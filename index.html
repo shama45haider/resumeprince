@@ -1,290 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prince Maldonado | Electrical Technician</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BoUnit - Coming Soon</title>
+
 <style>
-:root{ --red1:#e5989b; --red2:#ffb4a2; }
-body { margin:0; font-family:'Inter',sans-serif; background:#fff5f5; color:#2b2b2b; overflow-x:hidden; }
-
-body::before{ content:""; position:fixed; width:200%; height:200%; top:-50%; left:-50%; background: radial-gradient(circle at 30% 30%, rgba(229,152,155,0.15), transparent), radial-gradient(circle at 70% 70%, rgba(255,180,162,0.15), transparent); animation: floatBG 12s ease-in-out infinite alternate; z-index:-1; }
-@keyframes floatBG{ 0%{transform:translate(0,0);} 100%{transform:translate(40px,40px);} }
-
-.header { background:linear-gradient(135deg,var(--red1),var(--red2)); padding:60px 20px; text-align:center; color:white; }
-.header h1{ margin-bottom:8px; position:relative; }
-
-/* animated underline */
-.header h1::after{
-  content:"";
-  display:block;
-  width:60px;
-  height:3px;
-  background:white;
-  margin:10px auto 0;
-  border-radius:2px;
-  animation:expand 1s ease forwards;
-}
-@keyframes expand{ from{width:0;} to{width:60px;} }
-
-.subtitle{ font-weight:500; opacity:0.95; }
-.container{ max-width:1000px; margin:auto; padding:20px; }
-
-.section{ background:white; padding:20px; margin-bottom:20px; border-radius:14px; box-shadow:0 10px 25px rgba(0,0,0,0.05); transform:translateY(40px); opacity:0; transition:all 0.8s ease; position:relative; backdrop-filter: blur(4px); }
-
-.section::before{ content:""; position:absolute; inset:0; border-radius:14px; padding:1px; background:linear-gradient(135deg, rgba(229,152,155,0.4), rgba(255,180,162,0.4)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; opacity:0; transition:0.3s; }
-.section:hover::before{ opacity:1; }
-
-.section.visible{ transform:translateY(0); opacity:1; }
-.section:hover{ transform:scale(1.02); box-shadow:0 20px 40px rgba(0,0,0,0.1); }
-
-/* title animation */
-.section h2{ color:var(--red1); margin-bottom:10px; transform:translateX(-10px); opacity:0; transition:0.5s; }
-.section.visible h2{ transform:translateX(0); opacity:1; }
-
-.skills{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.skill{ background:#fff1f1; padding:10px; border-radius:10px; transition:0.3s; }
-.skill:hover{ transform:translateY(-3px); box-shadow:0 0 12px rgba(229,152,155,0.4); }
-
-/* gallery */
-.gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-
-.work-item{ position:relative; }
-.work-item img{ width:100%; height:160px; object-fit:cover; border-radius:10px; transition:0.3s; cursor:pointer; }
-.work-item:hover img{ transform:scale(1.05); box-shadow:0 10px 25px rgba(0,0,0,0.15); }
-
-/* hover label */
-.work-label{
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  background:rgba(0,0,0,0.6);
-  color:white;
-  font-size:12px;
-  padding:6px;
-  text-align:center;
-  opacity:0;
-  border-radius:0 0 10px 10px;
-  transition:0.3s;
-}
-.work-item:hover .work-label{ opacity:1; }
-
-/* fullscreen viewer */
-.viewer{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:rgba(0,0,0,0.8);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
-}
-.viewer img{
-  max-width:90%;
-  max-height:90%;
-  border-radius:10px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.certs{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
-.cert{ background:#fff1f1; border:1px solid rgba(229,152,155,0.4); padding:14px; border-radius:12px; transition:0.25s; }
-.cert-icon{ font-size:18px; }
-.cert-title{ font-weight:600; }
-.cert-desc{ font-size:12px; color:#666; }
-.cert:hover{ transform:translateY(-4px); box-shadow:0 0 15px rgba(229,152,155,0.5); }
-
-.job{ margin-bottom:15px; }
-ul{ margin:5px 0 10px 20px; }
-.footer{ text-align:center; padding:20px; color:gray; }
-html{ scroll-behavior:smooth; }
-.highlight{ font-weight:600; }
-
-
-/* MOBILE RESPONSIVENESS */
-@media (max-width: 768px){
-  .container{ padding:15px; }
-  .header{ padding:40px 15px; }
-  .header h1{ font-size:24px; }
-  .subtitle{ font-size:14px; }
-
-  .skills{ grid-template-columns:1fr; }
-  .certs{ grid-template-columns:1fr; }
-  .gallery{ grid-template-columns:1fr 1fr; }
-
-  .section{ padding:16px; }
+body {
+  min-height: 100vh;
+  background: url('background.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
-@media (max-width: 480px){
-  .gallery{ grid-template-columns:1fr; }
-  .header h1{ font-size:20px; }
-  .subtitle{ font-size:13px; }
+/* Grey overlay */
+body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  z-index: 0;
+}
+
+.wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* Logo circle */
+.logo-wrap {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0,150,255,0.6);
+  animation: pulse 3s infinite;
+}
+
+.logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 18px;
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
+
+.social {
+  font-size: 20px;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+/* Newsletter Box */
+.newsletter {
+  background: rgba(0,0,0,0.8);
+  padding: 30px;
+  border-radius: 8px;
+  text-align: left;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+
+.newsletter h3 {
+  margin-bottom: 10px;
+}
+
+.newsletter p {
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+}
+
+.form input {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.form button {
+  padding: 14px 25px;
+  border: none;
+  background: #111;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0,150,255,0.5);
+  transition: 0.3s;
+}
+
+.form button:hover {
+  background: #0a0a0a;
+  box-shadow: 0 0 25px rgba(0,150,255,0.8);
+}
+
+.small {
+  font-size: 12px;
+  margin-top: 10px;
+  opacity: 0.5;
+}
+
+/* Particles */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.particles span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(0,150,255,0.5);
+  border-radius: 50%;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); }
+  100% { transform: translateY(-10vh); }
 }
 
 </style>
 </head>
+
 <body>
 
-<div class="header">
-  <h1>Prince Maldonado</h1>
-  <div class="subtitle">Electrical Technician | Motor Controls | Systems & Networking</div>
-  <p>Brooklyn, NY | (914) 498-4855 | contact@princem.co</p>
-</div>
+<div class="particles" id="particles"></div>
 
-<div class="container">
-
-<div class="section">
-  <h2>Professional Summary</h2>
-  <p>
-    Hands-on electrical technician with real experience working on electromechanical systems in fast-paced environments.
-    Experienced in <span class="highlight">troubleshooting</span>, <span class="highlight">wiring</span>, <span class="highlight">motor controls</span>, and maintaining system reliability under pressure.
-    Also skilled in network-based systems, server setup, and security systems.
-  </p>
-</div>
-
-<div class="section">
-  <h2>Experience</h2>
-
-  <div class="job">
-    <h3>Game Technician — Dave & Buster’s (2024–2025)</h3>
-    <ul>
-      <li>Worked on arcade and electromechanical systems</li>
-      <li>Diagnosed motors, sensors, switches, and wiring</li>
-      <li>Performed preventative maintenance</li>
-      <li>Installed controllers and network cabling</li>
-    </ul>
+<div class="wrapper">
+  
+  <div class="logo-wrap">
+    <img src="logo.png" alt="BoUnit Logo">
   </div>
 
-  <div class="job">
-    <h3>Camp Counselor — SYEP</h3>
-    <ul>
-      <li>Maintained safe structured environment</li>
-      <li>Organized activities and teamwork</li>
-    </ul>
-  </div>
+  <div class="title">IN PROGRESS...</div>
+  <div class="subtitle">GET FUTURE UPDATES THROUGH OUR SOCIALS!</div>
+  <div class="social">@BoUnit.104</div>
 
-  <div class="job">
-    <h3>Game Technician — Funtopia USA (2021–2023)</h3>
-    <ul>
-      <li>Maintained bumper car systems</li>
-      <li>Repaired wiring and soldering</li>
-      <li>Replaced components and inspected systems</li>
-      <li>Troubleshot failures</li>
-    </ul>
-  </div>
+  <div class="newsletter">
+    <h3>NEWSLETTER</h3>
+    <p>Sign up to our newsletter to receive exclusive offers.</p>
 
-</div>
-
-<div class="section">
-  <h2>Technical Skills</h2>
-  <div class="skills">
-    <div class="skill">Electrical troubleshooting and diagnostics</div>
-    <div class="skill">Motor controls and contactors</div>
-    <div class="skill">Alarm system installation and repair</div>
-    <div class="skill">CCTV systems setup and maintenance</div>
-    <div class="skill">System administration basics</div>
-    <div class="skill">Building and managing dedicated data servers</div>
-    <div class="skill">CAT cable termination and networking</div>
-    <div class="skill">Welding and fabrication</div>
-    <div class="skill">Wiring, repairs, and soldering</div>
-    <div class="skill">Preventative maintenance</div>
-    <div class="skill">Multimeter testing and fault finding</div>
-    <div class="skill">Power tools and electrical hand tools</div>
-  </div>
-</div>
-
-<div class="section">
-  <h2>My Work</h2>
-  <div class="gallery">
-
-    <div class="work-item" onclick="openViewer(this)">
-      <img src="https://via.placeholder.com/300x200">
-      <div class="work-label">Panel Wiring</div>
+    <div class="form">
+      <input type="email" placeholder="E-mail">
+      <button>SUBSCRIBE</button>
     </div>
 
-    <div class="work-item" onclick="openViewer(this)">
-      <img src="https://via.placeholder.com/300x200">
-      <div class="work-label">Motor Control Setup</div>
-    </div>
-
-    <div class="work-item" onclick="openViewer(this)">
-      <img src="https://via.placeholder.com/300x200">
-      <div class="work-label">CCTV Installation</div>
-    </div>
-
-  </div>
-</div>
-
-<div class="section">
-  <h2>Certifications</h2>
-  <div class="certs">
-    <div class="cert">
-      <div class="cert-icon">🦺</div>
-      <div class="cert-title">OSHA 10</div>
-      <div class="cert-desc">Basic workplace safety training</div>
-    </div>
-    <div class="cert">
-      <div class="cert-icon">⚠️</div>
-      <div class="cert-title">OSHA 30</div>
-      <div class="cert-desc">Advanced safety and hazard prevention</div>
-    </div>
-    <div class="cert">
-      <div class="cert-icon">🏗️</div>
-      <div class="cert-title">SST Card</div>
-      <div class="cert-desc">NYC site safety certification</div>
-    </div>
-    <div class="cert">
-      <div class="cert-icon">📜</div>
-      <div class="cert-title">NCCER Certified</div>
-      <div class="cert-desc">National construction certification</div>
-    </div>
-  </div>
-</div>
-
-<div class="section">
-  <h2>Education</h2>
-
-  <div class="job">
-    <h3>Lincoln Technical Institute — Electrical Trade Program (2025–Present)</h3>
-    <ul>
-      <li>Hands-on training in residential and commercial electrical systems</li>
-      <li>Worked with motor controls, wiring methods, and circuit design</li>
-      <li>Gained experience reading blueprints and electrical schematics</li>
-      <li>Applied safety practices and code standards in lab environments</li>
-    </ul>
-  </div>
-
-  <div class="job">
-    <h3>Essex Street Academy — High School Diploma (2023)</h3>
-    <ul>
-      <li>Completed core academic curriculum</li>
-      <li>Developed strong problem-solving and teamwork skills</li>
-    </ul>
+    <div class="small">By signing up you agree to our policy.</div>
   </div>
 
 </div>
-
-<div class="viewer" id="viewer" onclick="closeViewer()">
-  <img id="viewerImg">
-</div>
-
-</div>
-
-<div class="footer">© 2026 Prince Maldonado</div>
 
 <script>
-const sections=document.querySelectorAll('.section');
-const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');}});});
-sections.forEach(section=>observer.observe(section));
-
-function openViewer(el){
-  document.getElementById('viewer').style.display='flex';
-  document.getElementById('viewerImg').src = el.querySelector('img').src;
-}
-
-function closeViewer(){
-  document.getElementById('viewer').style.display='none';
+const container = document.getElementById('particles');
+for (let i = 0; i < 50; i++) {
+  const span = document.createElement('span');
+  span.style.left = Math.random() * 100 + 'vw';
+  span.style.animationDuration = (5 + Math.random() * 10) + 's';
+  span.style.opacity = Math.random();
+  container.appendChild(span);
 }
 </script>
 
