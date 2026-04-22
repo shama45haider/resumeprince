@@ -15,11 +15,11 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:var(--bg);color:var(--text)}
+body{background:var(--bg);color:var(--text);overflow-x:hidden}
 
 /* TOP BAR */
 .topbar{
-  height:40px;
+  height:42px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -33,8 +33,8 @@ body{background:var(--bg);color:var(--text)}
   letter-spacing:1.5px;
   opacity:0;
   transform:translateY(10px);
-  transition:.5s;
-  text-shadow:0 0 10px rgba(47,124,255,.7);
+  transition:.6s;
+  text-shadow:0 0 10px rgba(47,124,255,.8);
 }
 .tick.active{
   opacity:1;
@@ -46,24 +46,28 @@ body{background:var(--bg);color:var(--text)}
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:14px 40px;
-  background:rgba(10,10,15,0.8);
-  backdrop-filter:blur(16px);
+  padding:14px 30px;
+  background:rgba(10,10,15,0.85);
+  backdrop-filter:blur(14px);
   border-bottom:1px solid rgba(255,255,255,0.05);
   position:sticky;
   top:0;
   z-index:100;
 }
-.nav-left,.nav-right{display:flex;gap:25px}
-.nav-center{position:absolute;left:50%;transform:translateX(-50%)}
-.logo{height:28px}
-
+.nav-left,.nav-right{display:flex;gap:20px}
+.nav-center{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+}
+.logo{
+  height:30px;
+}
 .nav a{
   font-size:12px;
   letter-spacing:2px;
   color:rgba(255,255,255,0.6);
   text-decoration:none;
-  position:relative;
 }
 .nav a:hover{color:#fff}
 
@@ -85,28 +89,36 @@ body{background:var(--bg);color:var(--text)}
 }
 .hero-content{position:relative;z-index:2}
 .hero-logo{
-  width:240px;
+  width:260px;
+  max-width:80%;
   margin-bottom:20px;
+  filter:drop-shadow(0 0 20px rgba(47,124,255,.4));
 }
 
+/* SECTIONS */
+.section{padding:50px 20px}
+
 /* PRODUCTS */
-.section{padding:40px 20px}
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
 }
 .card{
   background:var(--card);
   padding:10px;
   border-radius:10px;
   position:relative;
+  overflow:hidden;
 }
 .card img{
   width:100%;
   aspect-ratio:1/1;
   object-fit:cover;
+  transition:.3s;
 }
+.card:hover img{transform:scale(1.05)}
+
 .new{
   position:absolute;
   top:8px;
@@ -115,6 +127,7 @@ body{background:var(--bg);color:var(--text)}
   font-size:10px;
   padding:3px 6px;
 }
+
 .actions{
   position:absolute;
   bottom:10px;
@@ -123,14 +136,24 @@ body{background:var(--bg);color:var(--text)}
   display:flex;
   gap:8px;
   opacity:0;
+  transition:.3s;
 }
 .card:hover .actions{opacity:1}
+
+.actions button{
+  padding:6px 10px;
+  border:none;
+  font-size:11px;
+  cursor:pointer;
+}
+.cart-btn{background:var(--blue);color:#fff}
+.view-btn{background:#000;color:#fff}
 
 /* FEATURES */
 .features{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
 }
 .feature{
   background:linear-gradient(145deg,#1b1b24,#111);
@@ -140,18 +163,37 @@ body{background:var(--bg);color:var(--text)}
   transition:.3s;
 }
 .feature:hover{
-  transform:translateY(-5px);
-  box-shadow:0 10px 30px rgba(47,124,255,.3);
+  transform:translateY(-6px);
+  box-shadow:0 15px 40px rgba(47,124,255,.3);
 }
 
 /* VIDEOS */
-.videos{display:grid;gap:10px}
+.videos{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+.video{
+  width:100%;
+  border-radius:10px;
+}
 
 /* NEWSLETTER */
 .newsletter{
   text-align:center;
   background:#000;
-  padding:30px;
+  padding:40px;
+}
+.newsletter input{
+  padding:10px;
+  width:200px;
+  margin-right:10px;
+}
+.newsletter button{
+  padding:10px 20px;
+  background:var(--blue);
+  border:none;
+  color:#fff;
 }
 
 /* CART */
@@ -159,7 +201,7 @@ body{background:var(--bg);color:var(--text)}
   position:fixed;
   right:0;
   top:0;
-  width:260px;
+  width:280px;
   height:100%;
   background:#111;
   padding:20px;
@@ -169,16 +211,22 @@ body{background:var(--bg);color:var(--text)}
 .cart-box.open{transform:translateX(0)}
 
 /* MOBILE */
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .videos{grid-template-columns:1fr}
+  .features{grid-template-columns:repeat(2,1fr)}
+}
 @media(max-width:600px){
   .grid{grid-template-columns:1fr}
   .nav-left{display:none}
+  .hero-logo{width:180px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOPBAR -->
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="tick active">SHOP OUR NEW ARRIVALS</div>
   <div class="tick">FREE SHIPPING ON ALL ORDERS OVER $400</div>
@@ -193,9 +241,11 @@ body{background:var(--bg);color:var(--text)}
     <a href="#">BRANDS</a>
     <a href="#">NEW</a>
   </div>
+
   <div class="nav-center">
     <img src="logo.png" class="logo">
   </div>
+
   <div class="nav-right">
     <span onclick="toggleCart()">🛒</span>
   </div>
@@ -211,20 +261,49 @@ body{background:var(--bg);color:var(--text)}
 
 <!-- PRODUCTS -->
 <div class="section">
-<h2>NEW ARRIVALS</h2>
+<h2>NEW ARRIVALS</h2><br>
+
 <div class="grid">
+
 <div class="card">
 <span class="new">NEW</span>
 <img src="offwhite.jpg">
 <h4>Off White Jordan 1</h4>
 <p>$950</p>
+<div class="actions">
+<button class="cart-btn" onclick="addToCart('Off White',950)">Add</button>
+<button class="view-btn">View</button>
 </div>
+</div>
+
+<div class="card">
+<span class="new">NEW</span>
+<img src="chicago.jpg">
+<h4>Jordan 1 Chicago</h4>
+<p>$180</p>
+<div class="actions">
+<button class="cart-btn" onclick="addToCart('Chicago',180)">Add</button>
+<button class="view-btn">View</button>
+</div>
+</div>
+
+<div class="card">
+<span class="new">NEW</span>
+<img src="balenciaga.jpg">
+<h4>Balenciaga Fit</h4>
+<p>$350</p>
+<div class="actions">
+<button class="cart-btn" onclick="addToCart('Balenciaga',350)">Add</button>
+<button class="view-btn">View</button>
+</div>
+</div>
+
 </div>
 </div>
 
 <!-- WHY CHOOSE US -->
 <div class="section">
-<h2>WHY CHOOSE US</h2>
+<h2>WHY CHOOSE US</h2><br>
 <div class="features">
 <div class="feature">✔ 100% AUTHENTIC</div>
 <div class="feature">🚚 FAST SHIPPING</div>
@@ -235,16 +314,18 @@ body{background:var(--bg);color:var(--text)}
 
 <!-- VIDEO REVIEWS -->
 <div class="section">
-<h2>VIDEO REVIEWS</h2>
+<h2>VIDEO REVIEWS</h2><br>
 <div class="videos">
-<iframe height="200" src="https://www.youtube.com/embed/ysz5S6PUM-U"></iframe>
-<iframe height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+<iframe class="video" height="200" src="https://www.youtube.com/embed/ysz5S6PUM-U"></iframe>
+<iframe class="video" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+<iframe class="video" height="200" src="https://www.youtube.com/embed/ysz5S6PUM-U"></iframe>
+<iframe class="video" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
 </div>
 </div>
 
 <!-- NEWSLETTER -->
 <div class="newsletter">
-<h3>JOIN THE COMMUNITY</h3>
+<h3>JOIN THE COMMUNITY</h3><br>
 <input placeholder="Email">
 <button>Subscribe</button>
 </div>
@@ -265,8 +346,26 @@ setInterval(()=>{
   ticks[i].classList.add('active');
 },4000);
 
+let cart=[];
 function toggleCart(){
   document.getElementById('cart').classList.toggle('open')
+}
+function addToCart(name,price){
+  const item=cart.find(i=>i.name===name);
+  if(item){item.qty++}else{cart.push({name,price,qty:1})}
+  renderCart();
+}
+function renderCart(){
+  let total=0;
+  const list=document.getElementById('cartItems');
+  list.innerHTML='';
+  cart.forEach(i=>{
+    total+=i.price*i.qty;
+    const li=document.createElement('li');
+    li.innerText=i.name+' x'+i.qty;
+    list.appendChild(li);
+  });
+  document.getElementById('total').innerText='Total: $'+total;
 }
 </script>
 
