@@ -22,7 +22,7 @@ body.light{
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden;position:relative;z-index:0}
 
 /* PARTICLES */
 .particles{
@@ -32,28 +32,32 @@ body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden}
   width:100%;
   height:100%;
   pointer-events:none;
-  z-index:-1; /* move behind content but above background */
+  z-index:0; /* behind content but visible */
 }
 
 .particles span{
   position:absolute;
   width:4px;
   height:4px;
-  background:rgba(40,100,255,0.8); /* brighter navy blue */
+  background:rgba(80,140,255,0.5); /* slightly brighter */
   border-radius:50%;
-  box-shadow:0 0 8px rgba(40,100,255,0.6); /* glow so you can see it */
-  animation:float 12s linear infinite;
+  box-shadow:0 0 10px rgba(80,140,255,0.4); /* clearer glow */
+  animation:float 22s linear infinite;
 }
 
 @keyframes float{
-  0%{transform:translateY(100vh) scale(0);opacity:0}
+  0%{transform:translateY(0);opacity:0.5}
+  100%{transform:translateY(-120vh);opacity:0.5}
+}
+  100%{transform:translateY(-120vh) scale(1);opacity:0.4}
+}
   10%{opacity:1}
   100%{transform:translateY(-10vh) scale(1);opacity:0}
 }
 
-.topbar{background:#000;color:#fff;font-size:12px;text-align:center;padding:8px}
+.topbar{position:relative;z-index:1;background:#000;color:#fff;font-size:12px;text-align:center;padding:8px}
 
-.nav{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:var(--card);position:sticky;top:0;z-index:10}
+.nav{position:sticky;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:var(--card);position:sticky;top:0;z-index:10}
 .nav-links{display:flex;gap:20px;font-size:14px;color:var(--muted)}
 .nav img{height:50px}
 
@@ -65,14 +69,14 @@ body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden}
   font-size:12px;
 }
 
-.hero{display:flex;align-items:center;justify-content:space-between;padding:80px 40px;background:linear-gradient(135deg,#111,#1a1a2b)}
+.hero{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:80px 40px;background:linear-gradient(135deg,#111,#1a1a2b)}
 .hero h1{font-size:48px;margin-bottom:20px}
 .hero p{margin-bottom:20px;color:var(--muted)}
 .hero button{padding:12px 22px;border:none;background:var(--blue);color:#fff;border-radius:6px;box-shadow:0 0 25px rgba(47,124,255,.5);cursor:pointer;transition:.3s}
 .hero button:hover{transform:scale(1.08)}
 .hero img{width:420px;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
 
-.section{padding:60px 40px}
+.section{position:relative;z-index:1;padding:60px 40px}
 
 .products .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .card{background:var(--card);padding:15px;border-radius:10px;transition:.3s;cursor:pointer;position:relative}
@@ -98,13 +102,13 @@ body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden}
 .review iframe{border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.6)}
 .review p{text-align:center;font-size:12px;margin-top:8px;color:var(--muted)}
 
-.features{display:flex;justify-content:space-around;padding:40px;background:var(--card)}
+.features{position:relative;z-index:1;display:flex;justify-content:space-around;padding:40px;background:var(--card)}
 
-.newsletter{background:#000;color:#fff;padding:40px;text-align:center}
+.newsletter{position:relative;z-index:1;background:#000;color:#fff;padding:40px;text-align:center}
 .newsletter input{padding:10px;width:250px;margin-right:10px}
 .newsletter button{padding:10px 20px;border:none;background:var(--blue);color:#fff}
 
-.footer{background:#000;color:#aaa;padding:40px;display:flex;justify-content:space-between}
+.footer{position:relative;z-index:1;background:#000;color:#aaa;padding:40px;display:flex;justify-content:space-between}
 
 @media(max-width:900px){
 .products .grid{grid-template-columns:repeat(2,1fr)}
@@ -145,10 +149,33 @@ body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden}
 <div class="section products">
   <h2>NEW ARRIVALS</h2><br>
   <div class="grid">
-    <div class="card"><img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop"><h4>Jordan 4</h4><p>$325</p><div class="quick">Quick View</div></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=800&auto=format&fit=crop"><h4>Yeezy 350</h4><p>$290</p><div class="quick">Quick View</div></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop"><h4>Chrome Jeans</h4><p>$1250</p><div class="quick">Quick View</div></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1584735175315-9d5df23be620?q=80&w=800&auto=format&fit=crop"><h4>Black Cats</h4><p>$315</p><div class="quick">Quick View</div></div>
+    <div class="card">
+      <img src="offwhite.jpg">
+      <h4>Off-White Jordan 1 White</h4>
+      <p>$950</p>
+      <div class="quick">Quick View</div>
+    </div>
+
+    <div class="card">
+      <img src="chicago.jpg">
+      <h4>Jordan 1 Chicago</h4>
+      <p>$180</p>
+      <div class="quick">Quick View</div>
+    </div>
+
+    <div class="card">
+      <img src="balenciaga.jpg">
+      <h4>Balenciaga Fit + Asics</h4>
+      <p>$350</p>
+      <div class="quick">Quick View</div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1584735175315-9d5df23be620?q=80&w=800&auto=format&fit=crop">
+      <h4>Jordan 4 Black Cat</h4>
+      <p>$315</p>
+      <div class="quick">Quick View</div>
+    </div>
   </div>
 </div>
 
@@ -201,11 +228,12 @@ function toggleMode(){
 }
 // generate particles
 const container = document.getElementById('particles');
-for(let i=0;i<40;i++){
+for(let i=0;i<45;i++){ 
   const span=document.createElement('span');
   span.style.left=Math.random()*100+'vw';
-  span.style.animationDuration=(8+Math.random()*8)+'s';
-  span.style.opacity=Math.random();
+  span.style.top=Math.random()*100+'vh'; /* start across screen */
+  span.style.animationDuration=(25+Math.random()*20)+'s'; 
+  span.style.opacity=0.3 + Math.random()*0.3; 
   container.appendChild(span);
 }
 </script>
