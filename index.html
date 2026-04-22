@@ -55,7 +55,12 @@ body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden;pos
   100%{transform:translateY(-10vh) scale(1);opacity:0}
 }
 
-.topbar{position:relative;z-index:1;background:#000;color:#fff;font-size:12px;text-align:center;padding:8px}
+.topbar{position:relative;z-index:1;background:#000;color:#fff;font-size:12px;text-align:center;padding:10px;overflow:hidden}
+.ticker{position:relative;height:16px}
+.tick{position:absolute;left:0;right:0;opacity:0;transform:translateY(8px);letter-spacing:1px;
+  text-shadow:0 0 10px rgba(47,124,255,.6), 0 0 20px rgba(47,124,255,.3);
+  transition:opacity .6s ease, transform .6s ease}
+.tick.active{opacity:1;transform:translateY(0)}
 
 .nav{position:sticky;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:var(--card);position:sticky;top:0;z-index:10}
 .nav-links{display:flex;gap:20px;font-size:14px;color:var(--muted)}
@@ -102,7 +107,12 @@ body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden;pos
 .review iframe{border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.6)}
 .review p{text-align:center;font-size:12px;margin-top:8px;color:var(--muted)}
 
-.features{position:relative;z-index:1;display:flex;justify-content:space-around;padding:40px;background:var(--card)}
+.features{position:relative;z-index:1;display:flex;justify-content:space-around;gap:20px;padding:50px 40px;background:var(--card)}
+.feature-box{display:flex;align-items:center;gap:15px;background:rgba(255,255,255,0.03);padding:20px 25px;border-radius:10px;transition:.3s}
+.feature-box:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(47,124,255,.2)}
+.feature-icon{font-size:22px;background:var(--blue);color:#fff;padding:10px;border-radius:8px;box-shadow:0 0 15px rgba(47,124,255,.4)}
+.feature-text h4{font-size:14px;margin-bottom:4px}
+.feature-text p{font-size:12px;color:var(--muted)}
 
 .newsletter{position:relative;z-index:1;background:#000;color:#fff;padding:40px;text-align:center}
 .newsletter input{padding:10px;width:250px;margin-right:10px}
@@ -125,7 +135,14 @@ body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden;pos
 
 <div class="particles" id="particles"></div>
 
-<div class="topbar">FREE SHIPPING ON ALL ORDERS OVER $199</div>
+<div class="topbar">
+  <div class="ticker" id="ticker">
+    <span class="tick active">SHOP OUR NEW ARRIVALS</span>
+    <span class="tick">FREE SHIPPING ON ALL ORDERS OVER $400</span>
+    <span class="tick">100% AUTHENTICITY GUARANTEED</span>
+    <span class="tick">NEXT-DAY SHIPPING</span>
+  </div>
+</div>
 
 <div class="nav">
   <div class="nav-links">
@@ -205,7 +222,38 @@ body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden;pos
 </div>
 
 <div class="features">
-  <div>✔ AUTHENTIC</div>
+  <div class="feature-box">
+    <div class="feature-icon">✔️</div>
+    <div class="feature-text">
+      <h4>100% Authentic</h4>
+      <p>All products verified before shipping</p>
+    </div>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon">🚚</div>
+    <div class="feature-text">
+      <h4>Fast Shipping</h4>
+      <p>Quick delivery on all orders</p>
+    </div>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon">🔄</div>
+    <div class="feature-text">
+      <h4>Easy Returns</h4>
+      <p>Hassle-free return policy</p>
+    </div>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon">🔒</div>
+    <div class="feature-text">
+      <h4>Secure Payments</h4>
+      <p>Encrypted and protected checkout</p>
+    </div>
+  </div>
+</div>
   <div>🚚 FAST</div>
   <div>🔄 RETURNS</div>
   <div>🔒 SECURE</div>
@@ -223,15 +271,23 @@ body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden;pos
 </div>
 
 <script>
-function toggleMode(){
-  document.body.classList.toggle('light');
-}
+function toggleMode(){ document.body.classList.toggle('light'); }
+
+// animated header ticker
+const ticks = document.querySelectorAll('#ticker .tick');
+let idx = 0;
+setInterval(()=>{
+  ticks[idx].classList.remove('active');
+  idx = (idx + 1) % ticks.length;
+  ticks[idx].classList.add('active');
+}, 4000);
+
 // generate particles
 const container = document.getElementById('particles');
 for(let i=0;i<45;i++){ 
   const span=document.createElement('span');
   span.style.left=Math.random()*100+'vw';
-  span.style.top=Math.random()*100+'vh'; /* start across screen */
+  span.style.top=Math.random()*100+'vh';
   span.style.animationDuration=(25+Math.random()*20)+'s'; 
   span.style.opacity=0.3 + Math.random()*0.3; 
   container.appendChild(span);
