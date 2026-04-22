@@ -1,207 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BoUnit - Coming Soon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoUnit NYC</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:#f5f5f5;color:#111}
+
+/* TOP BAR */
+.topbar{
+  background:#000;
+  color:#fff;
+  font-size:12px;
+  text-align:center;
+  padding:8px;
+  letter-spacing:1px;
 }
 
-body {
-  min-height: 100vh;
-  background: url('background.png') center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
+/* NAV */
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  background:#fff;
 }
 
-/* Grey overlay */
-body::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(8px);
-  z-index: 0;
+.nav-links{
+  display:flex;
+  gap:20px;
+  font-size:14px;
 }
 
-.wrapper {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 900px;
-  text-align: center;
-  padding: 40px 20px;
+.nav img{
+  height:50px;
 }
 
-/* Logo (clean, no circle) */
-.logo-wrap {
-  width: 220px;
-  margin: 0 auto 25px;
+/* HERO */
+.hero{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:80px 40px;
+  background:#eaeaea;
 }
 
-.logo-wrap img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 0 15px rgba(0,150,255,0.25));
-}
-  50% { transform: scale(1.05); }
+.hero-text{
+  max-width:500px;
 }
 
-.title {
-  font-size: 32px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-  opacity: 0.9;
+.hero h1{
+  font-size:48px;
+  line-height:1.1;
+  margin-bottom:20px;
 }
 
-.subtitle {
-  font-size: 14px;
-  opacity: 0.6;
-  margin-bottom: 20px;
+.hero p{
+  margin-bottom:20px;
+  opacity:.7;
 }
 
-.social {
-  font-size: 20px;
-  margin-bottom: 40px;
-  opacity: 0.9;
+.hero button{
+  padding:12px 20px;
+  border:none;
+  background:#000;
+  color:#fff;
+  cursor:pointer;
 }
 
-/* Newsletter Box */
-.newsletter {
-  background: rgba(0,0,0,0.8);
-  padding: 30px;
-  border-radius: 8px;
-  text-align: left;
-  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+.hero img{
+  width:400px;
 }
 
-.newsletter h3 {
-  margin-bottom: 10px;
+/* CATEGORY */
+.categories{
+  display:flex;
+  gap:20px;
+  padding:40px;
 }
 
-.newsletter p {
-  margin-bottom: 20px;
-  opacity: 0.7;
+.cat{
+  flex:1;
+  background:#ddd;
+  padding:40px;
+  text-align:center;
+  font-weight:bold;
 }
 
-.form {
-  display: flex;
-  gap: 10px;
+/* PRODUCTS */
+.products{
+  padding:40px;
 }
 
-.form input {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  outline: none;
-  font-size: 16px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
 }
 
-.form button {
-  padding: 14px 25px;
-  border: none;
-  background: #111;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(0,150,255,0.5);
-  transition: 0.3s;
+.card{
+  background:#fff;
+  padding:15px;
+  text-align:center;
 }
 
-.form button:hover {
-  background: #0a0a0a;
-  box-shadow: 0 0 25px rgba(0,150,255,0.8);
+.card img{
+  width:100%;
 }
 
-.small {
-  font-size: 12px;
-  margin-top: 10px;
-  opacity: 0.5;
+.card h4{
+  font-size:14px;
+  margin:10px 0;
 }
 
-/* Particles */
-.particles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
+.card p{
+  font-size:13px;
+  opacity:.7;
 }
 
-.particles span {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: rgba(0,150,255,0.5);
-  border-radius: 50%;
-  animation: float 10s linear infinite;
+/* FEATURES */
+.features{
+  display:flex;
+  justify-content:space-around;
+  padding:40px;
+  background:#fff;
+  font-size:13px;
 }
 
-@keyframes float {
-  0% { transform: translateY(100vh); }
-  100% { transform: translateY(-10vh); }
+/* NEWSLETTER */
+.newsletter{
+  background:#000;
+  color:#fff;
+  padding:40px;
+  text-align:center;
 }
 
+.newsletter input{
+  padding:10px;
+  width:250px;
+  margin-right:10px;
+}
+
+.newsletter button{
+  padding:10px 20px;
+  border:none;
+  background:#fff;
+}
+
+/* FOOTER */
+.footer{
+  background:#111;
+  color:#aaa;
+  padding:40px;
+  font-size:13px;
+  display:flex;
+  justify-content:space-between;
+}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .hero{flex-direction:column;text-align:center}
+  .hero img{margin-top:20px}
+}
 </style>
 </head>
 
 <body>
 
-<div class="particles" id="particles"></div>
+<div class="topbar">FREE SHIPPING ON ALL ORDERS OVER $199</div>
 
-<div class="wrapper">
-  
-  <div class="logo-wrap">
-    <img src="logo.png" alt="BoUnit Logo">
+<div class="nav">
+  <div class="nav-links">
+    <span>SHOP</span>
+    <span>BRANDS</span>
+    <span>NEW IN</span>
+    <span>CLOTHING</span>
   </div>
-
-  <div class="title">IN PROGRESS...</div>
-  <div class="subtitle">GET FUTURE UPDATES THROUGH OUR SOCIALS!</div>
-  <div class="social">
-  <a href="https://www.instagram.com/bounit.104/" target="_blank" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:white; cursor:pointer;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
-      <path d="M7.75 2C4.574 2 2 4.574 2 7.75v8.5C2 19.426 4.574 22 7.75 22h8.5C19.426 22 22 19.426 22 16.25v-8.5C22 4.574 19.426 2 16.25 2h-8.5zm0 2h8.5A3.75 3.75 0 0 1 20 7.75v8.5A3.75 3.75 0 0 1 16.25 20h-8.5A3.75 3.75 0 0 1 4 16.25v-8.5A3.75 3.75 0 0 1 7.75 4zm9.75 1.5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
-    </svg>
-    BoUnit.104
-  </a>
+  <img src="logo.png">
+  <div>🔍 🛒</div>
 </div>
 
-  <div class="newsletter">
-    <h3>NEWSLETTER</h3>
-    <p>Sign up to our newsletter to receive exclusive offers.</p>
+<div class="hero">
+  <div class="hero-text">
+    <h1>BUILT DIFFERENT.<br>WORN PROUD.</h1>
+    <p>Authentic sneakers & streetwear. Verified & delivered.</p>
+    <button>SHOP NOW</button>
+  </div>
+  <img src="shoe.png">
+</div>
 
-    <div class="form">
-      <input type="email" placeholder="E-mail">
-      <button>SUBSCRIBE</button>
+<div class="categories">
+  <div class="cat">JORDAN</div>
+  <div class="cat">YEEZY</div>
+  <div class="cat">CHROME HEARTS</div>
+  <div class="cat">VINTAGE</div>
+</div>
+
+<div class="products">
+  <h2>NEW ARRIVALS</h2>
+  <br>
+  <div class="grid">
+    <div class="card">
+      <img src="p1.png">
+      <h4>Jordan 4 Military Black</h4>
+      <p>$325 • Size 8-13</p>
     </div>
-
-    <div class="small">By signing up you agree to our policy.</div>
+    <div class="card">
+      <img src="p2.png">
+      <h4>Yeezy 350 Zebra</h4>
+      <p>$290 • Size 8-13</p>
+    </div>
+    <div class="card">
+      <img src="p3.png">
+      <h4>Chrome Hearts Jeans</h4>
+      <p>$1250 • Size 28-36</p>
+    </div>
+    <div class="card">
+      <img src="p4.png">
+      <h4>Jordan 4 Black Cat</h4>
+      <p>$315 • Size 8-13</p>
+    </div>
   </div>
-
 </div>
 
-<script>
-const container = document.getElementById('particles');
-for (let i = 0; i < 50; i++) {
-  const span = document.createElement('span');
-  span.style.left = Math.random() * 100 + 'vw';
-  span.style.animationDuration = (5 + Math.random() * 10) + 's';
-  span.style.opacity = Math.random();
-  container.appendChild(span);
-}
-</script>
+<div class="features">
+  <div>✔ 100% AUTHENTIC</div>
+  <div>🚚 FAST SHIPPING</div>
+  <div>🔄 EASY RETURNS</div>
+  <div>🔒 SECURE PAYMENTS</div>
+</div>
+
+<div class="newsletter">
+  <h3>STAY IN THE LOOP</h3>
+  <br>
+  <input placeholder="Enter your email">
+  <button>SUBSCRIBE</button>
+</div>
+
+<div class="footer">
+  <div>
+    <img src="logo.png" style="height:40px"><br><br>
+    BoUnit NYC
+  </div>
+  <div>
+    Contact: support@bounitnyc.com
+  </div>
+</div>
 
 </body>
 </html>
