@@ -14,284 +14,149 @@
   --muted:#9aa0a6;
 }
 
-body.light{
-  --bg:#f5f5f5;
-  --card:#ffffff;
-  --text:#111;
-  --muted:#666;
-}
-
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:var(--bg);color:var(--text);transition:.3s;overflow-x:hidden;position:relative;z-index:0}
+body{background:var(--bg);color:var(--text);overflow-x:hidden}
 
-/* PARTICLES */
-.particles{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  z-index:0; /* behind content but visible */
-}
-
-.particles span{
-  position:absolute;
-  width:4px;
-  height:4px;
-  background:rgba(80,140,255,0.5); /* slightly brighter */
-  border-radius:50%;
-  box-shadow:0 0 10px rgba(80,140,255,0.4); /* clearer glow */
-  animation:float 22s linear infinite;
-}
-
-@keyframes float{
-  0%{transform:translateY(0);opacity:0.5}
-  100%{transform:translateY(-120vh);opacity:0.5}
-}
-  100%{transform:translateY(-120vh) scale(1);opacity:0.4}
-}
-  10%{opacity:1}
-  100%{transform:translateY(-10vh) scale(1);opacity:0}
-}
-
-.topbar{position:relative;z-index:1;background:#000;color:#fff;font-size:12px;text-align:center;padding:10px;overflow:hidden}
-.ticker{position:relative;height:16px}
-.tick{position:absolute;left:0;right:0;opacity:0;transform:translateY(8px);letter-spacing:1px;
-  text-shadow:0 0 10px rgba(47,124,255,.6), 0 0 20px rgba(47,124,255,.3);
-  transition:opacity .6s ease, transform .6s ease}
+/* TOPBAR */
+.topbar{background:#000;color:#fff;padding:10px;text-align:center;font-size:12px;overflow:hidden}
+.ticker{position:relative;height:18px}
+.tick{position:absolute;left:0;right:0;text-align:center;opacity:0;transform:translateY(10px);
+  transition:.5s;
+  text-shadow:0 0 10px rgba(47,124,255,.6)}
 .tick.active{opacity:1;transform:translateY(0)}
 
-.nav{position:sticky;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:var(--card);position:sticky;top:0;z-index:10}
-.nav-links{display:flex;gap:20px;font-size:14px;color:var(--muted)}
-.nav img{height:50px}
+/* NAV */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 20px;background:var(--card);position:sticky;top:0}
+.nav img{height:40px}
 
-.toggle{
-  cursor:pointer;
-  padding:6px 10px;
-  border:1px solid var(--muted);
-  border-radius:4px;
-  font-size:12px;
+/* HERO */
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:60px 20px;background:linear-gradient(135deg,#111,#1a1a2b)}
+.hero h1{font-size:28px;margin-bottom:10px}
+.hero p{color:var(--muted);font-size:14px;margin-bottom:15px}
+.hero img{width:100%;max-width:320px;border-radius:10px}
+.hero button{margin-top:10px;padding:10px 18px;background:var(--blue);border:none;color:#fff;border-radius:6px}
+
+.section{padding:40px 20px}
+
+/* PRODUCTS */
+.products .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.card{background:var(--card);padding:10px;border-radius:10px;position:relative}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px}
+.card h4{font-size:13px;margin:6px 0}
+.card p{font-size:12px;color:var(--muted)}
+
+/* NEW TAG */
+.new-tag{
+  position:absolute;
+  top:8px;
+  left:8px;
+  font-size:10px;
+  padding:3px 6px;
+  background:var(--blue);
+  color:#fff;
+  font-weight:bold;
+  letter-spacing:1px;
+  box-shadow:0 0 10px rgba(47,124,255,.8);
+  animation:glitch 1s infinite alternate;
+}
+@keyframes glitch{
+  0%{transform:translate(0)}
+  50%{transform:translate(1px,-1px)}
+  100%{transform:translate(-1px,1px)}
 }
 
-.hero{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:80px 40px;background:linear-gradient(135deg,#111,#1a1a2b)}
-.hero h1{font-size:48px;margin-bottom:20px}
-.hero p{margin-bottom:20px;color:var(--muted)}
-.hero button{padding:12px 22px;border:none;background:var(--blue);color:#fff;border-radius:6px;box-shadow:0 0 25px rgba(47,124,255,.5);cursor:pointer;transition:.3s}
-.hero button:hover{transform:scale(1.08)}
-.hero img{width:420px;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+/* CATALOG STYLE */
+.card::after{
+  content:"View Item";
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#000;
+  color:#fff;
+  font-size:11px;
+  padding:4px 10px;
+  opacity:0;
+  transition:.3s;
+}
+.card:hover::after{opacity:1}
 
-.section{position:relative;z-index:1;padding:60px 40px}
-
-.products .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.card{background:var(--card);padding:15px;border-radius:10px;transition:.3s;cursor:pointer;position:relative}
-.card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,.5)}
-.card img{width:100%;border-radius:6px}
-.card h4{margin:10px 0}
-.card p{color:var(--muted);font-size:13px}
-
-.quick{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;padding:6px 12px;font-size:12px;border-radius:4px;opacity:0;transition:.3s}
-.card:hover .quick{opacity:1}
-
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.gallery img{width:100%;height:250px;object-fit:cover;border-radius:10px;transition:.3s}
-.gallery img:hover{transform:scale(1.05)}
-
-.info{display:flex;gap:40px}
-.info-box{background:var(--card);padding:20px;border-radius:10px;transition:.3s}
-.info-box:hover{transform:translateY(-5px)}
-.info-box p{color:var(--muted);font-size:13px}
-
-.reviews{background:#121220}
-.review-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.review iframe{border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.6)}
-.review p{text-align:center;font-size:12px;margin-top:8px;color:var(--muted)}
-
-.features{position:relative;z-index:1;display:flex;justify-content:space-around;gap:20px;padding:50px 40px;background:var(--card)}
-.feature-box{display:flex;align-items:center;gap:15px;background:rgba(255,255,255,0.03);padding:20px 25px;border-radius:10px;transition:.3s}
-.feature-box:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(47,124,255,.2)}
-.feature-icon{font-size:22px;background:var(--blue);color:#fff;padding:10px;border-radius:8px;box-shadow:0 0 15px rgba(47,124,255,.4)}
-.feature-text h4{font-size:14px;margin-bottom:4px}
-.feature-text p{font-size:12px;color:var(--muted)}
-
-.newsletter{position:relative;z-index:1;background:#000;color:#fff;padding:40px;text-align:center}
-.newsletter input{padding:10px;width:250px;margin-right:10px}
-.newsletter button{padding:10px 20px;border:none;background:var(--blue);color:#fff}
-
-.footer{position:relative;z-index:1;background:#000;color:#aaa;padding:40px;display:flex;justify-content:space-between}
-
-@media(max-width:900px){
-.products .grid{grid-template-columns:repeat(2,1fr)}
-.gallery-grid{grid-template-columns:1fr}
-.review-grid{grid-template-columns:1fr}
-.hero{flex-direction:column;text-align:center}
-.info{flex-direction:column}
-.nav-links{display:none}
+/* MOBILE FIXES */
+@media(min-width:900px){
+  .hero{flex-direction:row;text-align:left;justify-content:space-between;padding:80px 40px}
+  .hero h1{font-size:48px}
+  .products .grid{grid-template-columns:repeat(4,1fr)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="particles" id="particles"></div>
-
 <div class="topbar">
   <div class="ticker" id="ticker">
-    <span class="tick active">SHOP OUR NEW ARRIVALS</span>
-    <span class="tick">FREE SHIPPING ON ALL ORDERS OVER $400</span>
-    <span class="tick">100% AUTHENTICITY GUARANTEED</span>
-    <span class="tick">NEXT-DAY SHIPPING</span>
+    <div class="tick active">SHOP OUR NEW ARRIVALS</div>
+    <div class="tick">FREE SHIPPING ON ALL ORDERS OVER $400</div>
+    <div class="tick">100% AUTHENTICITY GUARANTEED</div>
+    <div class="tick">NEXT-DAY SHIPPING</div>
   </div>
 </div>
 
 <div class="nav">
-  <div class="nav-links">
-    <span>SHOP</span>
-    <span>BRANDS</span>
-    <span>NEW IN</span>
-  </div>
   <img src="logo.png">
-  <div class="toggle" onclick="toggleMode()">Toggle Mode</div>
 </div>
 
 <div class="hero">
   <div>
     <h1>THE FUTURE OF STREETWEAR</h1>
-    <p>Premium sneakers. Verified authenticity. Built for culture.</p>
+    <p>Premium sneakers. Verified authenticity.</p>
     <button>SHOP NOW</button>
   </div>
-  <img src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?q=80&w=1200&auto=format&fit=crop">
+  <img src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?q=80&w=1200">
 </div>
 
 <div class="section products">
   <h2>NEW ARRIVALS</h2><br>
   <div class="grid">
+
     <div class="card">
+      <span class="new-tag">NEW</span>
       <img src="offwhite.jpg">
-      <h4>Off-White Jordan 1 White</h4>
+      <h4>Off-White Jordan 1</h4>
       <p>$950</p>
-      <div class="quick">Quick View</div>
     </div>
 
     <div class="card">
+      <span class="new-tag">NEW</span>
       <img src="chicago.jpg">
       <h4>Jordan 1 Chicago</h4>
       <p>$180</p>
-      <div class="quick">Quick View</div>
     </div>
 
     <div class="card">
+      <span class="new-tag">NEW</span>
       <img src="balenciaga.jpg">
-      <h4>Balenciaga Fit + Asics</h4>
+      <h4>Balenciaga Fit</h4>
       <p>$350</p>
-      <div class="quick">Quick View</div>
     </div>
 
     <div class="card">
-      <img src="https://images.unsplash.com/photo-1584735175315-9d5df23be620?q=80&w=800&auto=format&fit=crop">
+      <span class="new-tag">NEW</span>
+      <img src="https://images.unsplash.com/photo-1584735175315-9d5df23be620?q=80&w=800">
       <h4>Jordan 4 Black Cat</h4>
       <p>$315</p>
-      <div class="quick">Quick View</div>
     </div>
+
   </div>
-</div>
-
-<div class="section gallery">
-  <h2>FEATURED LOOKS</h2><br>
-  <div class="gallery-grid">
-    <img src="https://images.unsplash.com/photo-1528701800489-20be3c2ea9c8?q=80&w=1200">
-    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200">
-    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200">
-  </div>
-</div>
-
-<div class="section info">
-  <div class="info-box"><h3>AUTHENTIC</h3><p>Every product verified.</p></div>
-  <div class="info-box"><h3>FAST SHIPPING</h3><p>Quick delivery worldwide.</p></div>
-  <div class="info-box"><h3>TRUSTED</h3><p>Thousands of happy customers.</p></div>
-</div>
-
-<div class="section reviews">
-  <h2>VIDEO REVIEWS</h2><br>
-  <div class="review-grid">
-    <div class="review"><iframe width="100%" height="200" src="https://www.youtube.com/embed/ysz5S6PUM-U"></iframe><p>🔥 Legit</p></div>
-    <div class="review"><iframe width="100%" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe><p>🔥 Fast</p></div>
-    <div class="review"><iframe width="100%" height="200" src="https://www.youtube.com/embed/ysz5S6PUM-U"></iframe><p>🔥 Quality</p></div>
-    <div class="review"><iframe width="100%" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe><p>🔥 Recommend</p></div>
-  </div>
-</div>
-
-<div class="features">
-  <div class="feature-box">
-    <div class="feature-icon">✔️</div>
-    <div class="feature-text">
-      <h4>100% Authentic</h4>
-      <p>All products verified before shipping</p>
-    </div>
-  </div>
-
-  <div class="feature-box">
-    <div class="feature-icon">🚚</div>
-    <div class="feature-text">
-      <h4>Fast Shipping</h4>
-      <p>Quick delivery on all orders</p>
-    </div>
-  </div>
-
-  <div class="feature-box">
-    <div class="feature-icon">🔄</div>
-    <div class="feature-text">
-      <h4>Easy Returns</h4>
-      <p>Hassle-free return policy</p>
-    </div>
-  </div>
-
-  <div class="feature-box">
-    <div class="feature-icon">🔒</div>
-    <div class="feature-text">
-      <h4>Secure Payments</h4>
-      <p>Encrypted and protected checkout</p>
-    </div>
-  </div>
-</div>
-  <div>🚚 FAST</div>
-  <div>🔄 RETURNS</div>
-  <div>🔒 SECURE</div>
-</div>
-
-<div class="newsletter">
-  <h3>JOIN US</h3><br>
-  <input placeholder="Email">
-  <button>SUBSCRIBE</button>
-</div>
-
-<div class="footer">
-  <div><img src="logo.png" style="height:40px"><br><br>BoUnit NYC</div>
-  <div>support@bounitnyc.com</div>
 </div>
 
 <script>
-function toggleMode(){ document.body.classList.toggle('light'); }
-
-// animated header ticker
-const ticks = document.querySelectorAll('#ticker .tick');
-let idx = 0;
+const ticks=document.querySelectorAll('.tick');
+let i=0;
 setInterval(()=>{
-  ticks[idx].classList.remove('active');
-  idx = (idx + 1) % ticks.length;
-  ticks[idx].classList.add('active');
-}, 4000);
-
-// generate particles
-const container = document.getElementById('particles');
-for(let i=0;i<45;i++){ 
-  const span=document.createElement('span');
-  span.style.left=Math.random()*100+'vw';
-  span.style.top=Math.random()*100+'vh';
-  span.style.animationDuration=(25+Math.random()*20)+'s'; 
-  span.style.opacity=0.3 + Math.random()*0.3; 
-  container.appendChild(span);
-}
+  ticks[i].classList.remove('active');
+  i=(i+1)%ticks.length;
+  ticks[i].classList.add('active');
+},4000);
 </script>
 
 </body>
