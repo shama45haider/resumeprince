@@ -15,7 +15,7 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:var(--bg);color:var(--text);overflow-x:hidden}
+body{background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;display:block}
 
 /* TOPBAR */
 .topbar{background:#000;color:#fff;padding:10px;text-align:center;font-size:12px;overflow:hidden}
@@ -36,7 +36,7 @@ body{background:var(--bg);color:var(--text);overflow-x:hidden}
 .hero img{width:100%;max-width:320px;border-radius:10px}
 .hero button{margin-top:10px;padding:10px 18px;background:var(--blue);border:none;color:#fff;border-radius:6px}
 
-.section{padding:40px 20px}
+.section{padding:40px 20px;width:100%;display:block}
 
 /* PRODUCTS */
 .products .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
@@ -195,5 +195,6 @@ setInterval(()=>{
 },4000);
 </script>
 
+<div style="height:40px"></div>
 </body>
 </html>
