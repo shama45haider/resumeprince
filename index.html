@@ -17,83 +17,144 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 body{background:var(--bg);color:var(--text)}
 
-/* TOPBAR */
-.topbar{background:#000;padding:10px;text-align:center;font-size:12px;position:relative}
-.tick{position:absolute;width:100%;left:0;opacity:0;transition:.5s}
-.tick.active{opacity:1}
+/* NAVBAR */
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  background:rgba(15,15,20,0.9);
+  position:sticky;
+  top:0;
+  backdrop-filter:blur(10px);
+  z-index:10;
+}
+.nav img{height:40px}
+.nav-links{display:flex;gap:20px;font-size:14px;color:var(--muted)}
+.nav-links span:hover{color:#fff;cursor:pointer}
 
-/* NAV */
-.nav{display:flex;justify-content:center;padding:15px;background:var(--card)}
-.nav img{height:45px}
-
-/* HERO */
-.hero{text-align:center;padding:60px 20px}
-.hero h1{font-size:28px;margin-bottom:10px}
-.hero p{color:var(--muted);margin-bottom:15px}
-.hero img{width:100%;max-width:320px;border-radius:10px}
-.hero button{margin-top:10px;padding:10px 20px;background:var(--blue);border:none;color:#fff;border-radius:6px}
+/* HERO CINEMATIC */
+.hero{
+  position:relative;
+  height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:url('https://images.unsplash.com/photo-1528701800489-20be3c2ea9c8?q=80&w=1600') center/cover no-repeat;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  width:100%;height:100%;
+  background:linear-gradient(to bottom,rgba(0,0,0,.7),rgba(0,0,0,.9));
+}
+.hero-content{position:relative;z-index:2}
+.hero h1{font-size:42px;letter-spacing:2px}
+.hero p{color:var(--muted);margin:10px 0}
+.hero button{
+  padding:12px 25px;
+  background:var(--blue);
+  border:none;
+  color:#fff;
+  border-radius:6px;
+  margin-top:10px;
+  box-shadow:0 0 20px rgba(47,124,255,.4);
+}
 
 .section{padding:50px 20px}
 
 /* PRODUCTS */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
-.card{background:var(--card);padding:10px;border-radius:10px;position:relative}
-.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px}
+.card{
+  background:var(--card);
+  padding:10px;
+  border-radius:10px;
+  position:relative;
+  overflow:hidden;
+}
+.card img{
+  width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;
+  transition:.4s;
+}
+.card:hover img{transform:scale(1.08)}
 .card h4{font-size:13px;margin-top:5px}
 .card p{font-size:12px;color:var(--muted)}
-.new{position:absolute;top:8px;left:8px;background:var(--blue);padding:3px 6px;font-size:10px;border-radius:4px}
 
-/* FEATURES */
-.features{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
-.feature{background:var(--card);padding:20px;border-radius:10px;text-align:center}
-.feature h4{margin-bottom:5px}
-.feature p{font-size:12px;color:var(--muted)}
+.new{position:absolute;top:8px;left:8px;background:var(--blue);padding:3px 6px;font-size:10px}
 
-/* VIDEOS */
+/* HOVER ACTIONS */
+.actions{
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+  opacity:0;
+  transition:.3s;
+}
+.card:hover .actions{opacity:1}
+.actions button{
+  padding:6px 10px;
+  border:none;
+  font-size:11px;
+  cursor:pointer;
+}
+.cart{background:var(--blue);color:#fff}
+.view{background:#000;color:#fff}
+
+/* CART */
+.cart-box{
+  position:fixed;
+  right:0;
+  top:0;
+  width:250px;
+  height:100%;
+  background:#111;
+  padding:20px;
+  transform:translateX(100%);
+  transition:.3s;
+}
+.cart-box.open{transform:translateX(0)}
+
+/* VIDEO */
 .videos{display:grid;grid-template-columns:1fr;gap:15px}
-.video{width:100%;border-radius:10px}
+.video{width:100%}
 
 /* NEWSLETTER */
 .newsletter{text-align:center;background:#000;padding:40px}
 .newsletter input{padding:10px;width:200px;margin-right:10px}
-.newsletter button{padding:10px 20px;background:var(--blue);border:none;color:#fff}
-
-/* FOOTER */
-.footer{text-align:center;padding:30px;background:#000;color:#aaa}
+.newsletter button{padding:10px;background:var(--blue);border:none;color:#fff}
 
 @media(min-width:900px){
   .grid{grid-template-columns:repeat(4,1fr)}
-  .features{grid-template-columns:repeat(4,1fr)}
   .videos{grid-template-columns:repeat(4,1fr)}
-  .hero h1{font-size:48px}
+  .hero h1{font-size:60px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <div class="tick active">SHOP OUR NEW ARRIVALS</div>
-  <div class="tick">FREE SHIPPING ON ALL ORDERS OVER $400</div>
-  <div class="tick">100% AUTHENTICITY GUARANTEED</div>
-  <div class="tick">NEXT-DAY SHIPPING</div>
-</div>
-
-<!-- NAV -->
 <div class="nav">
+  <div class="nav-links">
+    <span>SHOP</span>
+    <span>BRANDS</span>
+    <span>NEW</span>
+  </div>
   <img src="logo.png">
+  <span onclick="toggleCart()">🛒</span>
 </div>
 
-<!-- HERO -->
 <div class="hero">
-  <h1>THE FUTURE OF STREETWEAR</h1>
-  <p>Premium sneakers. Verified authenticity.</p>
-  <button>SHOP NOW</button><br><br>
-  <img src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?q=80&w=1200">
+  <div class="hero-content">
+    <h1>THE FUTURE OF STREETWEAR</h1>
+    <p>Premium. Authentic. Elevated.</p>
+    <button>SHOP NOW</button>
+  </div>
 </div>
 
-<!-- PRODUCTS -->
 <div class="section">
   <h2>NEW ARRIVALS</h2><br>
   <div class="grid">
@@ -103,6 +164,10 @@ body{background:var(--bg);color:var(--text)}
       <img src="offwhite.jpg">
       <h4>Off-White Jordan 1</h4>
       <p>$950</p>
+      <div class="actions">
+        <button class="cart" onclick="addToCart('Off White')">Add</button>
+        <button class="view">View</button>
+      </div>
     </div>
 
     <div class="card">
@@ -110,68 +175,41 @@ body{background:var(--bg);color:var(--text)}
       <img src="chicago.jpg">
       <h4>Jordan 1 Chicago</h4>
       <p>$180</p>
-    </div>
-
-    <div class="card">
-      <span class="new">NEW</span>
-      <img src="balenciaga.jpg">
-      <h4>Balenciaga Fit</h4>
-      <p>$350</p>
-    </div>
-
-    <div class="card">
-      <span class="new">NEW</span>
-      <img src="https://images.unsplash.com/photo-1584735175315-9d5df23be620?q=80&w=800">
-      <h4>Jordan 4 Black Cat</h4>
-      <p>$315</p>
+      <div class="actions">
+        <button class="cart" onclick="addToCart('Chicago')">Add</button>
+        <button class="view">View</button>
+      </div>
     </div>
 
   </div>
 </div>
 
-<!-- WHY CHOOSE US -->
-<div class="section">
-  <h2>WHY CHOOSE US</h2><br>
-  <div class="features">
-    <div class="feature"><h4>100% AUTHENTIC</h4><p>Verified products only</p></div>
-    <div class="feature"><h4>FAST SHIPPING</h4><p>Quick delivery</p></div>
-    <div class="feature"><h4>EASY RETURNS</h4><p>No hassle policy</p></div>
-    <div class="feature"><h4>SECURE PAYMENTS</h4><p>Safe checkout</p></div>
-  </div>
-</div>
-
-<!-- VIDEO REVIEWS -->
 <div class="section">
   <h2>VIDEO REVIEWS</h2><br>
   <div class="videos">
     <iframe class="video" height="200" src="https://www.youtube.com/embed/ysz5S6PUM-U"></iframe>
     <iframe class="video" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
-    <iframe class="video" height="200" src="https://www.youtube.com/embed/ysz5S6PUM-U"></iframe>
-    <iframe class="video" height="200" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
   </div>
 </div>
 
-<!-- NEWSLETTER -->
 <div class="newsletter">
   <h3>JOIN THE COMMUNITY</h3><br>
   <input placeholder="Email">
   <button>Subscribe</button>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-  BoUnit NYC<br>
-  support@bounitnyc.com
+<div class="cart-box" id="cart">
+  <h3>Cart</h3>
+  <ul id="cartItems"></ul>
 </div>
 
 <script>
-const ticks=document.querySelectorAll('.tick');
-let i=0;
-setInterval(()=>{
-  ticks[i].classList.remove('active');
-  i=(i+1)%ticks.length;
-  ticks[i].classList.add('active');
-},4000);
+function toggleCart(){document.getElementById('cart').classList.toggle('open')}
+function addToCart(item){
+  const li=document.createElement('li');
+  li.innerText=item;
+  document.getElementById('cartItems').appendChild(li);
+}
 </script>
 
 </body>
