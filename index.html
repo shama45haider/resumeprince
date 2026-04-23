@@ -149,7 +149,47 @@ body{background:#0f0f14;color:#fff}
 
 /* VIDEOS (COMPACT) */
 .videos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:820px;margin:0 auto}
-.video{width:100%;aspect-ratio:9/16;border:none;border-radius:8px;transform:scale(0.92)}
+.video{
+  width:100%;
+  aspect-ratio:9/16;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.video-container{
+  position:relative;
+}
+
+.verified{
+  position:absolute;
+  bottom:8px;
+  left:8px;
+  background:rgba(0,0,0,0.7);
+  padding:4px 8px;
+  font-size:11px;
+  border-radius:6px;
+}
+
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.modal video{
+  width:80%;
+  max-width:500px;
+}
+
+.modal.active{display:flex}
 
 /* FOOTER */
 .footer{background:#000;padding:18px 20px 10px;border-top:1px solid rgba(255,255,255,0.06)}
@@ -368,10 +408,37 @@ body{background:#0f0f14;color:#fff}
 <div class="section">
   <h2>VIDEO REVIEWS</h2>
   <div class="videos">
-    <iframe class="video" src="https://www.instagram.com/p/DIuNm-Np_t6/embed"></iframe>
-    <iframe class="video" src="https://www.instagram.com/p/DM1Ip9xphQs/embed"></iframe>
-    <iframe class="video" src="https://www.instagram.com/p/DIw6IfMJH78/embed"></iframe>
+
+  <div class="video-container">
+    <video class="video" src="vid1.mp4" muted loop playsinline onmouseover="this.muted=false" onmouseout="this.muted=true" onclick="openModal(this.src)"></video>
+    <div class="verified">✔ Verified Buyer</div>
   </div>
+
+  <div class="video-container">
+    <video class="video" src="vid2.mp4" muted loop playsinline onmouseover="this.muted=false" onmouseout="this.muted=true" onclick="openModal(this.src)"></video>
+    <div class="verified">✔ Verified Buyer</div>
+  </div>
+
+  <div class="video-container">
+    <video class="video" src="vid3.mp4" muted loop playsinline onmouseover="this.muted=false" onmouseout="this.muted=true" onclick="openModal(this.src)"></video>
+    <div class="verified">✔ Verified Buyer</div>
+  </div>
+
+  <div class="video-container">
+    <video class="video" src="vid4.mp4" muted loop playsinline onmouseover="this.muted=false" onmouseout="this.muted=true" onclick="openModal(this.src)"></video>
+    <div class="verified">✔ Verified Buyer</div>
+  </div>
+
+  <div class="video-container">
+    <video class="video" src="vid5.mp4" muted loop playsinline onmouseover="this.muted=false" onmouseout="this.muted=true" onclick="openModal(this.src)"></video>
+    <div class="verified">✔ Verified Buyer</div>
+  </div>
+
+</div>
+
+<div class="modal" id="videoModal" onclick="closeModal()">
+  <video id="modalVideo" controls autoplay></video>
+</div>
 </div>
 
 <!-- FOOTER -->
@@ -410,6 +477,21 @@ function slideLeft(){
 }
 function slideRight(){
   document.getElementById('arrivals').scrollBy({left:300,behavior:'smooth'});
+}
+
+function openModal(src){
+  const modal=document.getElementById('videoModal');
+  const vid=document.getElementById('modalVideo');
+  vid.src=src;
+  modal.classList.add('active');
+}
+
+function closeModal(){
+  const modal=document.getElementById('videoModal');
+  const vid=document.getElementById('modalVideo');
+  vid.pause();
+  vid.src="";
+  modal.classList.remove('active');
 }
 
 </script>
