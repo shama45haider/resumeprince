@@ -11,44 +11,328 @@
 body{background:#0f0f14;color:#fff}
 
 /* TOP BAR */
-.topbar{height:40px;background:#000;display:flex;align-items:center;justify-content:center;position:relative}
+.topbar{height:40px;background:#000;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .tick{position:absolute;opacity:0;transition:.4s;font-size:13px;font-weight:600}
 .tick.active{opacity:1}
 
 /* NAV */
-.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 25px;background:#111;position:sticky;top:0}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 25px;background:#111;position:sticky;top:0;z-index:10}
+.nav-left,.nav-right{display:flex;gap:15px;align-items:center}
 .nav-center{position:absolute;left:50%;transform:translateX(-50%)}
 .logo{height:40px}
+.nav a{color:#aaa;text-decoration:none;font-size:13px}
+.nav a:hover{color:#fff}
 
 /* HERO */
-.hero{height:80vh;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero{height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;background:#000}
+.hero-logo{width:220px;margin-bottom:15px}
 
-/* BRANDS */
-.brands{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.brand-card{position:relative;border-radius:12px;overflow:hidden}
-.brand-card img{width:100%;height:120px;object-fit:cover}
-.brand-card span{position:absolute;bottom:10px;left:10px;font-weight:600}
+.section{padding:40px 20px}
 
-/* ARRIVALS */
-.arrivals{display:flex;gap:18px;overflow-x:auto;padding:10px 40px}
-.arrival-card{min-width:260px;background:#17171f;border-radius:14px;overflow:hidden}
-.arrival-card video{width:100%;height:300px;object-fit:cover}
+/* NEW ARRIVALS (VIDEO SLIDER) */
+.arrivals{
+  display:flex;
+  gap:18px;
+  overflow-x:auto;
+  padding:10px 40px;
+  scroll-behavior:smooth;
+}
 
-/* VIDEO REVIEWS */
-.video-section{position:relative;max-width:1000px;margin:auto}
-.videos{display:flex;gap:14px;overflow-x:auto;padding:10px 40px}
-.video-container{min-width:220px;position:relative}
-.video{width:100%;height:320px;object-fit:cover;border-radius:12px}
-.verified{position:absolute;bottom:10px;left:10px;background:black;padding:6px;border-radius:6px}
+.arrivals::-webkit-scrollbar{display:none}
 
-/* FOOTER */
-.footer{background:#000;padding:20px}
-.footer-main{display:flex;justify-content:space-between}
+.arrivals::-webkit-scrollbar{height:6px}
+.arrivals::-webkit-scrollbar-thumb{background:#2f7cff;border-radius:10px}
+
+.arrival-card{
+  min-width:260px;
+  background:#17171f;
+  border-radius:14px;
+  overflow:hidden;
+  transition:.25s;
+  position:relative;
+}
+
+.arrival-card video{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+}
+
+.arrival-card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 20px 50px rgba(47,124,255,0.3);
+}
+
+.arrival-card video{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+}
+
+.arrival-card:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 15px 40px rgba(47,124,255,0.25);
+}
+
+.arrival-info{
+  padding:8px;
+  font-size:13px;
+}
+
+/* FEATURES */ (UPGRADED) */
+.features{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+.feature{
+  position:relative;
+  background:linear-gradient(180deg,#17171f,#111);
+  padding:20px 16px;
+  border-radius:14px;
+  text-align:left;
+  border:1px solid rgba(255,255,255,0.06);
+  overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.feature:hover{
+  transform:translateY(-6px);
+  border-color:rgba(47,124,255,0.6);
+  box-shadow:0 20px 50px rgba(47,124,255,0.25), inset 0 0 0 1px rgba(47,124,255,0.2);
+}
+
+/* glow accent */
+.feature::before{
+  content:"";
+  position:absolute;
+  inset:-40% -40%;
+  background:radial-gradient(circle at 30% 20%, rgba(47,124,255,0.18), transparent 40%), radial-gradient(circle at 70% 80%, rgba(47,124,255,0.12), transparent 40%);
+  opacity:.6;
+  pointer-events:none;
+}
+
+/* top icon */
+.feature-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(47,124,255,0.15);
+  border:1px solid rgba(47,124,255,0.35);
+  box-shadow:0 8px 20px rgba(47,124,255,0.25);
+  margin-bottom:10px;
+}
+
+.feature-title{
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:.3px;
+  margin-bottom:6px;
+}
+
+.feature-desc{
+  font-size:13px;
+  color:#9aa0a6;
+}
+
+/* subtle divider inside cards */
+.feature .line{
+  height:1px;
+  margin:10px 0 6px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);
+}
+
+@media(max-width:900px){
+  .features{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .features{grid-template-columns:1fr}
+}
+
+/* VIDEOS (HORIZONTAL CAROUSEL) */
+.video-section{position:relative;max-width:1000px;margin:0 auto}
+
+.videos{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  padding:10px 40px;
+}
+.videos::-webkit-scrollbar{display:none}
+
+.video-container{
+  min-width:220px;
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.video{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+.video-container:hover{
+  transform:scale(1.05);
+  box-shadow:0 20px 60px rgba(47,124,255,.35);
+}
+
+/* glow overlay */
+.video-container::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));
+}
+
+/* VERIFIED BADGE */
+.verified{
+  position:absolute;
+  bottom:10px;
+  left:10px;
+  background:rgba(0,0,0,0.8);
+  padding:6px 10px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:700;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  box-shadow:0 0 10px rgba(47,124,255,.6);
+}
+
+.verified::before{
+  content:"✔";
+  color:#2f7cff;
+  font-weight:900;
+}
+
+/* SLIDE BUTTONS */
+.slide-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,.6);
+  border:none;
+  color:#fff;
+  font-size:22px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:10;
+  transition:.25s;
+}
+.slide-btn:hover{
+  background:#2f7cff;
+  box-shadow:0 0 15px rgba(47,124,255,.7);
+}
+.slide-btn.left{left:0}
+.slide-btn.right{right:0}
+
+/* FOOTER */ */
+.footer{background:#000;padding:18px 20px 10px;border-top:1px solid rgba(255,255,255,0.06)}
+
+
+
+.footer-main{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px}
+
+.footer-left{display:flex;flex-direction:column;gap:4px}
+.footer-logo{width:84px;filter:drop-shadow(0 0 10px rgba(47,124,255,.25))}
+.footer-left strong{font-size:16px;letter-spacing:.5px}
+.footer-left span{font-size:13px;color:#9aa0a6}
+
+/* Right links styled as compact buttons */
+.footer-right{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.footer-right a{
+  font-size:14px;
+  color:#c9ced6;
+  text-decoration:none;
+  padding:7px 10px;
+  border-radius:8px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  transition:.25s ease;
+}
+.footer-right a:hover{
+  color:#fff;
+  background:rgba(47,124,255,0.18);
+  border-color:rgba(47,124,255,0.5);
+  box-shadow:0 6px 18px rgba(47,124,255,.25);
+  transform:translateY(-1px);
+}
+
+/* subtle divider */
+.footer-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);margin:10px 0}
 
 /* MOBILE */
 @media(max-width:700px){
-.brands{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+  .features{grid-template-columns:1fr}
+  .videos{grid-template-columns:1fr}
+  .footer-main{flex-direction:column;text-align:center}
+  .nav-left{display:none}
 }
+.slide-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.6);
+  border:none;
+  color:#fff;
+  font-size:24px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:5;
+  transition:.2s;
+}
+.slide-btn:hover{background:#2f7cff}
+.slide-btn.left{left:0}
+.slide-btn.right{right:0}
+
+
+
+/* BRANDS */
+.brands{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:14px;
+}
+.brand-card{
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.3s;
+}
+.brand-card img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  filter:brightness(.7);
+  transition:.3s;
+}
+.brand-card span{
+  position:absolute;
+  bottom:10px;
+  left:10px;
+  font-weight:600;
+  font-size:14px;
+}
+.brand-card:hover img{
+  transform:scale(1.08);
+  filter:brightness(.9);
+}
+
+@media(max-width:900px){
+  .brands{grid-template-columns:repeat(2,1fr)}
+}
+
 </style>
 </head>
 
@@ -56,109 +340,172 @@ body{background:#0f0f14;color:#fff}
 
 <!-- TOP BAR -->
 <div class="topbar">
-<div class="tick active">SHOP OUR NEW ARRIVALS</div>
-<div class="tick">FREE SHIPPING OVER $400</div>
-<div class="tick">100% AUTHENTIC GUARANTEED</div>
+  <div class="tick active">SHOP OUR NEW ARRIVALS</div>
+  <div class="tick">FREE SHIPPING ON ORDERS $400+</div>
+  <div class="tick">100% AUTHENTIC GUARANTEED  </div>
+</div>
+
 </div>
 
 <!-- NAV -->
 <div class="nav">
-<div>SHOP</div>
-<div class="nav-center"><img src="logo.png" class="logo"></div>
-<div>🛒</div>
+  <div class="nav-left">
+    <a href="#">SHOP</a>
+    <a href="#">BRANDS</a>
+  </div>
+  <div class="nav-center"><img src="logo.png" class="logo"></div>
+  <div class="nav-right">🛒</div>
 </div>
 
 <!-- SHOP BY BRAND -->
 <div class="section">
-<h2>SHOP BY BRAND</h2>
-<div class="brands">
-
-<div class="brand-card">
-<img src="nike1.png">
-<span>Nike</span>
-</div>
-
-<div class="brand-card">
-<img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800">
-<span>Amiri</span>
-</div>
-
-<div class="brand-card">
-<img src="chrome1.png">
-<span>Chrome Hearts</span>
-</div>
-
-<div class="brand-card">
-<img src="https://images.unsplash.com/photo-1520975922284-9e0a9a9a4b8b?q=80&w=800">
-<span>Rick Owens</span>
-</div>
-
-<div class="brand-card">
-<img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=800">
-<span>Moose Knuckle</span>
-</div>
-
-</div>
+  <h2 style="margin-bottom:12px">SHOP BY BRAND</h2>
+  <div class="brands">
+    <div class="brand-card"><img src="https://images.unsplash.com/photo-1528701800489-20be3c2ea9c8?q=80&w=800"><span>Nike</span></div>
+    <div class="brand-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800"><span>Amiri</span></div>
+    <div class="brand-card"><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=800"><span>Chrome Hearts</span></div>
+    <div class="brand-card"><img src="https://images.unsplash.com/photo-1520975922284-9e0a9a9a4b8b?q=80&w=800"><span>Rick Owens</span></div>
+    <div class="brand-card"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=800"><span>Moose Knuckle</span></div>
+  </div>
 </div>
 
 <!-- HERO -->
-<div class="hero" style="background:url('background.png') center/cover no-repeat;">
-<div>
-<img src="logo.png" style="width:200px">
-<h1>THE FUTURE OF STREETWEAR</h1>
-<p>Established in 2001, BoUnitNYC is a trusted source for authentic streetwear.</p>
-</div>
+<div class="hero" style="background:url('background.png') center/cover no-repeat; position:relative;">
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.75);"></div>
+  <div style="position:relative;z-index:2;max-width:600px;margin:auto;text-align:center;padding:20px">
+    <img src="logo.png" class="hero-logo">
+    <h1 style="margin-bottom:10px">THE FUTURE OF STREETWEAR</h1>
+    <p style="font-size:14px;color:#9aa0a6;line-height:1.6">
+      Established in 2001, BoUnitNYC has built a reputation as a trusted source for authentic streetwear and sneakers.
+      With decades of experience and a strong base of satisfied customers, we pride ourselves on quality, reliability,
+      and delivering verified products you can trust.
+    </p>
+  </div>
 </div>
 
-<!-- NEW ARRIVALS -->
+<!-- PRODUCTS -->
 <div class="section">
-<h2>NEW ARRIVALS</h2>
-<div class="arrivals">
-<div class="arrival-card"><video src="video1.mp4" autoplay muted loop></video></div>
-<div class="arrival-card"><video src="video2.mp4" autoplay muted loop></video></div>
-<div class="arrival-card"><video src="video3.mp4" autoplay muted loop></video></div>
+  <h2 style="margin-bottom:12px">NEW ARRIVALS</h2>
+
+  <div style="position:relative">
+
+  <button class="slide-btn left" onclick="slideLeft()">‹</button>
+  <button class="slide-btn right" onclick="slideRight()">›</button>
+
+  <div class="arrivals" id="arrivals">
+
+    <div class="arrival-card"><video src="video1.mp4" autoplay muted loop></video><div class="arrival-info">Jordan 4 - $450</div></div>
+    <div class="arrival-card"><video src="video2.mp4" autoplay muted loop></video><div class="arrival-info">Yeezy 350 - $300</div></div>
+    <div class="arrival-card"><video src="video3.mp4" autoplay muted loop></video><div class="arrival-info">Chrome Hearts - $700</div></div>
+    <div class="arrival-card"><video src="video4.mp4" autoplay muted loop></video><div class="arrival-info">Jordan 1 - $200</div></div>
+    <div class="arrival-card"><video src="video5.mp4" autoplay muted loop></video><div class="arrival-info">Dunks - $150</div></div>
+    <div class="arrival-card"><video src="video6.mp4" autoplay muted loop></video><div class="arrival-info">Travis Scott - $900</div></div>
+    <div class="arrival-card"><video src="video7.mp4" autoplay muted loop></video><div class="arrival-info">Foam Runners - $120</div></div>
+    <div class="arrival-card"><video src="video8.mp4" autoplay muted loop></video><div class="arrival-info">Jordan 11 - $280</div></div>
+    <div class="arrival-card"><video src="video9.mp4" autoplay muted loop></video><div class="arrival-info">Off White - $950</div></div>
+    <div class="arrival-card"><video src="video10.mp4" autoplay muted loop></video><div class="arrival-info">Essentials Fit - $180</div></div>
+
+  </div>
 </div>
 </div>
 
-<!-- VIDEO REVIEWS -->
+<!-- FEATURES -->
 <div class="section">
-<h2>VIDEO REVIEWS</h2>
-<div class="video-section">
-<div class="videos">
+  <h2 style="margin-bottom:14px">WHY CHOOSE US</h2>
+  <div class="features">
 
-<div class="video-container">
-<video class="video" src="vid1.mp4" autoplay muted loop></video>
-<div class="verified">Verified Buyer</div>
+    <div class="feature">
+      <div class="feature-icon">✔</div>
+      <div class="feature-title">100% Authentic</div>
+      <div class="line"></div>
+      <div class="feature-desc">Every item is verified and sourced from trusted partners to guarantee authenticity.</div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🚚</div>
+      <div class="feature-title">Fast Shipping</div>
+      <div class="line"></div>
+      <div class="feature-desc">Same-day processing with next-day shipping options available on most orders.</div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🔄</div>
+      <div class="feature-title">Easy Returns</div>
+      <div class="line"></div>
+      <div class="feature-desc">Hassle-free returns with quick refunds and responsive support.</div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">Secure Checkout</div>
+      <div class="line"></div>
+      <div class="feature-desc">Encrypted payments and trusted providers ensure your data stays protected.</div>
+    </div>
+
+  </div>
+</div>
 </div>
 
-<div class="video-container">
-<video class="video" src="vid2.mp4" autoplay muted loop></video>
-<div class="verified">Verified Buyer</div>
+<!-- VIDEOS -->
+<div class="section">
+  <h2 style="margin-bottom:14px">VIDEO REVIEWS</h2>
+
+  <div class="video-section">
+    <button class="slide-btn left" onclick="slideReviews(-1)">‹</button>
+    <button class="slide-btn right" onclick="slideReviews(1)">›</button>
+
+    <div class="videos" id="reviews">
+
+      <div class="video-container">
+        <video class="video" src="vid1.mp4" autoplay muted loop playsinline></video>
+        <div class="verified">Verified Buyer</div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid2.mp4" autoplay muted loop playsinline></video>
+        <div class="verified">Verified Buyer</div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid3.mp4" autoplay muted loop playsinline></video>
+        <div class="verified">Verified Buyer</div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid4.mp4" autoplay muted loop playsinline></video>
+        <div class="verified">Verified Buyer</div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid5.mp4" autoplay muted loop playsinline></video>
+        <div class="verified">Verified Buyer</div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
-<div class="video-container">
-<video class="video" src="vid3.mp4" autoplay muted loop></video>
-<div class="verified">Verified Buyer</div>
-</div>
-
-</div>
-</div>
-</div>
 
 <!-- FOOTER -->
 <div class="footer">
-<div class="footer-main">
-<div>
-<strong>BoUnitNYC</strong>
-<div>support@bounitnyc.com</div>
-</div>
-<div>
-<a>About</a>
-<a>Careers</a>
-<a>Terms</a>
-<a>Refund</a>
-<a>Privacy</a>
-</div>
+
+  <div class="footer-divider"></div>
+
+  <div class="footer-main">
+    <div class="footer-left">
+      <img src="logo.png" class="footer-logo">
+      <strong>BoUnitNYC</strong>
+      <span>support@bounitnyc.com</span>
+    </div>
+
+    <div class="footer-right">
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Terms of Services</a>
+      <a href="#">Refund Policy</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
 </div>
 </div>
 
@@ -166,10 +513,22 @@ body{background:#0f0f14;color:#fff}
 const ticks=document.querySelectorAll('.tick');
 let i=0;
 setInterval(()=>{
-ticks[i].classList.remove('active');
-i=(i+1)%ticks.length;
-ticks[i].classList.add('active');
+  ticks[i].classList.remove('active');
+  i=(i+1)%ticks.length;
+  ticks[i].classList.add('active');
 },3000);
+function slideLeft(){
+  document.getElementById('arrivals').scrollBy({left:-300,behavior:'smooth'});
+}
+function slideRight(){
+  document.getElementById('arrivals').scrollBy({left:300,behavior:'smooth'});
+}
+
+function slideReviews(dir){
+  const container=document.getElementById('reviews');
+  container.scrollBy({left:dir*260,behavior:'smooth'});
+}
+
 </script>
 
 </body>
