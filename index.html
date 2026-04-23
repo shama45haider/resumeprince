@@ -9,15 +9,9 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 
-html, body{
-  height:100%;
-}
-
 body{
   background:#0f0f14;
   color:#fff;
-  display:flex;
-  flex-direction:column;
 }
 
 /* TOP BAR */
@@ -28,43 +22,59 @@ body{
   align-items:center;
   justify-content:center;
   position:relative;
+  overflow:hidden;
 }
 .tick{
   position:absolute;
   opacity:0;
-  transition:.5s;
+  font-weight:600;
   font-size:13px;
-  font-weight:700;
+  transition:.4s;
 }
 .tick.active{opacity:1}
 
-/* NAV */
+/* NAVBAR */
 .nav{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   padding:15px 25px;
   background:#111;
   position:sticky;
   top:0;
+  z-index:10;
 }
-.nav-center{position:absolute;left:50%;transform:translateX(-50%)}
-.logo{height:30px}
+.nav-left,.nav-right{display:flex;gap:20px}
+.nav-center{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+}
+.logo{height:32px}
+.nav a{
+  color:#aaa;
+  text-decoration:none;
+  font-size:13px;
+}
+.nav a:hover{color:#fff}
 
 /* HERO */
 .hero{
-  flex:1;
+  height:80vh;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
 }
-.hero-logo{width:220px}
+.hero-logo{
+  width:220px;
+  margin-bottom:15px;
+}
 
 /* SECTIONS */
-.section{padding:40px 20px}
+.section{padding:50px 20px}
 
-/* GRID */
+/* PRODUCTS */
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -74,8 +84,10 @@ body{
   background:#17171f;
   padding:10px;
   border-radius:10px;
+  transition:.3s;
 }
 .card img{width:100%}
+.card:hover{transform:translateY(-5px)}
 
 /* FEATURES */
 .features{
@@ -83,35 +95,43 @@ body{
   grid-template-columns:repeat(2,1fr);
   gap:10px;
 }
+.feature{
+  background:#17171f;
+  padding:15px;
+  border-radius:8px;
+  text-align:center;
+}
 
 /* VIDEOS */
 .videos{
   display:grid;
-  gap:10px;
+  gap:15px;
 }
 .video{
   width:100%;
-  border:none;
   aspect-ratio:9/16;
+  border:none;
+  border-radius:10px;
 }
 
-/* FOOTER */
+/* FOOTER (PROPER FIXED VERSION) */
 .footer{
-  margin-top:auto;
   background:#000;
-  padding:15px 20px 5px;
+  padding:20px 20px 10px;
 }
 
 .footer-news{
   text-align:center;
-  margin-bottom:10px;
+  margin-bottom:15px;
 }
 .footer-news input{
-  padding:8px;
+  padding:10px;
   border:none;
+  background:#111;
+  color:#fff;
 }
 .footer-news button{
-  padding:8px;
+  padding:10px;
   background:#2f7cff;
   border:none;
   color:#fff;
@@ -122,12 +142,13 @@ body{
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
+  gap:10px;
 }
 
 .footer-left{
   display:flex;
   flex-direction:column;
-  gap:3px;
+  gap:4px;
 }
 
 .footer-right{
@@ -137,33 +158,54 @@ body{
 }
 
 .footer-right a{
+  font-size:14px;
   color:#aaa;
   text-decoration:none;
-  font-size:14px;
+  padding:6px 10px;
+  border-radius:6px;
+  background:#111;
+  transition:.2s;
 }
-.footer-right a:hover{color:#fff}
+.footer-right a:hover{
+  background:#2f7cff;
+  color:#fff;
+}
 
 /* MOBILE */
 @media(max-width:700px){
   .grid{grid-template-columns:1fr}
-  .footer-main{flex-direction:column;gap:10px;text-align:center}
+  .footer-main{flex-direction:column;text-align:center}
+  .nav-left{display:none}
 }
 </style>
 </head>
 
 <body>
 
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="tick active">SHOP OUR NEW ARRIVALS</div>
   <div class="tick">FREE SHIPPING OVER $400</div>
+  <div class="tick">100% AUTHENTIC GUARANTEED</div>
 </div>
 
+<!-- NAV -->
 <div class="nav">
-  <div>SHOP</div>
-  <div class="nav-center"><img src="logo.png" class="logo"></div>
-  <div>🛒</div>
+  <div class="nav-left">
+    <a href="#">SHOP</a>
+    <a href="#">BRANDS</a>
+  </div>
+
+  <div class="nav-center">
+    <img src="logo.png" class="logo">
+  </div>
+
+  <div class="nav-right">
+    🛒
+  </div>
 </div>
 
+<!-- HERO -->
 <div class="hero">
   <div>
     <img src="logo.png" class="hero-logo">
@@ -171,6 +213,7 @@ body{
   </div>
 </div>
 
+<!-- PRODUCTS -->
 <div class="section">
 <h2>NEW ARRIVALS</h2>
 <div class="grid">
@@ -180,16 +223,18 @@ body{
 </div>
 </div>
 
+<!-- FEATURES -->
 <div class="section">
 <h2>WHY CHOOSE US</h2>
 <div class="features">
-<div>✔ Authentic</div>
-<div>🚚 Fast Shipping</div>
-<div>🔄 Returns</div>
-<div>🔒 Secure</div>
+<div class="feature">✔ Authentic</div>
+<div class="feature">🚚 Fast Shipping</div>
+<div class="feature">🔄 Returns</div>
+<div class="feature">🔒 Secure</div>
 </div>
 </div>
 
+<!-- VIDEOS -->
 <div class="section">
 <h2>VIDEO REVIEWS</h2>
 <div class="videos">
@@ -198,10 +243,11 @@ body{
 </div>
 </div>
 
+<!-- FOOTER -->
 <div class="footer">
 
 <div class="footer-news">
-<input placeholder="Email">
+<input placeholder="Enter email">
 <button>Subscribe</button>
 </div>
 
