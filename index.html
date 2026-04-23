@@ -8,69 +8,158 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{background:#0f0f14;color:#fff}
+
+html, body{
+  height:100%;
+}
+
+body{
+  background:#0f0f14;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+}
+
+/* TOP BAR */
+.topbar{
+  height:40px;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.tick{
+  position:absolute;
+  opacity:0;
+  transition:.5s;
+  font-size:13px;
+  font-weight:700;
+}
+.tick.active{opacity:1}
 
 /* NAV */
-.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 25px;background:#111;position:sticky;top:0}
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 25px;
+  background:#111;
+  position:sticky;
+  top:0;
+}
 .nav-center{position:absolute;left:50%;transform:translateX(-50%)}
-.logo{height:32px}
-.nav a{color:#aaa;text-decoration:none;font-size:13px}
+.logo{height:30px}
 
 /* HERO */
-.hero{height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;background:#000}
-.hero-logo{width:220px;margin-bottom:15px}
+.hero{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.hero-logo{width:220px}
 
+/* SECTIONS */
 .section{padding:40px 20px}
 
 /* GRID */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.card{background:#17171f;padding:10px;border-radius:10px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+.card{
+  background:#17171f;
+  padding:10px;
+  border-radius:10px;
+}
 .card img{width:100%}
 
-/* FOOTER (CLEAN REBUILD) */
+/* FEATURES */
+.features{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+/* VIDEOS */
+.videos{
+  display:grid;
+  gap:10px;
+}
+.video{
+  width:100%;
+  border:none;
+  aspect-ratio:9/16;
+}
+
+/* FOOTER */
 .footer{
+  margin-top:auto;
   background:#000;
-  padding:20px;
+  padding:15px 20px 5px;
+}
+
+.footer-news{
+  text-align:center;
+  margin-bottom:10px;
+}
+.footer-news input{
+  padding:8px;
+  border:none;
+}
+.footer-news button{
+  padding:8px;
+  background:#2f7cff;
+  border:none;
+  color:#fff;
+}
+
+.footer-main{
   display:flex;
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
-  gap:15px;
 }
 
 .footer-left{
   display:flex;
   flex-direction:column;
-  gap:4px;
+  gap:3px;
 }
-
-.footer-logo{width:80px}
 
 .footer-right{
   display:flex;
-  gap:12px;
+  gap:10px;
   flex-wrap:wrap;
 }
 
 .footer-right a{
-  font-size:14px;
   color:#aaa;
   text-decoration:none;
+  font-size:14px;
 }
-
 .footer-right a:hover{color:#fff}
 
+/* MOBILE */
 @media(max-width:700px){
   .grid{grid-template-columns:1fr}
-  .footer{flex-direction:column;text-align:center}
+  .footer-main{flex-direction:column;gap:10px;text-align:center}
 }
 </style>
 </head>
 
 <body>
 
+<div class="topbar">
+  <div class="tick active">SHOP OUR NEW ARRIVALS</div>
+  <div class="tick">FREE SHIPPING OVER $400</div>
+</div>
+
 <div class="nav">
-  <div><a href="#">SHOP</a></div>
+  <div>SHOP</div>
   <div class="nav-center"><img src="logo.png" class="logo"></div>
   <div>🛒</div>
 </div>
@@ -83,23 +172,47 @@ body{background:#0f0f14;color:#fff}
 </div>
 
 <div class="section">
-  <h2>NEW ARRIVALS</h2>
-  <div class="grid">
-    <div class="card"><img src="offwhite.jpg"><p>$950</p></div>
-    <div class="card"><img src="chicago.jpg"><p>$180</p></div>
-    <div class="card"><img src="balenciaga.jpg"><p>$350</p></div>
-  </div>
+<h2>NEW ARRIVALS</h2>
+<div class="grid">
+<div class="card"><img src="offwhite.jpg"><p>$950</p></div>
+<div class="card"><img src="chicago.jpg"><p>$180</p></div>
+<div class="card"><img src="balenciaga.jpg"><p>$350</p></div>
+</div>
+</div>
+
+<div class="section">
+<h2>WHY CHOOSE US</h2>
+<div class="features">
+<div>✔ Authentic</div>
+<div>🚚 Fast Shipping</div>
+<div>🔄 Returns</div>
+<div>🔒 Secure</div>
+</div>
+</div>
+
+<div class="section">
+<h2>VIDEO REVIEWS</h2>
+<div class="videos">
+<iframe class="video" src="https://www.instagram.com/p/DIuNm-Np_t6/embed"></iframe>
+<iframe class="video" src="https://www.instagram.com/p/DM1Ip9xphQs/embed"></iframe>
+</div>
 </div>
 
 <div class="footer">
+
+<div class="footer-news">
+<input placeholder="Email">
+<button>Subscribe</button>
+</div>
+
+<div class="footer-main">
   <div class="footer-left">
-    <img src="logo.png" class="footer-logo">
     <strong>BoUnitNYC</strong>
     <span>support@bounitnyc.com</span>
   </div>
 
   <div class="footer-right">
-    <a href="#">About Us</a>
+    <a href="#">About</a>
     <a href="#">Careers</a>
     <a href="#">Terms</a>
     <a href="#">Refund</a>
@@ -107,4 +220,17 @@ body{background:#0f0f14;color:#fff}
   </div>
 </div>
 
-<
+</div>
+
+<script>
+const ticks=document.querySelectorAll('.tick');
+let i=0;
+setInterval(()=>{
+  ticks[i].classList.remove('active');
+  i=(i+1)%ticks.length;
+  ticks[i].classList.add('active');
+},3000);
+</script>
+
+</body>
+</html>
