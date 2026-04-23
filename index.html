@@ -8,172 +8,58 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-
-body{
-  background:#0f0f14;
-  color:#fff;
-}
+body{background:#0f0f14;color:#fff}
 
 /* TOP BAR */
-.topbar{
-  height:40px;
-  background:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  overflow:hidden;
-}
-.tick{
-  position:absolute;
-  opacity:0;
-  font-weight:600;
-  font-size:13px;
-  transition:.4s;
-}
+.topbar{height:40px;background:#000;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.tick{position:absolute;opacity:0;transition:.4s;font-size:13px;font-weight:600}
 .tick.active{opacity:1}
 
-/* NAVBAR */
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:15px 25px;
-  background:#111;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-.nav-left,.nav-right{display:flex;gap:20px}
-.nav-center{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-}
+/* NAV */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 25px;background:#111;position:sticky;top:0;z-index:10}
+.nav-left,.nav-right{display:flex;gap:15px;align-items:center}
+.nav-center{position:absolute;left:50%;transform:translateX(-50%)}
 .logo{height:32px}
-.nav a{
-  color:#aaa;
-  text-decoration:none;
-  font-size:13px;
-}
+.nav a{color:#aaa;text-decoration:none;font-size:13px}
 .nav a:hover{color:#fff}
 
 /* HERO */
-.hero{
-  height:80vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-.hero-logo{
-  width:220px;
-  margin-bottom:15px;
-}
+.hero{height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;background:#000}
+.hero-logo{width:220px;margin-bottom:15px}
 
-/* SECTIONS */
-.section{padding:50px 20px}
+.section{padding:40px 20px}
 
 /* PRODUCTS */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-.card{
-  background:#17171f;
-  padding:10px;
-  border-radius:10px;
-  transition:.3s;
-}
-.card img{width:100%}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.card{background:#17171f;padding:10px;border-radius:10px;transition:.25s}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .card:hover{transform:translateY(-5px)}
 
 /* FEATURES */
-.features{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-.feature{
-  background:#17171f;
-  padding:15px;
-  border-radius:8px;
-  text-align:center;
-}
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.feature{background:#17171f;padding:14px;border-radius:8px;text-align:center}
 
-/* VIDEOS */
-.videos{
-  display:grid;
-  gap:15px;
-}
-.video{
-  width:100%;
-  aspect-ratio:9/16;
-  border:none;
-  border-radius:10px;
-}
+/* VIDEOS (COMPACT) */
+.videos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:820px;margin:0 auto}
+.video{width:100%;aspect-ratio:9/16;border:none;border-radius:8px;transform:scale(0.92)}
 
-/* FOOTER (PROPER FIXED VERSION) */
-.footer{
-  background:#000;
-  padding:20px 20px 10px;
-}
-
-.footer-news{
-  text-align:center;
-  margin-bottom:15px;
-}
-.footer-news input{
-  padding:10px;
-  border:none;
-  background:#111;
-  color:#fff;
-}
-.footer-news button{
-  padding:10px;
-  background:#2f7cff;
-  border:none;
-  color:#fff;
-}
-
-.footer-main{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
-.footer-left{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
-
-.footer-right{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.footer-right a{
-  font-size:14px;
-  color:#aaa;
-  text-decoration:none;
-  padding:6px 10px;
-  border-radius:6px;
-  background:#111;
-  transition:.2s;
-}
-.footer-right a:hover{
-  background:#2f7cff;
-  color:#fff;
-}
+/* FOOTER */
+.footer{background:#000;padding:16px 20px 6px}
+.footer-news{display:flex;justify-content:center;gap:8px;margin-bottom:10px}
+.footer-news input{padding:8px 10px;border:none;background:#111;color:#fff;border-radius:6px}
+.footer-news button{padding:8px 12px;border:none;background:#2f7cff;color:#fff;border-radius:6px}
+.footer-main{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.footer-left{display:flex;flex-direction:column;gap:3px}
+.footer-logo{width:80px}
+.footer-right{display:flex;gap:8px;flex-wrap:wrap}
+.footer-right a{font-size:14px;color:#aaa;text-decoration:none;padding:6px 10px;background:#111;border-radius:6px}
+.footer-right a:hover{color:#fff;background:#2f7cff}
 
 /* MOBILE */
 @media(max-width:700px){
   .grid{grid-template-columns:1fr}
+  .features{grid-template-columns:1fr}
+  .videos{grid-template-columns:1fr}
   .footer-main{flex-direction:column;text-align:center}
   .nav-left{display:none}
 }
@@ -185,7 +71,7 @@ body{
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="tick active">SHOP OUR NEW ARRIVALS</div>
-  <div class="tick">FREE SHIPPING OVER $400</div>
+  <div class="tick">FREE SHIPPING ON ORDERS $400+</div>
   <div class="tick">100% AUTHENTIC GUARANTEED</div>
 </div>
 
@@ -195,14 +81,8 @@ body{
     <a href="#">SHOP</a>
     <a href="#">BRANDS</a>
   </div>
-
-  <div class="nav-center">
-    <img src="logo.png" class="logo">
-  </div>
-
-  <div class="nav-right">
-    🛒
-  </div>
+  <div class="nav-center"><img src="logo.png" class="logo"></div>
+  <div class="nav-right">🛒</div>
 </div>
 
 <!-- HERO -->
@@ -215,57 +95,57 @@ body{
 
 <!-- PRODUCTS -->
 <div class="section">
-<h2>NEW ARRIVALS</h2>
-<div class="grid">
-<div class="card"><img src="offwhite.jpg"><p>$950</p></div>
-<div class="card"><img src="chicago.jpg"><p>$180</p></div>
-<div class="card"><img src="balenciaga.jpg"><p>$350</p></div>
-</div>
+  <h2>NEW ARRIVALS</h2>
+  <div class="grid">
+    <div class="card"><img src="offwhite.jpg"><p>$950</p></div>
+    <div class="card"><img src="chicago.jpg"><p>$180</p></div>
+    <div class="card"><img src="balenciaga.jpg"><p>$350</p></div>
+  </div>
 </div>
 
 <!-- FEATURES -->
 <div class="section">
-<h2>WHY CHOOSE US</h2>
-<div class="features">
-<div class="feature">✔ Authentic</div>
-<div class="feature">🚚 Fast Shipping</div>
-<div class="feature">🔄 Returns</div>
-<div class="feature">🔒 Secure</div>
-</div>
+  <h2>WHY CHOOSE US</h2>
+  <div class="features">
+    <div class="feature">✔ Authentic</div>
+    <div class="feature">🚚 Fast Shipping</div>
+    <div class="feature">🔄 Returns</div>
+    <div class="feature">🔒 Secure</div>
+  </div>
 </div>
 
 <!-- VIDEOS -->
 <div class="section">
-<h2>VIDEO REVIEWS</h2>
-<div class="videos">
-<iframe class="video" src="https://www.instagram.com/p/DIuNm-Np_t6/embed"></iframe>
-<iframe class="video" src="https://www.instagram.com/p/DM1Ip9xphQs/embed"></iframe>
-</div>
+  <h2>VIDEO REVIEWS</h2>
+  <div class="videos">
+    <iframe class="video" src="https://www.instagram.com/p/DIuNm-Np_t6/embed"></iframe>
+    <iframe class="video" src="https://www.instagram.com/p/DM1Ip9xphQs/embed"></iframe>
+    <iframe class="video" src="https://www.instagram.com/p/DIw6IfMJH78/embed"></iframe>
+  </div>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-
-<div class="footer-news">
-<input placeholder="Enter email">
-<button>Subscribe</button>
-</div>
-
-<div class="footer-main">
-  <div class="footer-left">
-    <strong>BoUnitNYC</strong>
-    <span>support@bounitnyc.com</span>
+  <div class="footer-news">
+    <input placeholder="Enter email">
+    <button>Subscribe</button>
   </div>
 
-  <div class="footer-right">
-    <a href="#">About</a>
-    <a href="#">Careers</a>
-    <a href="#">Terms</a>
-    <a href="#">Refund</a>
-    <a href="#">Privacy</a>
-  </div>
-</div>
+  <div class="footer-main">
+    <div class="footer-left">
+      <img src="logo.png" class="footer-logo">
+      <strong>BoUnitNYC</strong>
+      <span>support@bounitnyc.com</span>
+    </div>
 
+    <div class="footer-right">
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Terms</a>
+      <a href="#">Refund</a>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
 </div>
 
 <script>
