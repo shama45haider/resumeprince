@@ -29,13 +29,45 @@ body{background:#0f0f14;color:#fff}
 
 .section{padding:40px 20px}
 
-/* PRODUCTS */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.card{background:#17171f;padding:10px;border-radius:10px;transition:.25s}
-.card img{width:100%;aspect-ratio:1/1;object-fit:cover}
-.card:hover{transform:translateY(-5px)}
+/* NEW ARRIVALS (VIDEO SLIDER) */
+.arrivals{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  padding-bottom:10px;
+  scroll-snap-type:x mandatory;
+}
 
-/* FEATURES (UPGRADED) */
+.arrivals::-webkit-scrollbar{height:6px}
+.arrivals::-webkit-scrollbar-thumb{background:#2f7cff;border-radius:10px}
+
+.arrival-card{
+  min-width:180px;
+  background:#17171f;
+  border-radius:12px;
+  overflow:hidden;
+  scroll-snap-align:start;
+  transition:.25s;
+  position:relative;
+}
+
+.arrival-card video{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+}
+
+.arrival-card:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 15px 40px rgba(47,124,255,0.25);
+}
+
+.arrival-info{
+  padding:8px;
+  font-size:13px;
+}
+
+/* FEATURES */ (UPGRADED) */
 .features{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -182,12 +214,23 @@ body{background:#0f0f14;color:#fff}
 
 <!-- PRODUCTS -->
 <div class="section">
-  <h2>NEW ARRIVALS</h2>
-  <div class="grid">
-    <div class="card"><img src="offwhite.jpg"><p>$950</p></div>
-    <div class="card"><img src="chicago.jpg"><p>$180</p></div>
-    <div class="card"><img src="balenciaga.jpg"><p>$350</p></div>
+  <h2 style="margin-bottom:12px">NEW ARRIVALS</h2>
+
+  <div class="arrivals">
+
+    <div class="arrival-card"><video src="video1.mp4" autoplay muted loop></video><div class="arrival-info">Jordan 4 - $450</div></div>
+    <div class="arrival-card"><video src="video2.mp4" autoplay muted loop></video><div class="arrival-info">Yeezy 350 - $300</div></div>
+    <div class="arrival-card"><video src="video3.mp4" autoplay muted loop></video><div class="arrival-info">Chrome Hearts - $700</div></div>
+    <div class="arrival-card"><video src="video4.mp4" autoplay muted loop></video><div class="arrival-info">Jordan 1 - $200</div></div>
+    <div class="arrival-card"><video src="video5.mp4" autoplay muted loop></video><div class="arrival-info">Dunks - $150</div></div>
+    <div class="arrival-card"><video src="video6.mp4" autoplay muted loop></video><div class="arrival-info">Travis Scott - $900</div></div>
+    <div class="arrival-card"><video src="video7.mp4" autoplay muted loop></video><div class="arrival-info">Foam Runners - $120</div></div>
+    <div class="arrival-card"><video src="video8.mp4" autoplay muted loop></video><div class="arrival-info">Jordan 11 - $280</div></div>
+    <div class="arrival-card"><video src="video9.mp4" autoplay muted loop></video><div class="arrival-info">Off White - $950</div></div>
+    <div class="arrival-card"><video src="video10.mp4" autoplay muted loop></video><div class="arrival-info">Essentials Fit - $180</div></div>
+
   </div>
+</div>
 </div>
 
 <!-- FEATURES -->
