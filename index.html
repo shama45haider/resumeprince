@@ -13,7 +13,288 @@ body{
   background:#0f0f14;
   color:#fff;
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoUnit NYC</title>
 
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+  background:#0f0f14;
+  color:#fff;
+}
+
+/* TOP BAR */
+.topbar{
+  height:40px;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.tick{
+  position:absolute;
+  opacity:0;
+  font-weight:600;
+  font-size:13px;
+  transition:.4s;
+}
+.tick.active{opacity:1}
+
+/* NAVBAR */
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 25px;
+  background:#111;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.nav-left,.nav-right{display:flex;gap:20px}
+.nav-center{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+}
+.logo{height:32px}
+.nav a{
+  color:#aaa;
+  text-decoration:none;
+  font-size:13px;
+}
+.nav a:hover{color:#fff}
+
+/* HERO */
+.hero{
+  height:80vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.hero-logo{
+  width:220px;
+  margin-bottom:15px;
+}
+
+/* SECTIONS */
+.section{padding:50px 20px}
+
+/* PRODUCTS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+.card{
+  background:#17171f;
+  padding:10px;
+  border-radius:10px;
+  transition:.3s;
+}
+.card img{width:100%}
+.card:hover{transform:translateY(-5px)}
+
+/* FEATURES */
+.features{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.feature{
+  background:#17171f;
+  padding:15px;
+  border-radius:8px;
+  text-align:center;
+}
+
+/* VIDEOS */
+.videos{
+  display:grid;
+  gap:15px;
+}
+.video{
+  width:100%;
+  aspect-ratio:9/16;
+  border:none;
+  border-radius:10px;
+}
+
+/* FOOTER (PROPER FIXED VERSION) */
+.footer{
+  background:#000;
+  padding:20px 20px 10px;
+}
+
+.footer-news{
+  text-align:center;
+  margin-bottom:15px;
+}
+.footer-news input{
+  padding:10px;
+  border:none;
+  background:#111;
+  color:#fff;
+}
+.footer-news button{
+  padding:10px;
+  background:#2f7cff;
+  border:none;
+  color:#fff;
+}
+
+.footer-main{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.footer-left{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.footer-right{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.footer-right a{
+  font-size:14px;
+  color:#aaa;
+  text-decoration:none;
+  padding:6px 10px;
+  border-radius:6px;
+  background:#111;
+  transition:.2s;
+}
+.footer-right a:hover{
+  background:#2f7cff;
+  color:#fff;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+  .grid{grid-template-columns:1fr}
+  .footer-main{flex-direction:column;text-align:center}
+  .nav-left{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="tick active">SHOP OUR NEW ARRIVALS</div>
+  <div class="tick">FREE SHIPPING OVER $400</div>
+  <div class="tick">100% AUTHENTIC GUARANTEED</div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-left">
+    <a href="#">SHOP</a>
+    <a href="#">BRANDS</a>
+  </div>
+
+  <div class="nav-center">
+    <img src="logo.png" class="logo">
+  </div>
+
+  <div class="nav-right">
+    🛒
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <img src="logo.png" class="hero-logo">
+    <h1>THE FUTURE OF STREETWEAR</h1>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="section">
+<h2>NEW ARRIVALS</h2>
+<div class="grid">
+<div class="card"><img src="offwhite.jpg"><p>$950</p></div>
+<div class="card"><img src="chicago.jpg"><p>$180</p></div>
+<div class="card"><img src="balenciaga.jpg"><p>$350</p></div>
+</div>
+</div>
+
+<!-- FEATURES -->
+<div class="section">
+<h2>WHY CHOOSE US</h2>
+<div class="features">
+<div class="feature">✔ Authentic</div>
+<div class="feature">🚚 Fast Shipping</div>
+<div class="feature">🔄 Returns</div>
+<div class="feature">🔒 Secure</div>
+</div>
+</div>
+
+<!-- VIDEOS -->
+<div class="section">
+<h2>VIDEO REVIEWS</h2>
+<div class="videos">
+<iframe class="video" src="https://www.instagram.com/p/DIuNm-Np_t6/embed"></iframe>
+<iframe class="video" src="https://www.instagram.com/p/DM1Ip9xphQs/embed"></iframe>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+
+<div class="footer-news">
+<input placeholder="Enter email">
+<button>Subscribe</button>
+</div>
+
+<div class="footer-main">
+  <div class="footer-left">
+    <strong>BoUnitNYC</strong>
+    <span>support@bounitnyc.com</span>
+  </div>
+
+  <div class="footer-right">
+    <a href="#">About</a>
+    <a href="#">Careers</a>
+    <a href="#">Terms</a>
+    <a href="#">Refund</a>
+    <a href="#">Privacy</a>
+  </div>
+</div>
+
+</div>
+
+<script>
+const ticks=document.querySelectorAll('.tick');
+let i=0;
+setInterval(()=>{
+  ticks[i].classList.remove('active');
+  i=(i+1)%ticks.length;
+  ticks[i].classList.add('active');
+},3000);
+</script>
+
+</body>
+</html>
 /* TOP BAR */
 .topbar{
   height:40px;
