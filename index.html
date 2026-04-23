@@ -284,7 +284,13 @@ body{background:var(--bg);color:var(--text)}
 
 /* VIDEOS */
 .videos{display:grid;grid-template-columns:1fr;gap:10px}
-.video{width:100%}
+.video{
+  width:100%;
+  border:none;
+  overflow:hidden;
+  border-radius:12px;
+  aspect-ratio:9/16;
+}
 
 /* NEWSLETTER */
 .newsletter{text-align:center;background:#000;padding:30px}
