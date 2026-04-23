@@ -32,23 +32,35 @@ body{background:#0f0f14;color:#fff}
 /* NEW ARRIVALS (VIDEO SLIDER) */
 .arrivals{
   display:flex;
-  gap:14px;
+  gap:18px;
   overflow-x:auto;
-  padding-bottom:10px;
-  scroll-snap-type:x mandatory;
+  padding:10px 40px;
+  scroll-behavior:smooth;
 }
+
+.arrivals::-webkit-scrollbar{display:none}
 
 .arrivals::-webkit-scrollbar{height:6px}
 .arrivals::-webkit-scrollbar-thumb{background:#2f7cff;border-radius:10px}
 
 .arrival-card{
-  min-width:180px;
+  min-width:260px;
   background:#17171f;
-  border-radius:12px;
+  border-radius:14px;
   overflow:hidden;
-  scroll-snap-align:start;
   transition:.25s;
   position:relative;
+}
+
+.arrival-card video{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+}
+
+.arrival-card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 20px 50px rgba(47,124,255,0.3);
 }
 
 .arrival-card video{
@@ -182,6 +194,25 @@ body{background:#0f0f14;color:#fff}
   .footer-main{flex-direction:column;text-align:center}
   .nav-left{display:none}
 }
+.slide-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.6);
+  border:none;
+  color:#fff;
+  font-size:24px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:5;
+  transition:.2s;
+}
+.slide-btn:hover{background:#2f7cff}
+.slide-btn.left{left:0}
+.slide-btn.right{right:0}
+
 </style>
 </head>
 
@@ -191,7 +222,9 @@ body{background:#0f0f14;color:#fff}
 <div class="topbar">
   <div class="tick active">SHOP OUR NEW ARRIVALS</div>
   <div class="tick">FREE SHIPPING ON ORDERS $400+</div>
-  <div class="tick">100% AUTHENTIC GUARANTEED</div>
+  <div class="tick">100% AUTHENTIC GUARANTEED  </div>
+</div>
+
 </div>
 
 <!-- NAV -->
@@ -216,7 +249,12 @@ body{background:#0f0f14;color:#fff}
 <div class="section">
   <h2 style="margin-bottom:12px">NEW ARRIVALS</h2>
 
-  <div class="arrivals">
+  <div style="position:relative">
+
+  <button class="slide-btn left" onclick="slideLeft()">‹</button>
+  <button class="slide-btn right" onclick="slideRight()">›</button>
+
+  <div class="arrivals" id="arrivals">
 
     <div class="arrival-card"><video src="video1.mp4" autoplay muted loop></video><div class="arrival-info">Jordan 4 - $450</div></div>
     <div class="arrival-card"><video src="video2.mp4" autoplay muted loop></video><div class="arrival-info">Yeezy 350 - $300</div></div>
@@ -311,6 +349,13 @@ setInterval(()=>{
   i=(i+1)%ticks.length;
   ticks[i].classList.add('active');
 },3000);
+function slideLeft(){
+  document.getElementById('arrivals').scrollBy({left:-300,behavior:'smooth'});
+}
+function slideRight(){
+  document.getElementById('arrivals').scrollBy({left:300,behavior:'smooth'});
+}
+
 </script>
 
 </body>
