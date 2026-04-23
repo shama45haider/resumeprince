@@ -35,9 +35,73 @@ body{background:#0f0f14;color:#fff}
 .card img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .card:hover{transform:translateY(-5px)}
 
-/* FEATURES */
-.features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.feature{background:#17171f;padding:14px;border-radius:8px;text-align:center}
+/* FEATURES (UPGRADED) */
+.features{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+.feature{
+  position:relative;
+  background:linear-gradient(180deg,#17171f,#111);
+  padding:20px 16px;
+  border-radius:14px;
+  text-align:left;
+  border:1px solid rgba(255,255,255,0.06);
+  overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.feature:hover{
+  transform:translateY(-6px);
+  border-color:rgba(47,124,255,0.6);
+  box-shadow:0 20px 50px rgba(47,124,255,0.25), inset 0 0 0 1px rgba(47,124,255,0.2);
+}
+
+/* glow accent */
+.feature::before{
+  content:"";
+  position:absolute;
+  inset:-40% -40%;
+  background:radial-gradient(circle at 30% 20%, rgba(47,124,255,0.18), transparent 40%), radial-gradient(circle at 70% 80%, rgba(47,124,255,0.12), transparent 40%);
+  opacity:.6;
+  pointer-events:none;
+}
+
+/* top icon */
+.feature-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(47,124,255,0.15);
+  border:1px solid rgba(47,124,255,0.35);
+  box-shadow:0 8px 20px rgba(47,124,255,0.25);
+  margin-bottom:10px;
+}
+
+.feature-title{
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:.3px;
+  margin-bottom:6px;
+}
+
+.feature-desc{
+  font-size:13px;
+  color:#9aa0a6;
+}
+
+/* subtle divider inside cards */
+.feature .line{
+  height:1px;
+  margin:10px 0 6px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent);
+}
+
+@media(max-width:900px){
+  .features{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .features{grid-template-columns:1fr}
+}
 
 /* VIDEOS (COMPACT) */
 .videos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:820px;margin:0 auto}
@@ -128,13 +192,39 @@ body{background:#0f0f14;color:#fff}
 
 <!-- FEATURES -->
 <div class="section">
-  <h2>WHY CHOOSE US</h2>
+  <h2 style="margin-bottom:14px">WHY CHOOSE US</h2>
   <div class="features">
-    <div class="feature">✔ Authentic</div>
-    <div class="feature">🚚 Fast Shipping</div>
-    <div class="feature">🔄 Returns</div>
-    <div class="feature">🔒 Secure</div>
+
+    <div class="feature">
+      <div class="feature-icon">✔</div>
+      <div class="feature-title">100% Authentic</div>
+      <div class="line"></div>
+      <div class="feature-desc">Every item is verified and sourced from trusted partners to guarantee authenticity.</div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🚚</div>
+      <div class="feature-title">Fast Shipping</div>
+      <div class="line"></div>
+      <div class="feature-desc">Same-day processing with next-day shipping options available on most orders.</div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🔄</div>
+      <div class="feature-title">Easy Returns</div>
+      <div class="line"></div>
+      <div class="feature-desc">Hassle-free returns with quick refunds and responsive support.</div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">Secure Checkout</div>
+      <div class="line"></div>
+      <div class="feature-desc">Encrypted payments and trusted providers ensure your data stays protected.</div>
+    </div>
+
   </div>
+</div>
 </div>
 
 <!-- VIDEOS -->
