@@ -297,6 +297,67 @@ body{background:var(--bg);color:var(--text)}
 .newsletter input{padding:10px;width:180px}
 .newsletter button{padding:10px;background:var(--blue);border:none;color:#fff}
 
+/* FOOTER */
+.footer{
+  position:relative;
+  padding:60px 40px;
+  background:linear-gradient(180deg,#000,#0a0a12);
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:40px;
+  overflow:hidden;
+}
+
+.footer::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:radial-gradient(circle, rgba(47,124,255,0.15), transparent 60%);
+  animation:glowMove 10s linear infinite;
+}
+
+@keyframes glowMove{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(20%,20%)}
+  100%{transform:translate(0,0)}
+}
+
+.footer-left{
+  position:relative;
+  z-index:2;
+  font-size:14px;
+}
+
+.footer-left span{
+  display:block;
+  margin-top:8px;
+  color:var(--muted);
+}
+
+.footer-right{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.footer-right a{
+  text-decoration:none;
+  color:var(--muted);
+  font-size:13px;
+  transition:.3s;
+}
+
+.footer-right a:hover{
+  color:#fff;
+  transform:translateX(4px);
+}
+
 /* CART */
 .cart-box{position:fixed;right:0;top:0;width:260px;height:100%;background:#111;padding:20px;transform:translateX(100%);transition:.3s}
 .cart-box.open{transform:translateX(0)}
@@ -463,7 +524,18 @@ body{background:var(--bg);color:var(--text)}
 </div>
 
 <div class="footer">
-  BoUnit NYC<br>support@bounitnyc.com
+  <div class="footer-left">
+    <strong>BoUnitNYC</strong>
+    <span>support@bounitnyc.com</span>
+  </div>
+
+  <div class="footer-right">
+    <a href="#">About Us</a>
+    <a href="#">Careers</a>
+    <a href="#">Terms Of Services</a>
+    <a href="#">Refund Policy</a>
+    <a href="#">Privacy Policy</a>
+  </div>
 </div>
 
 <script>
