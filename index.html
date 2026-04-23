@@ -350,6 +350,16 @@ body{background:var(--bg);color:var(--text)}
   z-index:2;
 }
 
+.footer-left strong{
+  font-size:16px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  background:linear-gradient(90deg,#fff,#2f7cff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 10px rgba(47,124,255,0.4);
+}
+
 .footer-logo{
   width:120px;
   margin-bottom:10px;
@@ -361,6 +371,13 @@ body{background:var(--bg);color:var(--text)}
   margin-top:6px;
   color:var(--muted);
   font-size:13px;
+  letter-spacing:0.5px;
+  transition:.3s;
+}
+
+.footer-left span:hover{
+  color:#fff;
+  text-shadow:0 0 6px rgba(47,124,255,0.6);
 }
 
 .footer-right{
@@ -375,7 +392,30 @@ body{background:var(--bg);color:var(--text)}
   text-decoration:none;
   color:var(--muted);
   font-size:13px;
+  letter-spacing:1px;
+  position:relative;
   transition:.3s;
+}
+
+.footer-right a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-3px;
+  width:0%;
+  height:1px;
+  background:var(--blue);
+  transition:.3s;
+}
+
+.footer-right a:hover{
+  color:#fff;
+  transform:translateX(6px);
+  text-shadow:0 0 8px rgba(47,124,255,0.6);
+}
+
+.footer-right a:hover::after{
+  width:100%;
 }
 
 .footer-right a:hover{
