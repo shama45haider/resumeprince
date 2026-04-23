@@ -147,51 +147,93 @@ body{background:#0f0f14;color:#fff}
   .features{grid-template-columns:1fr}
 }
 
-/* VIDEOS (COMPACT) */
-.videos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:820px;margin:0 auto}
-.video{
-  width:100%;
-  aspect-ratio:9/16;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
+/* VIDEOS (HORIZONTAL CAROUSEL) */
+.video-section{position:relative;max-width:1000px;margin:0 auto}
+
+.videos{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  padding:10px 40px;
 }
+.videos::-webkit-scrollbar{display:none}
 
 .video-container{
+  min-width:220px;
   position:relative;
+  border-radius:12px;
+  overflow:hidden;
+  transition:.3s;
 }
 
+.video{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+.video-container:hover{
+  transform:scale(1.05);
+  box-shadow:0 20px 60px rgba(47,124,255,.35);
+}
+
+/* glow overlay */
+.video-container::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));
+}
+
+/* VERIFIED BADGE */
 .verified{
   position:absolute;
-  bottom:8px;
-  left:8px;
-  background:rgba(0,0,0,0.7);
-  padding:4px 8px;
-  font-size:11px;
-  border-radius:6px;
-}
-
-.modal{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.9);
-  display:none;
+  bottom:10px;
+  left:10px;
+  background:rgba(0,0,0,0.8);
+  padding:6px 10px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:700;
+  color:#fff;
+  display:flex;
   align-items:center;
-  justify-content:center;
-  z-index:999;
+  gap:5px;
+  box-shadow:0 0 10px rgba(47,124,255,.6);
 }
 
-.modal video{
-  width:80%;
-  max-width:500px;
+.verified::before{
+  content:"✔";
+  color:#2f7cff;
+  font-weight:900;
 }
 
-.modal.active{display:flex}
+/* SLIDE BUTTONS */
+.slide-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,.6);
+  border:none;
+  color:#fff;
+  font-size:22px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:10;
+  transition:.25s;
+}
+.slide-btn:hover{
+  background:#2f7cff;
+  box-shadow:0 0 15px rgba(47,124,255,.7);
+}
+.slide-btn.left{left:0}
+.slide-btn.right{right:0}
 
-/* FOOTER */
+/* FOOTER */ */
 .footer{background:#000;padding:18px 20px 10px;border-top:1px solid rgba(255,255,255,0.06)}
 
 
@@ -406,13 +448,42 @@ body{background:#0f0f14;color:#fff}
 
 <!-- VIDEOS -->
 <div class="section">
-  <h2>VIDEO REVIEWS</h2>
-  <div class="videos">
+  <h2 style="margin-bottom:14px">VIDEO REVIEWS</h2>
 
-  <div class="video-container">
-    <video class="video" src="vid1.mp4" muted loop playsinline onmouseover="this.muted=false" onmouseout="this.muted=true" onclick="openModal(this.src)"></video>
-    <div class="verified">✔ Verified Buyer</div>
+  <div class="video-section">
+    <button class="slide-btn left" onclick="slideReviews(-1)">‹</button>
+    <button class="slide-btn right" onclick="slideReviews(1)">›</button>
+
+    <div class="videos" id="reviews">
+
+      <div class="video-container">
+        <video class="video" src="vid1.mp4" autoplay muted loop playsinline></video>
+        <div class="verified">Verified Buyer</div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid2.mp4" autoplay muted loop playsinline></video>
+        <div class="verified">Verified Buyer</div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid3.mp4" autoplay muted loop playsinline></video>
+        <div class="verified">Verified Buyer</div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid4.mp4" autoplay muted loop playsinline></video>
+        <div class="verified">Verified Buyer</div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid5.mp4" autoplay muted loop playsinline></video>
+        <div class="verified">Verified Buyer</div>
+      </div>
+
+    </div>
   </div>
+</div>
 
   <div class="video-container">
     <video class="video" src="vid2.mp4" muted loop playsinline onmouseover="this.muted=false" onmouseout="this.muted=true" onclick="openModal(this.src)"></video>
@@ -479,19 +550,9 @@ function slideRight(){
   document.getElementById('arrivals').scrollBy({left:300,behavior:'smooth'});
 }
 
-function openModal(src){
-  const modal=document.getElementById('videoModal');
-  const vid=document.getElementById('modalVideo');
-  vid.src=src;
-  modal.classList.add('active');
-}
-
-function closeModal(){
-  const modal=document.getElementById('videoModal');
-  const vid=document.getElementById('modalVideo');
-  vid.pause();
-  vid.src="";
-  modal.classList.remove('active');
+function slideReviews(dir){
+  const container=document.getElementById('reviews');
+  container.scrollBy({left:dir*260,behavior:'smooth'});
 }
 
 </script>
