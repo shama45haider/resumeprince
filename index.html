@@ -5,83 +5,231 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BoUnit NYC</title>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{background:#0f0f14;color:#fff}
+body{background:#0f0f14;color:#fff;overflow-x:hidden}
 
-/* TOP BAR */
-.topbar{
-  height:36px;
-  background:linear-gradient(90deg,#000,#0a0a1a,#000);
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;
-}
+/* ── TOP BAR ── */
+.topbar{height:36px;background:linear-gradient(90deg,#000 0%,#0a0a1a 50%,#000 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(47,124,255,0.2)}
+.topbar::after{content:"";position:absolute;bottom:0;left:-100%;width:55%;height:1px;background:linear-gradient(90deg,transparent,rgba(47,124,255,0.9),transparent);animation:shimmer 3s linear infinite}
+@keyframes shimmer{to{left:140%}}
+.tick{position:absolute;opacity:0;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#ccd6f6;transform:translateY(8px);transition:opacity .5s,transform .5s}
+.tick.active{opacity:1;transform:translateY(0)}
+.tick::before,.tick::after{content:"|";color:rgba(47,124,255,0.45);margin:0 14px;font-size:10px;vertical-align:middle;font-weight:300}
 
-.tick{position:absolute;opacity:0;transition:.5s;font-size:12px;font-weight:600}
-.tick.active{opacity:1}
-
-/* NAV */
-.nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 30px;
-  background:rgba(10,10,20,0.85);
-  backdrop-filter:blur(10px);
-  position:sticky;top:0;z-index:100;
-}
-
-.nav-left,.nav-right{display:flex;gap:10px;align-items:center}
+/* ── NAV ── */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:0 24px;height:60px;background:rgba(8,8,18,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:200;transition:height .3s,background .3s}
+.nav.scrolled{height:50px;background:rgba(4,4,12,0.97);border-bottom-color:rgba(47,124,255,0.18);box-shadow:0 8px 32px rgba(0,0,0,0.7)}
+.nav-left,.nav-right{display:flex;gap:4px;align-items:center}
 .nav-center{position:absolute;left:50%;transform:translateX(-50%)}
-.logo{height:38px}
+.logo{height:34px;transition:height .3s}
+.nav.scrolled .logo{height:26px}
 
-/* NAV LINKS */
-.nav a{
-  color:#aaa;
-  text-decoration:none;
-  font-size:12px;
-  padding:6px 12px;
-  border-radius:8px;
-  transition:.25s;
+/* hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:#8892b0;border-radius:2px;transition:.25s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* mobile drawer */
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(5,5,15,0.98);backdrop-filter:blur(24px);z-index:190;flex-direction:column;padding:80px 28px 40px;gap:2px;transform:translateX(-100%);transition:transform .32s cubic-bezier(.4,0,.2,1)}
+.mobile-menu.open{transform:translateX(0)}
+.mob-link{display:block;padding:14px 0;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8892b0;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.05);transition:color .2s}
+.mob-link:hover{color:#fff}
+.mob-sub{padding:7px 0 7px 14px;font-size:12px;color:#444;letter-spacing:1px;text-transform:uppercase;display:block;text-decoration:none;transition:color .2s}
+.mob-sub:hover{color:#2f7cff}
+.mob-sale{color:#ff4d4d !important}
+
+/* nav links */
+.nav-link{color:#8892b0;font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;padding:8px 12px;border-radius:8px;position:relative;cursor:pointer;transition:color .22s,background .22s;display:flex;align-items:center;gap:5px;background:none;border:none;font-family:'Poppins',sans-serif}
+.nav-link::after{content:"";position:absolute;bottom:4px;left:12px;right:12px;height:1px;background:#2f7cff;transform:scaleX(0);transition:transform .22s;box-shadow:0 0 6px rgba(47,124,255,0.8)}
+.nav-link:hover{color:#fff;background:rgba(47,124,255,0.07)}
+.nav-link:hover::after{transform:scaleX(1)}
+.chevron{font-size:9px;opacity:.6;transition:transform .22s;display:inline-block}
+.nav-item:hover .chevron{transform:rotate(180deg)}
+
+/* dropdown */
+.nav-item{position:relative}
+.dropdown{position:absolute;top:calc(100% + 8px);left:0;background:rgba(10,10,22,0.98);backdrop-filter:blur(24px);border:1px solid rgba(47,124,255,0.18);border-radius:14px;padding:8px;min-width:210px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .22s,transform .22s;box-shadow:0 20px 60px rgba(0,0,0,0.7);z-index:300}
+.nav-item:hover .dropdown{opacity:1;pointer-events:all;transform:translateY(0)}
+.dropdown-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:9px;color:#9aa0b4;text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;transition:background .18s,color .18s;cursor:pointer}
+.dropdown-item:hover{background:rgba(47,124,255,0.12);color:#fff}
+.dropdown-item .d-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);flex-shrink:0;color:#8892b0}
+.dropdown-item.sale{color:#ff4d4d}
+.dropdown-item.sale .d-icon{background:rgba(255,77,77,0.1);border-color:rgba(255,77,77,0.22);color:#ff4d4d}
+.dropdown-item.sale:hover{background:rgba(255,77,77,0.1)}
+.dropdown-divider{height:1px;background:rgba(255,255,255,0.06);margin:5px 0}
+
+/* search */
+.search-wrap{position:relative;display:flex;align-items:center}
+.search-bar{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:10px;color:#fff;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:.3px;padding:7px 12px 7px 34px;width:160px;transition:width .25s,border-color .25s,background .25s;outline:none}
+.search-bar:focus{width:210px;border-color:rgba(47,124,255,0.5);background:rgba(47,124,255,0.06)}
+.search-bar::placeholder{color:#444;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;opacity:.4;pointer-events:none}
+
+/* cart btn */
+.cart-btn{position:relative;display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;cursor:pointer;color:#8892b0;transition:.22s}
+.cart-btn:hover{background:rgba(47,124,255,0.12);border-color:rgba(47,124,255,0.4);color:#fff;box-shadow:0 0 16px rgba(47,124,255,.2)}
+.cart-count{position:absolute;top:-6px;right:-6px;background:#2f7cff;color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #0f0f14}
+
+/* ── CART PANEL ── */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:500;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-panel{position:fixed;top:0;right:0;bottom:0;width:400px;max-width:100vw;background:#0d0d1a;border-left:1px solid rgba(47,124,255,0.15);z-index:600;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:-20px 0 60px rgba(0,0,0,0.6)}
+.cart-panel.open{transform:translateX(0)}
+.cart-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid rgba(255,255,255,0.07)}
+.cart-header h3{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.cart-close{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+.cart-close:hover{background:rgba(255,77,77,0.15);border-color:rgba(255,77,77,0.3);color:#ff4d4d}
+.cart-items{flex:1;overflow-y:auto;padding:14px 22px;display:flex;flex-direction:column;gap:12px}
+.cart-items::-webkit-scrollbar{width:3px}
+.cart-items::-webkit-scrollbar-thumb{background:#2f7cff;border-radius:3px}
+.cart-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#444;text-align:center;padding:40px}
+.cart-empty svg{opacity:.2;width:48px;height:48px}
+.cart-empty p{font-size:11px;letter-spacing:1px;text-transform:uppercase;line-height:1.8}
+.cart-item{display:flex;gap:12px;align-items:center;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:11px}
+.cart-item-img{width:60px;height:60px;border-radius:8px;background:rgba(47,124,255,0.08);object-fit:cover;flex-shrink:0;border:1px solid rgba(47,124,255,0.15)}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-size:11px;font-weight:600;letter-spacing:.4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cart-item-price{font-size:12px;color:#2f7cff;font-weight:700;margin-top:2px}
+.cart-item-qty{display:flex;align-items:center;gap:8px;margin-top:5px}
+.qty-btn{width:20px;height:20px;border-radius:5px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;line-height:1}
+.qty-btn:hover{background:rgba(47,124,255,0.2);border-color:rgba(47,124,255,0.4)}
+.qty-num{font-size:12px;font-weight:600;min-width:14px;text-align:center}
+.cart-item-remove{width:24px;height:24px;border-radius:6px;flex-shrink:0;background:rgba(255,77,77,0.08);border:1px solid rgba(255,77,77,0.15);color:#ff4d4d;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.cart-item-remove:hover{background:rgba(255,77,77,0.2)}
+.cart-footer{padding:14px 22px 22px;border-top:1px solid rgba(255,255,255,0.07)}
+.cart-subtotal{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cart-subtotal span{font-size:11px;color:#8892b0;letter-spacing:.5px;text-transform:uppercase}
+.cart-subtotal strong{font-size:17px;font-weight:700}
+.checkout-btn{width:100%;padding:13px;border-radius:11px;background:linear-gradient(135deg,#2f7cff,#1a5cd6);border:none;color:#fff;font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:.25s;box-shadow:0 8px 24px rgba(47,124,255,0.35)}
+.checkout-btn:hover{background:linear-gradient(135deg,#4a8fff,#2f7cff);box-shadow:0 12px 32px rgba(47,124,255,0.5);transform:translateY(-1px)}
+.free-ship-note{text-align:center;font-size:10px;color:#444;margin-top:9px;letter-spacing:.8px;text-transform:uppercase}
+
+/* ── SECTIONS ── */
+.section{padding:44px 20px}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+.section-header h2{font-size:18px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.section-sub{font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase;margin-top:3px}
+.review-count{font-size:11px;color:#555;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
+.review-count span{color:#2f7cff;font-weight:700}
+
+/* ── HERO ── */
+.hero{height:80vh;min-height:400px;display:flex;align-items:center;justify-content:center;text-align:center;background:#000}
+.hero-logo{width:180px;margin-bottom:14px}
+
+/* ── BRANDS CAROUSEL ── */
+.brands-wrap{position:relative;max-width:1100px;margin:0 auto}
+.brands{display:flex;gap:14px;overflow-x:auto;scroll-behavior:smooth;padding:6px 50px}
+.brands::-webkit-scrollbar{display:none}
+.brand-card{min-width:180px;flex-shrink:0;position:relative;border-radius:12px;overflow:hidden;cursor:pointer;transition:.3s;border:1px solid rgba(255,255,255,0.06)}
+.brand-card img{width:100%;height:110px;object-fit:cover;filter:brightness(.65);transition:.3s;display:block}
+.brand-card span{position:absolute;bottom:10px;left:12px;font-weight:700;font-size:13px;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,0.8)}
+.brand-card:hover img{transform:scale(1.07);filter:brightness(.9)}
+.brand-card:hover{box-shadow:0 12px 40px rgba(47,124,255,0.2);border-color:rgba(47,124,255,0.2)}
+
+/* ── NEW ARRIVALS ── */
+.arrivals-wrap{position:relative;max-width:1100px;margin:0 auto}
+.arrivals{display:flex;gap:16px;overflow-x:auto;padding:8px 50px;scroll-behavior:smooth}
+.arrivals::-webkit-scrollbar{display:none}
+.arrival-card{min-width:220px;background:#17171f;border-radius:14px;overflow:hidden;transition:.25s;position:relative;flex-shrink:0;border:1px solid rgba(255,255,255,0.05)}
+.arrival-card video,.arrival-card img{width:100%;height:280px;object-fit:cover;display:block}
+.arrival-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 15px 40px rgba(47,124,255,0.25)}
+.arrival-info{padding:10px 12px;font-size:12px;font-weight:600;letter-spacing:.3px}
+
+/* ── WHY CHOOSE US ── */
+.why-wrap{max-width:1100px;margin:0 auto}
+.trust-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06);border-radius:12px;overflow:hidden;margin-bottom:20px;border:1px solid rgba(255,255,255,0.06)}
+.trust-stat{background:#0d0d1a;padding:16px 12px;text-align:center}
+.trust-stat-num{font-size:22px;font-weight:700;background:linear-gradient(135deg,#fff,#8892b0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-1px;line-height:1;margin-bottom:3px}
+.trust-stat-label{font-size:9px;color:#555;letter-spacing:1.5px;text-transform:uppercase}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.feature{background:#0d0d1a;padding:18px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);transition:border-color .25s,box-shadow .25s;position:relative;overflow:hidden}
+.feature::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(47,124,255,0.4),transparent);opacity:0;transition:opacity .25s}
+.feature:hover{border-color:rgba(47,124,255,0.2);box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+.feature:hover::before{opacity:1}
+.feature-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(47,124,255,0.1);border:1px solid rgba(47,124,255,0.2);color:#2f7cff;margin-bottom:12px}
+.feature-title{font-weight:700;font-size:12px;letter-spacing:.3px;margin-bottom:5px}
+.feature-desc{font-size:11px;color:#555;line-height:1.65}
+.feature-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+.feature-tag{font-size:9px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:rgba(47,124,255,0.07);border:1px solid rgba(47,124,255,0.12);color:#4a7acc}
+
+/* ── VIDEO REVIEWS ── */
+.video-section{position:relative;max-width:1100px;margin:0 auto}
+.videos{display:flex;gap:14px;overflow-x:auto;scroll-behavior:smooth;padding:10px 50px}
+.videos::-webkit-scrollbar{display:none}
+.video-container{min-width:220px;flex-shrink:0;position:relative;border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s;background:#0d0d1a;border:1px solid rgba(255,255,255,0.06)}
+.video-container:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 28px 60px rgba(0,0,0,0.6),0 0 0 1px rgba(47,124,255,0.2);border-color:rgba(47,124,255,0.25)}
+.video{width:100%;height:350px;object-fit:cover;display:block;cursor:pointer}
+.video-container::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.12) 0%,transparent 30%,transparent 52%,rgba(0,0,0,0.88) 100%);pointer-events:none;z-index:1}
+
+/* unmute */
+.unmute-btn{position:absolute;top:12px;right:12px;z-index:3;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.18);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.unmute-btn:hover{background:rgba(47,124,255,0.7);border-color:rgba(47,124,255,0.8)}
+.unmute-btn svg{width:13px;height:13px;pointer-events:none}
+
+/* video meta */
+.video-meta{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:12px 12px 14px;display:flex;flex-direction:column;gap:6px}
+.verified{display:inline-flex;align-items:center;gap:5px;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);padding:4px 9px;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#fff;border:1px solid rgba(47,124,255,0.3);width:fit-content}
+.verified-dot{width:5px;height:5px;border-radius:50%;background:#2f7cff;box-shadow:0 0 5px rgba(47,124,255,0.9);flex-shrink:0}
+.ig-handle{display:flex;align-items:center;gap:7px;text-decoration:none}
+.ig-logo{width:20px;height:20px;flex-shrink:0;border-radius:5px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center}
+.ig-name{font-size:12px;font-weight:700;letter-spacing:.3px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ig-handle:hover .ig-name{text-decoration:underline}
+
+/* slide buttons */
+.slide-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(8,8,18,0.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:20px;width:38px;height:38px;border-radius:50%;cursor:pointer;z-index:10;transition:.25s;display:flex;align-items:center;justify-content:center}
+.slide-btn:hover{background:#2f7cff;border-color:#2f7cff;box-shadow:0 0 16px rgba(47,124,255,.6)}
+.slide-btn.left{left:6px}
+.slide-btn.right{right:6px}
+
+/* ── FOOTER ── */
+.footer{background:#000;padding:20px 24px 14px;border-top:1px solid rgba(255,255,255,0.06)}
+.footer-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);margin-bottom:16px}
+.footer-main{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.footer-left{display:flex;flex-direction:column;gap:3px}
+.footer-logo{width:72px;filter:drop-shadow(0 0 10px rgba(47,124,255,.25))}
+.footer-left strong{font-size:14px;letter-spacing:.5px}
+.footer-left span{font-size:12px;color:#9aa0a6}
+.footer-right{display:flex;gap:6px;flex-wrap:wrap}
+.footer-right a{font-size:11px;color:#8892b0;text-decoration:none;padding:6px 10px;border-radius:7px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);letter-spacing:.5px;transition:.22s}
+.footer-right a:hover{color:#fff;background:rgba(47,124,255,0.15);border-color:rgba(47,124,255,0.4);transform:translateY(-1px)}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .nav-left,.search-wrap{display:none}
+  .hamburger{display:flex}
+  .nav{padding:0 16px}
+  .section{padding:28px 14px}
+  .hero{height:60vh;min-height:320px}
+  .hero h1{font-size:19px}
+  .hero p{font-size:12px}
+  .hero-logo{width:130px}
+  .trust-stats{grid-template-columns:repeat(2,1fr)}
+  .features{grid-template-columns:repeat(2,1fr)}
+  .brand-card{min-width:140px}
+  .brand-card img{height:90px}
+  .arrival-card{min-width:180px}
+  .arrival-card img,.arrival-card video{height:240px}
+  .video-container{min-width:200px}
+  .video{height:310px}
+  .arrivals,.videos,.brands{padding-left:10px;padding-right:10px}
+  .slide-btn.left{left:2px}
+  .slide-btn.right{right:2px}
+  .footer-main{flex-direction:column;align-items:flex-start}
+  .section-header{flex-direction:column;align-items:flex-start}
 }
-.nav a:hover{color:#fff;background:rgba(47,124,255,0.15)}
-
-/* SEARCH */
-.search-bar{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
-  color:#fff;
-  padding:6px 10px;
-  border-radius:8px;
+@media(max-width:480px){
+  .features{grid-template-columns:1fr}
+  .trust-stats{grid-template-columns:repeat(2,1fr)}
+  .arrival-card{min-width:160px}
+  .video-container{min-width:185px}
+  .video{height:280px}
+  .cart-panel{width:100vw}
 }
-
-/* CART */
-.cart-btn{
-  background:linear-gradient(135deg,#2f7cff,#1a4fff);
-  padding:6px 14px;
-  border-radius:10px;
-  display:flex;gap:6px;align-items:center;
-}
-
-/* HERO */
-.hero{height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;background:#000}
-
-/* SECTION */
-.section{padding:40px 20px}
-
-/* ARRIVALS */
-.arrivals{display:flex;gap:16px;overflow-x:auto;padding:10px 40px}
-.arrival-card{min-width:260px;background:#17171f;border-radius:14px;overflow:hidden}
-.arrival-card img{width:100%;height:300px;object-fit:cover}
-
-/* BRANDS */
-.brands{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.brand-card img{width:100%;height:120px;object-fit:cover}
-
 </style>
 </head>
-
 <body>
 
 <!-- TOP BAR -->
@@ -92,78 +240,366 @@ body{background:#0f0f14;color:#fff}
 </div>
 
 <!-- NAV -->
-<div class="nav">
-
+<div class="nav" id="mainNav">
   <div class="nav-left">
-    <a href="#">Shop</a>
-    <a href="#">New Arrivals</a>
-    <a href="#">Brands</a>
-    <a href="#">Trending</a>
-    <a href="#">Contact</a>
+    <div class="nav-item">
+      <button class="nav-link">SHOP <span class="chevron">▾</span></button>
+      <div class="dropdown">
+        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>Sneakers</a>
+        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div>Clothing</a>
+        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>Accessories</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item sale" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>SALE</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <button class="nav-link">BRANDS <span class="chevron">▾</span></button>
+      <div class="dropdown">
+        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Nike</a>
+        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Amiri</a>
+        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Chrome Hearts</a>
+        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Eric Emanuel</a>
+        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>ValeForever</a>
+      </div>
+    </div>
   </div>
-
-  <div class="nav-center">
-    <img src="logo.png" class="logo">
-  </div>
-
+  <div class="nav-center"><img src="logo.png" class="logo"></div>
   <div class="nav-right">
-    <input type="text" id="searchInput" placeholder="Search..." class="search-bar">
-    <div class="cart-btn">🛒 Cart</div>
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-bar" id="searchBar" type="text" placeholder="Search">
+    </div>
+    <button class="cart-btn" onclick="toggleCart()" title="View Cart">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
+</div>
 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a class="mob-link" href="#">Shop</a>
+  <a class="mob-sub" href="#">Sneakers</a>
+  <a class="mob-sub" href="#">Clothing</a>
+  <a class="mob-sub" href="#">Accessories</a>
+  <a class="mob-sub mob-sale" href="#">Sale</a>
+  <a class="mob-link" href="#">Brands</a>
+  <a class="mob-sub" href="#">Nike</a>
+  <a class="mob-sub" href="#">Amiri</a>
+  <a class="mob-sub" href="#">Chrome Hearts</a>
+  <a class="mob-sub" href="#">Eric Emanuel</a>
+  <a class="mob-sub" href="#">ValeForever</a>
+</div>
+
+<!-- CART -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Your Cart</h3>
+    <button class="cart-close" onclick="toggleCart()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <p>Your cart is empty.<br>Start shopping to add items.</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-subtotal"><span>Subtotal</span><strong id="cartTotal">$0</strong></div>
+    <button class="checkout-btn">Proceed to Checkout</button>
+    <div class="free-ship-note">Free shipping on orders $400+</div>
+  </div>
 </div>
 
 <!-- SHOP BY BRAND -->
 <div class="section">
-  <h2>SHOP BY BRAND</h2>
-  <div class="brands">
-    <div class="brand-card"><img src="nike1.png"></div>
-    <div class="brand-card"><img src="amiri1.png"></div>
-    <div class="brand-card"><img src="chrome1.png"></div>
-    <div class="brand-card"><img src="vale1.png"></div>
-    <div class="brand-card"><img src="eric1.png"></div>
+  <div class="section-header"><div><h2>Shop by Brand</h2></div></div>
+  <div class="brands-wrap">
+    <button class="slide-btn left" onclick="slideBrands(-1)">&#8249;</button>
+    <button class="slide-btn right" onclick="slideBrands(1)">&#8250;</button>
+    <div class="brands" id="brandsCarousel">
+      <div class="brand-card"><img src="nike1.png"><span>Nike</span></div>
+      <div class="brand-card"><img src="amiri1.png"><span>Amiri</span></div>
+      <div class="brand-card"><img src="chrome1.png"><span>Chrome Hearts</span></div>
+      <div class="brand-card"><img src="vale1.png"><span>ValeForever</span></div>
+      <div class="brand-card"><img src="eric1.png"><span>Eric Emanuel</span></div>
+    </div>
   </div>
 </div>
 
 <!-- HERO -->
-<div class="hero">
-  <div>
-    <img src="logo.png" style="width:200px">
-    <h1>THE FUTURE OF STREETWEAR</h1>
+<div class="hero" style="background:url('background.png') center/cover no-repeat;position:relative;">
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.75)"></div>
+  <div style="position:relative;z-index:2;max-width:560px;margin:auto;text-align:center;padding:20px">
+    <img src="logo.png" class="hero-logo">
+    <h1 style="margin-bottom:10px;font-size:24px;letter-spacing:.5px">THE FUTURE OF STREETWEAR</h1>
+    <p style="font-size:13px;color:#9aa0a6;line-height:1.7">Established in 2001, BoUnitNYC has built a reputation as a trusted source for authentic streetwear and sneakers. Decades of experience, thousands of satisfied customers, zero compromises on quality.</p>
   </div>
 </div>
 
 <!-- NEW ARRIVALS -->
 <div class="section">
-  <h2>NEW ARRIVALS</h2>
+  <div class="section-header"><div><h2>New Arrivals</h2></div></div>
+  <div class="arrivals-wrap">
+    <button class="slide-btn left" onclick="slideLeft()">&#8249;</button>
+    <button class="slide-btn right" onclick="slideRight()">&#8250;</button>
+    <div class="arrivals" id="arrivals">
+      <div class="arrival-card"><img src="chtrucker.jpeg"><div class="arrival-info">Chrome Hearts Trucker</div></div>
+      <div class="arrival-card"><img src="jorts.jpeg"><div class="arrival-info">Denim Jorts</div></div>
+      <div class="arrival-card"><img src="flugame.jpeg"><div class="arrival-info">Jordan 12 Flu Game</div></div>
+      <div class="arrival-card"><img src="asics.jpeg"><div class="arrival-info">ASICS Runner</div></div>
+      <div class="arrival-card"><img src="supreme.jpeg"><div class="arrival-info">Supreme Piece</div></div>
+    </div>
+  </div>
+</div>
 
-  <div class="arrivals" id="arrivals">
+<!-- WHY CHOOSE US -->
+<div class="section">
+  <div class="why-wrap">
+    <div class="section-header"><div><h2>Why Choose Us</h2><div class="section-sub">Trusted by thousands of buyers</div></div></div>
+    <div class="trust-stats">
+      <div class="trust-stat"><div class="trust-stat-num">10K+</div><div class="trust-stat-label">Orders Fulfilled</div></div>
+      <div class="trust-stat"><div class="trust-stat-num">100%</div><div class="trust-stat-label">Authenticity Rate</div></div>
+      <div class="trust-stat"><div class="trust-stat-num">4.9★</div><div class="trust-stat-label">Average Rating</div></div>
+      <div class="trust-stat"><div class="trust-stat-num">24h</div><div class="trust-stat-label">Avg. Ship Time</div></div>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="feature-title">100% Authentic</div>
+        <div class="feature-desc">Every item manually verified before it ships. Zero fakes, ever.</div>
+        <div class="feature-tags"><span class="feature-tag">Manual Check</span><span class="feature-tag">Zero Fakes</span></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="feature-title">Fast Shipping</div>
+        <div class="feature-desc">Same-day processing, next-day delivery. Fully tracked and insured.</div>
+        <div class="feature-tags"><span class="feature-tag">Same-Day</span><span class="feature-tag">Insured</span></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg></div>
+        <div class="feature-title">Easy Returns</div>
+        <div class="feature-desc">7-day return window. No forms, no hassle, fast refunds.</div>
+        <div class="feature-tags"><span class="feature-tag">7 Days</span><span class="feature-tag">Fast Refunds</span></div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="feature-title">Secure Checkout</div>
+        <div class="feature-desc">256-bit SSL on every order. Apple Pay and Crypto accepted.</div>
+        <div class="feature-tags"><span class="feature-tag">SSL</span><span class="feature-tag">Apple Pay</span><span class="feature-tag">Crypto</span></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <div class="arrival-card"><img src="chtrucker.jpeg"><div class="arrival-info">Chrome Hearts Trucker</div></div>
-    <div class="arrival-card"><img src="jorts.jpeg"><div class="arrival-info">Denim Jorts</div></div>
-    <div class="arrival-card"><img src="flugame.jpeg"><div class="arrival-info">Jordan 12 Flu Game</div></div>
-    <div class="arrival-card"><img src="asics.jpeg"><div class="arrival-info">ASICS Runner</div></div>
-    <div class="arrival-card"><img src="supreme.jpeg"><div class="arrival-info">Supreme Piece</div></div>
+<!-- VIDEO REVIEWS -->
+<div class="section">
+  <div class="section-header">
+    <div><h2>Video Reviews</h2><div class="section-sub">Real customers. Real fits.</div></div>
+    <div class="review-count"><span>5</span> verified reviews</div>
+  </div>
+  <div class="video-section">
+    <button class="slide-btn left" onclick="slideReviews(-1)">&#8249;</button>
+    <button class="slide-btn right" onclick="slideReviews(1)">&#8250;</button>
+    <div class="videos" id="reviews">
 
+      <div class="video-container">
+        <video class="video" src="vid1.mp4" autoplay muted loop playsinline id="v1"></video>
+        <button class="unmute-btn" id="ub1" onclick="toggleMute('v1','ub1')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+        <div class="video-meta">
+          <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
+          <a class="ig-handle" href="https://instagram.com/jaydot_geek" target="_blank" rel="noopener">
+            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <span class="ig-name">@jaydot_geek</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid2.mp4" autoplay muted loop playsinline id="v2"></video>
+        <button class="unmute-btn" id="ub2" onclick="toggleMute('v2','ub2')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+        <div class="video-meta">
+          <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
+          <a class="ig-handle" href="https://instagram.com/jayguapo65" target="_blank" rel="noopener">
+            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <span class="ig-name">@jayguapo65</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid3.mp4" autoplay muted loop playsinline id="v3"></video>
+        <button class="unmute-btn" id="ub3" onclick="toggleMute('v3','ub3')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+        <div class="video-meta">
+          <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
+          <a class="ig-handle" href="https://instagram.com/ndot_spinalot47" target="_blank" rel="noopener">
+            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <span class="ig-name">@ndot_spinalot47</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid4.mp4" autoplay muted loop playsinline id="v4"></video>
+        <button class="unmute-btn" id="ub4" onclick="toggleMute('v4','ub4')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+        <div class="video-meta">
+          <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
+          <a class="ig-handle" href="https://instagram.com/nycjahh_" target="_blank" rel="noopener">
+            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <span class="ig-name">@nycjahh_</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="video-container">
+        <video class="video" src="vid5.mp4" autoplay muted loop playsinline id="v5"></video>
+        <button class="unmute-btn" id="ub5" onclick="toggleMute('v5','ub5')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+        <div class="video-meta">
+          <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
+          <a class="ig-handle" href="https://instagram.com/adamnkilla" target="_blank" rel="noopener">
+            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <span class="ig-name">@adamnkilla</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-divider"></div>
+  <div class="footer-main">
+    <div class="footer-left">
+      <img src="logo.png" class="footer-logo">
+      <strong>BoUnitNYC</strong>
+      <span>support@bounitnyc.com</span>
+    </div>
+    <div class="footer-right">
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Refund Policy</a>
+      <a href="#">Privacy Policy</a>
+    </div>
   </div>
 </div>
 
 <script>
-const ticks=document.querySelectorAll('.tick');
-let i=0;
-setInterval(()=>{
-ticks[i].classList.remove('active');
-i=(i+1)%ticks.length;
-ticks[i].classList.add('active');
-},3000);
+/* TICKER */
+const ticks=document.querySelectorAll('.tick');let ti=0;
+setInterval(()=>{ticks[ti].classList.remove('active');ti=(ti+1)%ticks.length;ticks[ti].classList.add('active')},3000);
 
-document.getElementById('searchInput').addEventListener('input', function(){
-  let filter=this.value.toLowerCase();
-  document.querySelectorAll('.arrival-card').forEach(card=>{
-    card.style.display=card.innerText.toLowerCase().includes(filter)?"block":"none";
+/* SCROLL NAV */
+window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40));
+
+/* MOBILE MENU */
+function toggleMenu(){
+  const hb=document.getElementById('hamburger'),mm=document.getElementById('mobileMenu');
+  hb.classList.toggle('open');mm.classList.toggle('open');
+  document.body.style.overflow=mm.classList.contains('open')?'hidden':'';
+}
+
+/* SLIDERS */
+function slideLeft(){document.getElementById('arrivals').scrollBy({left:-260,behavior:'smooth'})}
+function slideRight(){document.getElementById('arrivals').scrollBy({left:260,behavior:'smooth'})}
+function slideReviews(dir){document.getElementById('reviews').scrollBy({left:dir*250,behavior:'smooth'})}
+function slideBrands(dir){document.getElementById('brandsCarousel').scrollBy({left:dir*200,behavior:'smooth'})}
+
+/* SEARCH */
+document.getElementById('searchBar').addEventListener('keydown',e=>{if(e.key==='Escape')e.target.blur()});
+
+/* UNMUTE — clicking unmute on one video mutes all others */
+const MUTED_SVG=`<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>`;
+const SOUND_SVG=`<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>`;
+
+function toggleMute(videoId,btnId){
+  const vid=document.getElementById(videoId);
+  const willUnmute=vid.muted;
+  // mute all videos
+  [1,2,3,4,5].forEach(n=>{
+    const v=document.getElementById('v'+n);
+    if(v){v.muted=true;document.getElementById('ub'+n).querySelector('svg').innerHTML=MUTED_SVG}
   });
-});
-</script>
+  // toggle target
+  if(willUnmute){
+    vid.muted=false;
+    document.getElementById(btnId).querySelector('svg').innerHTML=SOUND_SVG;
+  }
+}
 
+/* CART */
+let cart=[];
+function toggleCart(){
+  const panel=document.getElementById('cartPanel'),overlay=document.getElementById('cartOverlay');
+  const open=panel.classList.toggle('open');
+  overlay.classList.toggle('open',open);
+  document.body.style.overflow=open?'hidden':'';
+}
+function addToCart(name,price,img){
+  const ex=cart.find(i=>i.name===name);
+  if(ex)ex.qty++;else cart.push({name,price,img,qty:1});
+  renderCart();toggleCart();
+}
+function removeFromCart(name){cart=cart.filter(i=>i.name!==name);renderCart()}
+function changeQty(name,delta){
+  const item=cart.find(i=>i.name===name);if(!item)return;
+  item.qty+=delta;if(item.qty<=0)removeFromCart(name);else renderCart();
+}
+function renderCart(){
+  const container=document.getElementById('cartItems'),empty=document.getElementById('cartEmpty');
+  document.getElementById('cartCount').textContent=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartTotal').textContent='$'+cart.reduce((s,i)=>s+i.price*i.qty,0).toLocaleString();
+  Array.from(container.querySelectorAll('.cart-item')).forEach(el=>el.remove());
+  if(!cart.length){empty.style.display='flex';return}
+  empty.style.display='none';
+  cart.forEach(item=>{
+    const el=document.createElement('div');el.className='cart-item';
+    el.innerHTML=`<img class="cart-item-img" src="${item.img}" onerror="this.style.background='rgba(47,124,255,0.15)'">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">$${(item.price*item.qty).toLocaleString()}</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty('${item.name}',-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.name}',1)">+</button>
+        </div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart('${item.name}')"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
+    container.appendChild(el);
+  });
+}
+
+/* ADD TO CART ON ARRIVAL CARDS */
+document.querySelectorAll('.arrival-card').forEach(card=>{
+  card.style.cursor='pointer';
+  const info=card.querySelector('.arrival-info');if(!info)return;
+  const text=info.textContent.trim();
+  const m=text.match(/^(.+?)\s*-\s*\$?([\d,]+)$/);
+  const name=m?m[1]:text,price=m?parseInt(m[2].replace(',','')):0;
+  const img=card.querySelector('img')?.src||'';
+  const btn=document.createElement('button');
+  btn.textContent='+ ADD TO CART';
+  btn.style.cssText='position:absolute;bottom:44px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(47,124,255,0.92);border:none;color:#fff;font-family:Poppins,sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;padding:7px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;opacity:0;transition:.2s;pointer-events:none;z-index:5;';
+  card.appendChild(btn);
+  card.addEventListener('mouseenter',()=>{btn.style.opacity='1';btn.style.pointerEvents='all';btn.style.transform='translateX(-50%) translateY(0)'});
+  card.addEventListener('mouseleave',()=>{btn.style.opacity='0';btn.style.pointerEvents='none';btn.style.transform='translateX(-50%) translateY(10px)'});
+  btn.addEventListener('click',e=>{e.stopPropagation();addToCart(name,price,img)});
+});
+
+renderCart();
+</script>
 </body>
 </html>
