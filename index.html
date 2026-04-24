@@ -30,54 +30,34 @@ body{background:#0f0f14;color:#fff}
 .section{padding:40px 20px}
 
 /* NEW ARRIVALS (VIDEO SLIDER) */
-.arrivals{
-  display:flex;
-  gap:18px;
-  overflow-x:auto;
-  padding:10px 40px;
-  scroll-behavior:smooth;
-}
+<div class="arrivals" id="arrivals">
 
-.arrivals::-webkit-scrollbar{display:none}
+  <div class="arrival-card">
+    <img src="chtrucker.jpeg">
+    <div class="arrival-info">Chrome Hearts Trucker</div>
+  </div>
 
-.arrivals::-webkit-scrollbar{height:6px}
-.arrivals::-webkit-scrollbar-thumb{background:#2f7cff;border-radius:10px}
+  <div class="arrival-card">
+    <img src="jorts.jpeg">
+    <div class="arrival-info">Denim Jorts</div>
+  </div>
 
-.arrival-card{
-  min-width:260px;
-  background:#17171f;
-  border-radius:14px;
-  overflow:hidden;
-  transition:.25s;
-  position:relative;
-}
+  <div class="arrival-card">
+    <img src="flugame.jpeg">
+    <div class="arrival-info">Jordan 12 Flu Game</div>
+  </div>
 
-.arrival-card video{
-  width:100%;
-  height:320px;
-  object-fit:cover;
-}
+  <div class="arrival-card">
+    <img src="asics.jpeg">
+    <div class="arrival-info">ASICS Runner</div>
+  </div>
 
-.arrival-card:hover{
-  transform:translateY(-8px) scale(1.03);
-  box-shadow:0 20px 50px rgba(47,124,255,0.3);
-}
+  <div class="arrival-card">
+    <img src="supreme.jpeg">
+    <div class="arrival-info">Supreme Piece</div>
+  </div>
 
-.arrival-card video{
-  width:100%;
-  height:240px;
-  object-fit:cover;
-}
-
-.arrival-card:hover{
-  transform:translateY(-6px) scale(1.02);
-  box-shadow:0 15px 40px rgba(47,124,255,0.25);
-}
-
-.arrival-info{
-  padding:8px;
-  font-size:13px;
-}
+</div>
 
 /* FEATURES */ (UPGRADED) */
 .features{
