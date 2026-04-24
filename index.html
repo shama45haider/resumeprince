@@ -29,69 +29,94 @@ body{background:#0f0f14;color:#fff}
 
 .section{padding:40px 20px}
 
-/* ARRIVALS */
-.arrivals{display:flex;gap:18px;overflow-x:auto;padding:10px 40px;scroll-behavior:smooth}
+/* NEW ARRIVALS */
+.arrivals{
+  display:flex;
+  gap:18px;
+  overflow-x:auto;
+  padding:10px 40px;
+  scroll-behavior:smooth;
+}
 .arrivals::-webkit-scrollbar{display:none}
 
-.arrival-card{min-width:260px;background:#17171f;border-radius:14px;overflow:hidden}
-.arrival-card video{width:100%;height:240px;object-fit:cover}
-.arrival-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 15px 40px rgba(47,124,255,0.25)}
+.arrival-card{
+  min-width:260px;
+  background:#17171f;
+  border-radius:14px;
+  overflow:hidden;
+}
+.arrival-card video{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+}
+.arrival-card:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 15px 40px rgba(47,124,255,0.25);
+}
 
 .arrival-info{padding:8px;font-size:13px}
 
 /* FEATURES */
-.features{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.feature{background:#17171f;padding:20px;border-radius:14px}
+.features{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+.feature{
+  background:#17171f;
+  padding:20px;
+  border-radius:14px;
+}
 
 /* VIDEO REVIEWS */
 .video-section{position:relative;max-width:1000px;margin:0 auto}
-.videos{display:flex;gap:14px;overflow-x:auto;padding:10px 40px}
+.videos{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  padding:10px 40px;
+}
 .videos::-webkit-scrollbar{display:none}
 .video-container{min-width:220px;position:relative}
 .video{width:100%;height:320px;object-fit:cover;border-radius:12px}
-.verified{position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,0.8);padding:6px 10px;border-radius:8px;font-weight:700}
+.verified{
+  position:absolute;
+  bottom:10px;
+  left:10px;
+  background:rgba(0,0,0,0.8);
+  padding:6px 10px;
+  border-radius:8px;
+  font-weight:700;
+}
 
 /* BRANDS */
-.brands{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.brand-card{position:relative;border-radius:12px;overflow:hidden}
-.brand-card img{width:100%;height:120px;object-fit:cover;filter:brightness(.7)}
-.brand-card span{position:absolute;bottom:10px;left:10px;font-weight:600}
-
-/* SLIDE BUTTONS */
-.slide-btn{
+.brands{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:14px;
+}
+.brand-card{
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+}
+.brand-card img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  filter:brightness(.7);
+}
+.brand-card span{
   position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(0,0,0,0.6);
-  border:none;
-  color:#fff;
-  font-size:22px;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  cursor:pointer;
-  z-index:10;
+  bottom:10px;
+  left:10px;
+  font-weight:600;
 }
-.slide-btn.left{left:0}
-.slide-btn.right{right:0}
 
-/* MOBILE FIX (SAFE) */
-@media(max-width:700px){
-  .brands{
-    display:flex !important;
-    overflow-x:auto;
-    gap:12px;
-    padding:10px;
-    scroll-snap-type:x mandatory;
-  }
-  .brands::-webkit-scrollbar{display:none}
-  .brand-card{
-    min-width:140px;
-    flex:0 0 auto;
-    scroll-snap-align:center;
-  }
-  .features{grid-template-columns:1fr}
-}
+/* FOOTER */
+.footer{background:#000;padding:18px}
+.footer-main{display:flex;justify-content:space-between}
 </style>
 </head>
 
@@ -118,17 +143,12 @@ body{background:#0f0f14;color:#fff}
 <div class="section">
   <h2 style="margin-bottom:12px">SHOP BY BRAND</h2>
 
-  <div style="position:relative">
-    <button class="slide-btn left" onclick="slideBrands(-1)">‹</button>
-    <button class="slide-btn right" onclick="slideBrands(1)">›</button>
-
-    <div class="brands" id="brands">
-      <div class="brand-card"><img src="nike1.png"><span>Nike</span></div>
-      <div class="brand-card"><img src="amiri1.png"><span>Amiri</span></div>
-      <div class="brand-card"><img src="chrome1.png"><span>Chrome Hearts</span></div>
-      <div class="brand-card"><img src="vale1.png"><span>ValeForever</span></div>
-      <div class="brand-card"><img src="eric1.png"><span>Eric Emanuel</span></div>
-    </div>
+  <div class="brands">
+    <div class="brand-card"><img src="nike1.png"><span>Nike</span></div>
+    <div class="brand-card"><img src="amiri1.png"><span>Amiri</span></div>
+    <div class="brand-card"><img src="chrome1.png"><span>Chrome Hearts</span></div>
+    <div class="brand-card"><img src="vale1.png"><span>ValeForever</span></div>
+    <div class="brand-card"><img src="eric1.png"><span>Eric Emanuel</span></div>
   </div>
 </div>
 
@@ -141,18 +161,53 @@ body{background:#0f0f14;color:#fff}
   </div>
 </div>
 
+<!-- NEW ARRIVALS -->
+<div class="section">
+  <h2 style="margin-bottom:12px">NEW ARRIVALS</h2>
+  <div class="arrivals">
+    <div class="arrival-card"><video src="video1.mp4" autoplay muted loop></video></div>
+    <div class="arrival-card"><video src="video2.mp4" autoplay muted loop></video></div>
+    <div class="arrival-card"><video src="video3.mp4" autoplay muted loop></video></div>
+  </div>
+</div>
+
+<!-- VIDEO REVIEWS -->
+<div class="section">
+  <h2 style="margin-bottom:14px">VIDEO REVIEWS</h2>
+  <div class="video-section">
+    <div class="videos">
+      <div class="video-container"><video class="video" src="vid1.mp4" autoplay muted loop></video><div class="verified">Verified Buyer</div></div>
+      <div class="video-container"><video class="video" src="vid2.mp4" autoplay muted loop></video><div class="verified">Verified Buyer</div></div>
+      <div class="video-container"><video class="video" src="vid3.mp4" autoplay muted loop></video><div class="verified">Verified Buyer</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-main">
+    <div>
+      <strong>BoUnitNYC</strong>
+      <div>support@bounitnyc.com</div>
+    </div>
+    <div>
+      <a>About Us</a>
+      <a>Careers</a>
+      <a>Terms of Services</a>
+      <a>Refund Policy</a>
+      <a>Privacy Policy</a>
+    </div>
+  </div>
+</div>
+
 <script>
 const ticks=document.querySelectorAll('.tick');
 let i=0;
 setInterval(()=>{
-ticks[i].classList.remove('active');
-i=(i+1)%ticks.length;
-ticks[i].classList.add('active');
+  ticks[i].classList.remove('active');
+  i=(i+1)%ticks.length;
+  ticks[i].classList.add('active');
 },3000);
-
-function slideBrands(dir){
-  document.getElementById('brands').scrollBy({left:dir*160,behavior:'smooth'});
-}
 </script>
 
 </body>
