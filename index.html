@@ -30,7 +30,7 @@ body{background:#0f0f14;color:#fff}
 .section{padding:40px 20px}
 
 /* ARRIVALS */
-.arrivals{display:flex;gap:18px;overflow-x:auto;padding:10px 40px}
+.arrivals{display:flex;gap:18px;overflow-x:auto;padding:10px 40px;scroll-behavior:smooth}
 .arrivals::-webkit-scrollbar{display:none}
 
 .arrival-card{min-width:260px;background:#17171f;border-radius:14px;overflow:hidden}
@@ -44,12 +44,12 @@ body{background:#0f0f14;color:#fff}
 .feature{background:#17171f;padding:20px;border-radius:14px}
 
 /* VIDEO REVIEWS */
-.video-section{position:relative;max-width:1000px;margin:auto}
+.video-section{position:relative;max-width:1000px;margin:0 auto}
 .videos{display:flex;gap:14px;overflow-x:auto;padding:10px 40px}
 .videos::-webkit-scrollbar{display:none}
 .video-container{min-width:220px;position:relative}
 .video{width:100%;height:320px;object-fit:cover;border-radius:12px}
-.verified{position:absolute;bottom:10px;left:10px;background:black;padding:6px;border-radius:6px}
+.verified{position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,0.8);padding:6px 10px;border-radius:8px;font-weight:700}
 
 /* BRANDS */
 .brands{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
@@ -75,25 +75,23 @@ body{background:#0f0f14;color:#fff}
 .slide-btn.left{left:0}
 .slide-btn.right{right:0}
 
-/* MOBILE BRAND CAROUSEL */
+/* MOBILE FIX (SAFE) */
 @media(max-width:700px){
   .brands{
-    display:flex;
+    display:flex !important;
     overflow-x:auto;
     gap:12px;
     padding:10px;
     scroll-snap-type:x mandatory;
   }
+  .brands::-webkit-scrollbar{display:none}
   .brand-card{
     min-width:140px;
     flex:0 0 auto;
     scroll-snap-align:center;
   }
+  .features{grid-template-columns:1fr}
 }
-
-/* FOOTER */
-.footer{background:#000;padding:18px}
-.footer-main{display:flex;justify-content:space-between}
 </style>
 </head>
 
@@ -140,45 +138,6 @@ body{background:#0f0f14;color:#fff}
   <div style="position:relative;z-index:2;text-align:center">
     <img src="logo.png" class="hero-logo">
     <h1>THE FUTURE OF STREETWEAR</h1>
-  </div>
-</div>
-
-<!-- NEW ARRIVALS -->
-<div class="section">
-  <h2>NEW ARRIVALS</h2>
-  <div class="arrivals" id="arrivals">
-    <div class="arrival-card"><video src="video1.mp4" autoplay muted loop></video></div>
-    <div class="arrival-card"><video src="video2.mp4" autoplay muted loop></video></div>
-    <div class="arrival-card"><video src="video3.mp4" autoplay muted loop></video></div>
-  </div>
-</div>
-
-<!-- VIDEO REVIEWS -->
-<div class="section">
-  <h2>VIDEO REVIEWS</h2>
-  <div class="video-section">
-    <div class="videos" id="reviews">
-      <div class="video-container"><video class="video" src="vid1.mp4" autoplay muted loop></video><div class="verified">Verified Buyer</div></div>
-      <div class="video-container"><video class="video" src="vid2.mp4" autoplay muted loop></video><div class="verified">Verified Buyer</div></div>
-      <div class="video-container"><video class="video" src="vid3.mp4" autoplay muted loop></video><div class="verified">Verified Buyer</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
-  <div class="footer-main">
-    <div>
-      <strong>BoUnitNYC</strong>
-      <div>support@bounitnyc.com</div>
-    </div>
-    <div>
-      <a>About</a>
-      <a>Careers</a>
-      <a>Terms</a>
-      <a>Refund</a>
-      <a>Privacy</a>
-    </div>
   </div>
 </div>
 
