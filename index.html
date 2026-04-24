@@ -11,17 +11,138 @@
 body{background:#0f0f14;color:#fff}
 
 /* TOP BAR */
-.topbar{height:40px;background:#000;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.tick{position:absolute;opacity:0;transition:.4s;font-size:13px;font-weight:600}
-.tick.active{opacity:1}
+.topbar{
+  height:36px;
+  background:linear-gradient(90deg,#000 0%,#0a0a1a 40%,#0d0d20 60%,#000 100%);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid rgba(47,124,255,0.25);
+}
+
+/* animated shimmer line at bottom of topbar */
+.topbar::after{
+  content:"";
+  position:absolute;
+  bottom:0;left:-100%;
+  width:60%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(47,124,255,0.9),transparent);
+  animation:shimmer 3s linear infinite;
+}
+@keyframes shimmer{to{left:140%}}
+
+.tick{
+  position:absolute;
+  opacity:0;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#ccd6f6;
+  transform:translateY(10px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.tick.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* dot separators in ticker */
+.tick::before,.tick::after{
+  content:"◆";
+  color:#2f7cff;
+  margin:0 10px;
+  font-size:7px;
+  vertical-align:middle;
+  opacity:0.8;
+}
 
 /* NAV */
-.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 25px;background:#111;position:sticky;top:0;z-index:10}
-.nav-left,.nav-right{display:flex;gap:15px;align-items:center}
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 30px;
+  background:rgba(10,10,20,0.75);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  position:sticky;top:0;z-index:100;
+  transition:padding .3s ease, background .3s ease;
+}
+.nav.scrolled{
+  padding:10px 30px;
+  background:rgba(5,5,15,0.92);
+  border-bottom-color:rgba(47,124,255,0.2);
+  box-shadow:0 8px 32px rgba(0,0,0,0.6);
+}
+
+.nav-left,.nav-right{display:flex;gap:8px;align-items:center}
 .nav-center{position:absolute;left:50%;transform:translateX(-50%)}
-.logo{height:40px}
-.nav a{color:#aaa;text-decoration:none;font-size:13px}
-.nav a:hover{color:#fff}
+.logo{height:38px;transition:height .3s ease}
+.nav.scrolled .logo{height:30px}
+
+/* NAV LINKS */
+.nav a{
+  color:#8892b0;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:7px 14px;
+  border-radius:8px;
+  position:relative;
+  transition:color .25s ease, background .25s ease;
+}
+
+/* glowing underline on hover */
+.nav a::after{
+  content:"";
+  position:absolute;
+  bottom:3px;left:14px;right:14px;
+  height:1px;
+  background:#2f7cff;
+  transform:scaleX(0);
+  transition:transform .25s ease;
+  box-shadow:0 0 6px rgba(47,124,255,0.8);
+}
+.nav a:hover{
+  color:#fff;
+  background:rgba(47,124,255,0.08);
+}
+.nav a:hover::after{transform:scaleX(1)}
+
+/* CART BUTTON */
+.cart-btn{
+  display:flex;align-items:center;gap:7px;
+  background:rgba(47,124,255,0.12);
+  border:1px solid rgba(47,124,255,0.35);
+  color:#fff;
+  font-size:13px;
+  padding:7px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.25s ease;
+  font-family:'Poppins',sans-serif;
+  font-weight:600;
+  letter-spacing:.5px;
+  text-decoration:none;
+}
+.cart-btn:hover{
+  background:rgba(47,124,255,0.28);
+  border-color:rgba(47,124,255,0.7);
+  box-shadow:0 0 18px rgba(47,124,255,0.35);
+  transform:translateY(-1px);
+}
+.cart-btn .cart-count{
+  background:#2f7cff;
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  width:18px;height:18px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
 
 /* HERO */
 .hero{height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;background:#000}
@@ -30,34 +151,56 @@ body{background:#0f0f14;color:#fff}
 .section{padding:40px 20px}
 
 /* NEW ARRIVALS (VIDEO SLIDER) */
-<div class="arrivals" id="arrivals">
+.arrivals{
+  display:flex;
+  gap:18px;
+  overflow-x:auto;
+  padding:10px 40px;
+  scroll-behavior:smooth;
+}
 
-  <div class="arrival-card">
-    <img src="chtrucker.jpeg">
-    <div class="arrival-info">Chrome Hearts Trucker</div>
-  </div>
+.arrivals::-webkit-scrollbar{display:none}
 
-  <div class="arrival-card">
-    <img src="jorts.jpeg">
-    <div class="arrival-info">Denim Jorts</div>
-  </div>
+.arrivals::-webkit-scrollbar{height:6px}
+.arrivals::-webkit-scrollbar-thumb{background:#2f7cff;border-radius:10px}
 
-  <div class="arrival-card">
-    <img src="flugame.jpeg">
-    <div class="arrival-info">Jordan 12 Flu Game</div>
-  </div>
+.arrival-card{
+  min-width:260px;
+  background:#17171f;
+  border-radius:14px;
+  overflow:hidden;
+  transition:.25s;
+  position:relative;
+}
 
-  <div class="arrival-card">
-    <img src="asics.jpeg">
-    <div class="arrival-info">ASICS Runner</div>
-  </div>
+.arrival-card video,
+.arrival-card img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  display:block;
+}
 
-  <div class="arrival-card">
-    <img src="supreme.jpeg">
-    <div class="arrival-info">Supreme Piece</div>
-  </div>
+.arrival-card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 20px 50px rgba(47,124,255,0.3);
+}
 
-</div>
+.arrival-card video{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+}
+
+.arrival-card:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 15px 40px rgba(47,124,255,0.25);
+}
+
+.arrival-info{
+  padding:8px;
+  font-size:13px;
+}
 
 /* FEATURES */ (UPGRADED) */
 .features{
@@ -374,16 +517,11 @@ body{background:#0f0f14;color:#fff}
 
   <div class="arrivals" id="arrivals">
 
-    <div class="arrival-card"><video src="video1.mp4" autoplay muted loop></video><div class="arrival-info">Jordan 4 - $450</div></div>
-    <div class="arrival-card"><video src="video2.mp4" autoplay muted loop></video><div class="arrival-info">Yeezy 350 - $300</div></div>
-    <div class="arrival-card"><video src="video3.mp4" autoplay muted loop></video><div class="arrival-info">Chrome Hearts - $700</div></div>
-    <div class="arrival-card"><video src="video4.mp4" autoplay muted loop></video><div class="arrival-info">Jordan 1 - $200</div></div>
-    <div class="arrival-card"><video src="video5.mp4" autoplay muted loop></video><div class="arrival-info">Dunks - $150</div></div>
-    <div class="arrival-card"><video src="video6.mp4" autoplay muted loop></video><div class="arrival-info">Travis Scott - $900</div></div>
-    <div class="arrival-card"><video src="video7.mp4" autoplay muted loop></video><div class="arrival-info">Foam Runners - $120</div></div>
-    <div class="arrival-card"><video src="video8.mp4" autoplay muted loop></video><div class="arrival-info">Jordan 11 - $280</div></div>
-    <div class="arrival-card"><video src="video9.mp4" autoplay muted loop></video><div class="arrival-info">Off White - $950</div></div>
-    <div class="arrival-card"><video src="video10.mp4" autoplay muted loop></video><div class="arrival-info">Essentials Fit - $180</div></div>
+    <div class="arrival-card"><img src="chtrucker.jpeg"><div class="arrival-info">Chrome Hearts Trucker</div></div>
+    <div class="arrival-card"><img src="jorts.jpeg"><div class="arrival-info">Denim Jorts</div></div>
+    <div class="arrival-card"><img src="flugame.jpeg"><div class="arrival-info">Jordan 12 Flu Game</div></div>
+    <div class="arrival-card"><img src="asics.jpeg"><div class="arrival-info">ASICS Runner</div></div>
+    <div class="arrival-card"><img src="supreme.jpeg"><div class="arrival-info">Supreme Piece</div></div>
 
   </div>
 </div>
