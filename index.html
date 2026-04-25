@@ -289,11 +289,11 @@ img,video{display:block;max-width:100%}
 
 /* ── NEW ARRIVALS ── */
 .arrivals-wrap{position:relative;max-width:1100px;margin:0 auto}
-.arrivals{display:flex;gap:16px;overflow-x:auto;padding:8px 50px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.arrivals{display:flex;gap:10px;overflow-x:auto;padding:8px 50px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
 .arrivals::-webkit-scrollbar{display:none}
-.arrival-card{min-width:220px;background:#17171f;border-radius:14px;overflow:hidden;transition:.25s;position:relative;flex-shrink:0;border:1px solid rgba(255,255,255,0.05)}
-.arrival-card img{width:100%;height:280px;object-fit:cover;object-position:center top}
-.arrival-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 15px 40px rgba(47,124,255,0.25)}
+.arrival-card{min-width:155px;background:#17171f;border-radius:12px;overflow:hidden;transition:.25s;position:relative;flex-shrink:0;border:1px solid rgba(47,124,255,0.15);box-shadow:0 0 18px rgba(47,124,255,0.15),0 0 40px rgba(47,124,255,0.08)}
+.arrival-card img{width:100%;height:190px;object-fit:cover;object-position:center top}
+.arrival-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 0 28px rgba(47,124,255,0.35),0 15px 40px rgba(47,124,255,0.3);border-color:rgba(47,124,255,0.4)}
 .arrival-info{padding:10px 12px;font-size:12px;font-weight:600;letter-spacing:.3px}
 
 /* ── WHY CHOOSE US ── */
@@ -707,7 +707,7 @@ img,video{display:block;max-width:100%}
     <button class="slide-btn left" onclick="slideLeft()">&#8249;</button>
     <button class="slide-btn right" onclick="slideRight()">&#8250;</button>
     <div class="arrivals" id="arrivals">
-      <div class="arrival-card"><img src="chtrucker.jpeg" alt="Chrome Hearts Trucker"><div class="arrival-info">Chrome Hearts Trucker</div></div>
+      <div class="arrival-card" onclick="window.open('chrometrucker.html','_blank')" style="cursor:pointer"><img src="chtrucker.jpeg" alt="Chrome Hearts Trucker"><div class="arrival-info">Chrome Hearts Trucker</div></div>
       <div class="arrival-card"><img src="jorts.jpeg" alt="Denim Jorts"><div class="arrival-info">Denim Jorts</div></div>
       <div class="arrival-card"><img src="flugame.jpeg" alt="Jordan 12 Flu Game"><div class="arrival-info">Jordan 12 Flu Game</div></div>
       <div class="arrival-card"><img src="asics.jpeg" alt="ASICS Runner"><div class="arrival-info">ASICS Runner</div></div>
