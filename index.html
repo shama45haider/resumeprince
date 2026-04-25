@@ -1,45 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- saved from url=(0059)file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./BoUnit NYC_files/css2" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>BoUnit NYC</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;-webkit-tap-highlight-color:transparent}
 body{background:#0f0f14;color:#fff;overflow-x:hidden}
+img,video{display:block;max-width:100%}
 
 /* ── TOP BAR ── */
-.topbar{height:36px;background:linear-gradient(90deg,#000 0%,#0a0a1a 50%,#000 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(47,124,255,0.2)}
+.topbar{height:36px;background:linear-gradient(90deg,#000,#0a0a1a 50%,#000);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(47,124,255,0.2)}
 .topbar::after{content:"";position:absolute;bottom:0;left:-100%;width:55%;height:1px;background:linear-gradient(90deg,transparent,rgba(47,124,255,0.9),transparent);animation:shimmer 3s linear infinite}
 @keyframes shimmer{to{left:140%}}
 .tick{position:absolute;opacity:0;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#ccd6f6;transform:translateY(8px);transition:opacity .5s,transform .5s}
 .tick.active{opacity:1;transform:translateY(0)}
-.tick::before,.tick::after{content:"|";color:rgba(47,124,255,0.45);margin:0 14px;font-size:10px;vertical-align:middle;font-weight:300}
+.tick::before,.tick::after{content:"|";color:rgba(47,124,255,0.45);margin:0 12px;font-size:10px;vertical-align:middle;font-weight:300}
 
-/* ── NAV ── */
-.nav{display:flex;justify-content:space-between;align-items:center;padding:0 24px;height:60px;background:rgba(8,8,18,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:200;transition:height .3s,background .3s}
+/* ── NAV DESKTOP ── */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:0 24px;height:60px;background:rgba(8,8,18,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:500;transition:height .3s,background .3s}
 .nav.scrolled{height:50px;background:rgba(4,4,12,0.97);border-bottom-color:rgba(47,124,255,0.18);box-shadow:0 8px 32px rgba(0,0,0,0.7)}
 .nav-left,.nav-right{display:flex;gap:4px;align-items:center}
 .nav-center{position:absolute;left:50%;transform:translateX(-50%)}
 .logo{height:34px;transition:height .3s}
 .nav.scrolled .logo{height:26px}
-
-/* hamburger */
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:10}
 .hamburger span{display:block;width:22px;height:2px;background:#8892b0;border-radius:2px;transition:.25s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-/* mobile drawer */
-.mobile-menu{display:none;position:fixed;inset:0;background:rgba(5,5,15,0.98);backdrop-filter:blur(24px);z-index:190;flex-direction:column;padding:80px 28px 40px;gap:2px;transform:translateX(-100%);transition:transform .32s cubic-bezier(.4,0,.2,1)}
-.mobile-menu.open{transform:translateX(0)}
-.mob-link{display:block;padding:14px 0;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8892b0;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.05);transition:color .2s}
-.mob-link:hover{color:#fff}
-.mob-sub{padding:7px 0 7px 14px;font-size:12px;color:#444;letter-spacing:1px;text-transform:uppercase;display:block;text-decoration:none;transition:color .2s}
-.mob-sub:hover{color:#2f7cff}
-.mob-sale{color:#ff4d4d !important}
 
 /* nav links */
 .nav-link{color:#8892b0;font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;padding:8px 12px;border-radius:8px;position:relative;cursor:pointer;transition:color .22s,background .22s;display:flex;align-items:center;gap:5px;background:none;border:none;font-family:'Poppins',sans-serif}
@@ -47,42 +37,98 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
 .nav-link:hover{color:#fff;background:rgba(47,124,255,0.07)}
 .nav-link:hover::after{transform:scaleX(1)}
 .chevron{font-size:9px;opacity:.6;transition:transform .22s;display:inline-block}
+
+/* ── DROPDOWN — key fix: padding-top bridges the gap so mouse never leaves the hover zone ── */
+.nav-item{position:relative}
+.dropdown{
+  position:absolute;top:100%;left:0;
+  padding-top:12px; /* invisible bridge — keeps hover alive */
+  opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;
+  transform:translateY(-4px);z-index:600;
+}
+.dropdown-inner{
+  background:rgba(10,10,22,0.98);backdrop-filter:blur(24px);
+  border:1px solid rgba(47,124,255,0.18);border-radius:14px;
+  padding:8px;min-width:210px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.7);
+}
+.nav-item:hover>.dropdown{opacity:1;pointer-events:all;transform:translateY(0)}
 .nav-item:hover .chevron{transform:rotate(180deg)}
 
-/* dropdown */
-.nav-item{position:relative}
-.dropdown{position:absolute;top:calc(100% + 8px);left:0;background:rgba(10,10,22,0.98);backdrop-filter:blur(24px);border:1px solid rgba(47,124,255,0.18);border-radius:14px;padding:8px;min-width:210px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .22s,transform .22s;box-shadow:0 20px 60px rgba(0,0,0,0.7);z-index:300}
-.nav-item:hover .dropdown{opacity:1;pointer-events:all;transform:translateY(0)}
-.dropdown-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:9px;color:#9aa0b4;text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;transition:background .18s,color .18s;cursor:pointer}
+.dropdown-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;color:#9aa0b4;text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;transition:background .15s,color .15s;cursor:pointer;white-space:nowrap}
 .dropdown-item:hover{background:rgba(47,124,255,0.12);color:#fff}
-.dropdown-item .d-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);flex-shrink:0;color:#8892b0}
+.dropdown-item .d-icon{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);flex-shrink:0;color:#8892b0}
 .dropdown-item.sale{color:#ff4d4d}
 .dropdown-item.sale .d-icon{background:rgba(255,77,77,0.1);border-color:rgba(255,77,77,0.22);color:#ff4d4d}
 .dropdown-item.sale:hover{background:rgba(255,77,77,0.1)}
 .dropdown-divider{height:1px;background:rgba(255,255,255,0.06);margin:5px 0}
 
+/* ── FLYOUT SUBMENU — same bridge trick, positioned to the right ── */
+.has-sub{position:relative}
+.has-sub>.dropdown-item{justify-content:space-between}
+.has-sub>.dropdown-item .arrow{font-size:13px;opacity:.5;transition:transform .18s,opacity .18s;margin-left:8px}
+.has-sub:hover>.dropdown-item .arrow{transform:translateX(3px);opacity:1}
+.submenu{
+  position:absolute;top:0;left:100%;
+  padding-left:10px; /* bridge gap to the right */
+  opacity:0;pointer-events:none;
+  transform:translateX(-4px);
+  transition:opacity .2s,transform .2s;z-index:700;
+}
+.submenu-inner{
+  background:rgba(10,10,22,0.98);backdrop-filter:blur(24px);
+  border:1px solid rgba(47,124,255,0.18);border-radius:14px;
+  padding:8px;min-width:180px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.7);
+}
+.has-sub:hover>.submenu{opacity:1;pointer-events:all;transform:translateX(0)}
+
 /* search */
 .search-wrap{position:relative;display:flex;align-items:center}
-.search-bar{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:10px;color:#fff;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:.3px;padding:7px 12px 7px 34px;width:160px;transition:width .25s,border-color .25s,background .25s;outline:none}
-.search-bar:focus{width:210px;border-color:rgba(47,124,255,0.5);background:rgba(47,124,255,0.06)}
+.search-bar{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:10px;color:#fff;font-family:'Poppins',sans-serif;font-size:11px;padding:7px 12px 7px 34px;width:155px;transition:width .25s,border-color .25s,background .25s;outline:none}
+.search-bar:focus{width:205px;border-color:rgba(47,124,255,0.5);background:rgba(47,124,255,0.06)}
 .search-bar::placeholder{color:#444;font-size:10px;letter-spacing:1px;text-transform:uppercase}
 .search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;opacity:.4;pointer-events:none}
 
 /* cart btn */
 .cart-btn{position:relative;display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;cursor:pointer;color:#8892b0;transition:.22s}
-.cart-btn:hover{background:rgba(47,124,255,0.12);border-color:rgba(47,124,255,0.4);color:#fff;box-shadow:0 0 16px rgba(47,124,255,.2)}
+.cart-btn:hover{background:rgba(47,124,255,0.12);border-color:rgba(47,124,255,0.4);color:#fff}
 .cart-count{position:absolute;top:-6px;right:-6px;background:#2f7cff;color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #0f0f14}
 
+/* ── MOBILE DRAWER ── */
+.mobile-menu{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:#060610;z-index:490;
+  flex-direction:column;overflow-y:auto;
+  transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+.mobile-menu.open{transform:translateX(0)}
+.mob-header{height:60px;display:flex;align-items:center;padding:0 20px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0}
+.mob-body{padding:16px 20px 40px;display:flex;flex-direction:column;gap:2px}
+.mob-section-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#333;padding:16px 0 6px}
+.mob-link{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8892b0;text-decoration:none;transition:background .15s,color .15s;cursor:pointer;border:none;background:none;width:100%;font-family:'Poppins',sans-serif}
+.mob-link:hover,.mob-link.active{background:rgba(47,124,255,0.08);color:#fff}
+.mob-link .mob-arrow{transition:transform .25s;font-size:12px;opacity:.5}
+.mob-link.active .mob-arrow{transform:rotate(90deg)}
+.mob-sub-list{display:none;flex-direction:column;gap:1px;padding:0 0 4px 12px}
+.mob-sub-list.open{display:flex}
+.mob-sub{display:block;padding:10px 14px;border-radius:9px;font-size:12px;color:#555;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;transition:background .15s,color .15s}
+.mob-sub:hover{background:rgba(47,124,255,0.08);color:#2f7cff}
+.mob-sub.sale{color:#ff4d4d}
+.mob-sub-indent{padding-left:28px;font-size:11px;color:#3a3a55}
+.mob-sub-indent:hover{color:#2f7cff}
+.mob-divider{height:1px;background:rgba(255,255,255,0.05);margin:8px 0}
+
 /* ── CART PANEL ── */
-.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:500;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:800;opacity:0;pointer-events:none;transition:opacity .3s}
 .cart-overlay.open{opacity:1;pointer-events:all}
-.cart-panel{position:fixed;top:0;right:0;bottom:0;width:400px;max-width:100vw;background:#0d0d1a;border-left:1px solid rgba(47,124,255,0.15);z-index:600;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:-20px 0 60px rgba(0,0,0,0.6)}
+.cart-panel{position:fixed;top:0;right:0;bottom:0;width:400px;max-width:100vw;background:#0d0d1a;border-left:1px solid rgba(47,124,255,0.15);z-index:900;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:-20px 0 60px rgba(0,0,0,0.6)}
 .cart-panel.open{transform:translateX(0)}
-.cart-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid rgba(255,255,255,0.07)}
+.cart-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0}
 .cart-header h3{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:8px}
 .cart-close{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
 .cart-close:hover{background:rgba(255,77,77,0.15);border-color:rgba(255,77,77,0.3);color:#ff4d4d}
-.cart-items{flex:1;overflow-y:auto;padding:14px 22px;display:flex;flex-direction:column;gap:12px}
+.cart-items{flex:1;overflow-y:auto;padding:14px 22px;display:flex;flex-direction:column;gap:12px;-webkit-overflow-scrolling:touch}
 .cart-items::-webkit-scrollbar{width:3px}
 .cart-items::-webkit-scrollbar-thumb{background:#2f7cff;border-radius:3px}
 .cart-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#444;text-align:center;padding:40px}
@@ -94,17 +140,17 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
 .cart-item-name{font-size:11px;font-weight:600;letter-spacing:.4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cart-item-price{font-size:12px;color:#2f7cff;font-weight:700;margin-top:2px}
 .cart-item-qty{display:flex;align-items:center;gap:8px;margin-top:5px}
-.qty-btn{width:20px;height:20px;border-radius:5px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;line-height:1}
+.qty-btn{width:22px;height:22px;border-radius:5px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;line-height:1}
 .qty-btn:hover{background:rgba(47,124,255,0.2);border-color:rgba(47,124,255,0.4)}
 .qty-num{font-size:12px;font-weight:600;min-width:14px;text-align:center}
 .cart-item-remove{width:24px;height:24px;border-radius:6px;flex-shrink:0;background:rgba(255,77,77,0.08);border:1px solid rgba(255,77,77,0.15);color:#ff4d4d;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
 .cart-item-remove:hover{background:rgba(255,77,77,0.2)}
-.cart-footer{padding:14px 22px 22px;border-top:1px solid rgba(255,255,255,0.07)}
+.cart-footer{padding:14px 22px 22px;border-top:1px solid rgba(255,255,255,0.07);flex-shrink:0}
 .cart-subtotal{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .cart-subtotal span{font-size:11px;color:#8892b0;letter-spacing:.5px;text-transform:uppercase}
 .cart-subtotal strong{font-size:17px;font-weight:700}
 .checkout-btn{width:100%;padding:13px;border-radius:11px;background:linear-gradient(135deg,#2f7cff,#1a5cd6);border:none;color:#fff;font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:.25s;box-shadow:0 8px 24px rgba(47,124,255,0.35)}
-.checkout-btn:hover{background:linear-gradient(135deg,#4a8fff,#2f7cff);box-shadow:0 12px 32px rgba(47,124,255,0.5);transform:translateY(-1px)}
+.checkout-btn:hover{background:linear-gradient(135deg,#4a8fff,#2f7cff);transform:translateY(-1px)}
 .free-ship-note{text-align:center;font-size:10px;color:#444;margin-top:9px;letter-spacing:.8px;text-transform:uppercase}
 
 /* ── SECTIONS ── */
@@ -116,25 +162,136 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
 .review-count span{color:#2f7cff;font-weight:700}
 
 /* ── HERO ── */
-.hero{height:80vh;min-height:400px;display:flex;align-items:center;justify-content:center;text-align:center;background:#000}
-.hero-logo{width:180px;margin-bottom:14px}
+.hero{
+  position:relative;
+  min-height:88vh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:#050510;
+}
+/* bg image */
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('background.png') center/cover no-repeat;
+  filter:brightness(0.28) saturate(0.6);
+  transform:scale(1.04);
+  z-index:0;
+}
+/* vignette */
+.hero-vignette{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse at center, transparent 25%, rgba(5,5,16,0.7) 75%),
+    linear-gradient(180deg, rgba(5,5,16,0.5) 0%, transparent 25%, transparent 70%, rgba(5,5,16,0.9) 100%);
+}
+/* animated blue glow orbs */
+.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0;z-index:2;animation:orbFloat 8s ease-in-out infinite}
+.hero-orb-1{width:500px;height:500px;background:radial-gradient(circle,rgba(47,124,255,0.18),transparent 70%);top:-10%;left:-8%;animation-delay:0s}
+.hero-orb-2{width:380px;height:380px;background:radial-gradient(circle,rgba(47,100,255,0.12),transparent 70%);bottom:-5%;right:-5%;animation-delay:-4s}
+.hero-orb-3{width:260px;height:260px;background:radial-gradient(circle,rgba(80,140,255,0.1),transparent 70%);top:40%;left:60%;animation-delay:-2s}
+@keyframes orbFloat{0%,100%{opacity:1;transform:scale(1) translate(0,0)}50%{opacity:.7;transform:scale(1.08) translate(10px,-12px)}}
 
-/* ── BRANDS CAROUSEL ── */
+/* particle canvas */
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+
+/* decorative line accents */
+.hero-line-l,.hero-line-r{
+  position:absolute;top:50%;width:1px;height:35%;
+  background:linear-gradient(180deg,transparent,rgba(47,124,255,0.35),transparent);
+  z-index:4;
+}
+.hero-line-l{left:10%}
+.hero-line-r{right:10%}
+.hero-line-l::before,.hero-line-r::before{
+  content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:5px;height:5px;border-radius:50%;
+  background:#2f7cff;box-shadow:0 0 12px rgba(47,124,255,0.9);
+}
+
+/* content */
+.hero-content{position:relative;z-index:5;max-width:640px;margin:auto;text-align:center;padding:40px 24px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:#2f7cff;margin-bottom:20px;
+  padding:6px 16px;border-radius:20px;
+  background:rgba(47,124,255,0.1);border:1px solid rgba(47,124,255,0.25);
+}
+.hero-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:#2f7cff;box-shadow:0 0 8px #2f7cff;animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;box-shadow:0 0 8px #2f7cff}50%{opacity:.5;box-shadow:0 0 16px #2f7cff}}
+.hero-logo{width:160px;margin:0 auto 18px;filter:drop-shadow(0 0 30px rgba(47,124,255,0.35))}
+.hero-title{
+  font-size:clamp(28px,5vw,52px);
+  font-weight:800;letter-spacing:-1px;
+  line-height:1.1;margin-bottom:16px;
+  background:linear-gradient(135deg,#fff 30%,#8892b0 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-title span{
+  background:linear-gradient(135deg,#2f7cff,#7ab4ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-desc{font-size:13px;color:#6a7280;line-height:1.75;max-width:440px;margin:0 auto 28px}
+
+/* CTA buttons */
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 28px;border-radius:12px;
+  background:linear-gradient(135deg,#2f7cff,#1a5cd6);
+  border:none;color:#fff;font-family:'Poppins',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  cursor:pointer;text-decoration:none;
+  box-shadow:0 8px 28px rgba(47,124,255,0.4);
+  transition:transform .22s,box-shadow .22s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(47,124,255,0.55)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 28px;border-radius:12px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.15);color:#ccd6f6;
+  font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:1.2px;text-transform:uppercase;
+  cursor:pointer;text-decoration:none;
+  transition:background .22s,border-color .22s,transform .22s;
+}
+.btn-secondary:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.3);transform:translateY(-2px)}
+
+/* hero stats bar */
+.hero-stats{
+  display:flex;justify-content:center;gap:0;margin-top:36px;
+  border:1px solid rgba(255,255,255,0.06);border-radius:14px;
+  overflow:hidden;background:rgba(0,0,0,0.35);backdrop-filter:blur(12px);
+  max-width:420px;margin-left:auto;margin-right:auto;
+}
+.hero-stat{flex:1;padding:14px 12px;text-align:center;border-right:1px solid rgba(255,255,255,0.06)}
+.hero-stat:last-child{border-right:none}
+.hero-stat-num{font-size:17px;font-weight:800;color:#fff;letter-spacing:-0.5px;line-height:1}
+.hero-stat-label{font-size:9px;color:#555;letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
+
+/* scroll indicator */
+.hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.4}
+.hero-scroll span{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#8892b0}
+.scroll-line{width:1px;height:32px;background:linear-gradient(180deg,rgba(47,124,255,0.8),transparent);animation:scrollAnim 2s ease-in-out infinite}
+@keyframes scrollAnim{0%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(0);transform-origin:bottom}}
+
+/* ── BRANDS ── */
 .brands-wrap{position:relative;max-width:1100px;margin:0 auto}
-.brands{display:flex;gap:14px;overflow-x:auto;scroll-behavior:smooth;padding:6px 50px}
+.brands{display:flex;gap:14px;overflow-x:auto;scroll-behavior:smooth;padding:6px 50px;-webkit-overflow-scrolling:touch}
 .brands::-webkit-scrollbar{display:none}
-.brand-card{min-width:180px;flex-shrink:0;position:relative;border-radius:12px;overflow:hidden;cursor:pointer;transition:.3s;border:1px solid rgba(255,255,255,0.06)}
-.brand-card img{width:100%;height:110px;object-fit:cover;filter:brightness(.65);transition:.3s;display:block}
-.brand-card span{position:absolute;bottom:10px;left:12px;font-weight:700;font-size:13px;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,0.8)}
-.brand-card:hover img{transform:scale(1.07);filter:brightness(.9)}
+.brand-card{min-width:175px;flex-shrink:0;position:relative;border-radius:12px;overflow:hidden;cursor:pointer;transition:.3s;border:1px solid rgba(255,255,255,0.06)}
+.brand-card img{width:100%;height:108px;object-fit:cover;filter:brightness(.62);transition:.3s}
+.brand-card span{position:absolute;bottom:10px;left:12px;font-weight:700;font-size:13px;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,0.9)}
+.brand-card:hover img{transform:scale(1.07);filter:brightness(.88)}
 .brand-card:hover{box-shadow:0 12px 40px rgba(47,124,255,0.2);border-color:rgba(47,124,255,0.2)}
 
 /* ── NEW ARRIVALS ── */
 .arrivals-wrap{position:relative;max-width:1100px;margin:0 auto}
-.arrivals{display:flex;gap:16px;overflow-x:auto;padding:8px 50px;scroll-behavior:smooth}
+.arrivals{display:flex;gap:16px;overflow-x:auto;padding:8px 50px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
 .arrivals::-webkit-scrollbar{display:none}
 .arrival-card{min-width:220px;background:#17171f;border-radius:14px;overflow:hidden;transition:.25s;position:relative;flex-shrink:0;border:1px solid rgba(255,255,255,0.05)}
-.arrival-card video,.arrival-card img{width:100%;height:280px;object-fit:cover;display:block}
+.arrival-card img{width:100%;height:280px;object-fit:cover}
 .arrival-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 15px 40px rgba(47,124,255,0.25)}
 .arrival-info{padding:10px 12px;font-size:12px;font-weight:600;letter-spacing:.3px}
 
@@ -157,25 +314,21 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
 
 /* ── VIDEO REVIEWS ── */
 .video-section{position:relative;max-width:1100px;margin:0 auto}
-.videos{display:flex;gap:14px;overflow-x:auto;scroll-behavior:smooth;padding:10px 50px}
+.videos{display:flex;gap:14px;overflow-x:auto;scroll-behavior:smooth;padding:10px 50px;-webkit-overflow-scrolling:touch}
 .videos::-webkit-scrollbar{display:none}
 .video-container{min-width:220px;flex-shrink:0;position:relative;border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s;background:#0d0d1a;border:1px solid rgba(255,255,255,0.06)}
 .video-container:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 28px 60px rgba(0,0,0,0.6),0 0 0 1px rgba(47,124,255,0.2);border-color:rgba(47,124,255,0.25)}
-.video{width:100%;height:350px;object-fit:cover;display:block;cursor:pointer}
+.video{width:100%;height:350px;object-fit:cover;display:block}
 .video-container::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.12) 0%,transparent 30%,transparent 52%,rgba(0,0,0,0.88) 100%);pointer-events:none;z-index:1}
-
-/* unmute */
-.unmute-btn{position:absolute;top:12px;right:12px;z-index:3;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.18);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.unmute-btn{position:absolute;top:12px;right:12px;z-index:3;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.18);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
 .unmute-btn:hover{background:rgba(47,124,255,0.7);border-color:rgba(47,124,255,0.8)}
 .unmute-btn svg{width:13px;height:13px;pointer-events:none}
-
-/* video meta */
 .video-meta{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:12px 12px 14px;display:flex;flex-direction:column;gap:6px}
 .verified{display:inline-flex;align-items:center;gap:5px;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);padding:4px 9px;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#fff;border:1px solid rgba(47,124,255,0.3);width:fit-content}
 .verified-dot{width:5px;height:5px;border-radius:50%;background:#2f7cff;box-shadow:0 0 5px rgba(47,124,255,0.9);flex-shrink:0}
 .ig-handle{display:flex;align-items:center;gap:7px;text-decoration:none}
 .ig-logo{width:20px;height:20px;flex-shrink:0;border-radius:5px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center}
-.ig-name{font-size:12px;font-weight:700;letter-spacing:.3px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ig-name{font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ig-handle:hover .ig-name{text-decoration:underline}
 
 /* slide buttons */
@@ -196,37 +349,65 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
 .footer-right a{font-size:11px;color:#8892b0;text-decoration:none;padding:6px 10px;border-radius:7px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);letter-spacing:.5px;transition:.22s}
 .footer-right a:hover{color:#fff;background:rgba(47,124,255,0.15);border-color:rgba(47,124,255,0.4);transform:translateY(-1px)}
 
-/* ── MOBILE ── */
+/* ── MOBILE RESPONSIVE ── */
 @media(max-width:768px){
+  /* nav */
   .nav-left,.search-wrap{display:none}
   .hamburger{display:flex}
   .nav{padding:0 16px}
+  .mobile-menu{display:flex}
+
+  /* hero */
+  .hero{min-height:70vh}
+  .hero-line-l,.hero-line-r{display:none}
+  .hero-orb-1{width:280px;height:280px}
+  .hero-orb-2{width:220px;height:220px}
+  .hero-orb-3{display:none}
+  .hero-content{padding:24px 20px}
+  .hero-logo{width:120px;margin-bottom:12px}
+  .hero-stats{gap:0}
+  .hero-stat{padding:12px 8px}
+  .hero-stat-num{font-size:15px}
+  .hero-ctas{flex-direction:column;align-items:center}
+  .btn-primary,.btn-secondary{width:100%;max-width:280px;justify-content:center}
+
+  /* sections */
   .section{padding:28px 14px}
-  .hero{height:60vh;min-height:320px}
-  .hero h1{font-size:19px}
-  .hero p{font-size:12px}
-  .hero-logo{width:130px}
-  .trust-stats{grid-template-columns:repeat(2,1fr)}
-  .features{grid-template-columns:repeat(2,1fr)}
+  .section-header{flex-direction:column;align-items:flex-start;gap:4px}
+
+  /* carousels - mobile friendly padding */
+  .brands,.arrivals,.videos{padding:6px 14px;gap:10px}
+  .slide-btn{display:none} /* hide slide buttons on touch — users swipe */
+
+  /* brands */
   .brand-card{min-width:140px}
   .brand-card img{height:90px}
+
+  /* arrivals */
   .arrival-card{min-width:180px}
-  .arrival-card img,.arrival-card video{height:240px}
+  .arrival-card img{height:230px}
+
+  /* why */
+  .trust-stats{grid-template-columns:repeat(2,1fr)}
+  .features{grid-template-columns:1fr 1fr}
+
+  /* videos */
   .video-container{min-width:200px}
-  .video{height:310px}
-  .arrivals,.videos,.brands{padding-left:10px;padding-right:10px}
-  .slide-btn.left{left:2px}
-  .slide-btn.right{right:2px}
-  .footer-main{flex-direction:column;align-items:flex-start}
-  .section-header{flex-direction:column;align-items:flex-start}
+  .video{height:300px}
+
+  /* footer */
+  .footer-main{flex-direction:column;align-items:flex-start;gap:14px}
+  .footer-right{justify-content:flex-start}
 }
 @media(max-width:480px){
   .features{grid-template-columns:1fr}
   .trust-stats{grid-template-columns:repeat(2,1fr)}
-  .arrival-card{min-width:160px}
-  .video-container{min-width:185px}
-  .video{height:280px}
+  .arrival-card{min-width:165px}
+  .arrival-card img{height:210px}
+  .video-container{min-width:180px}
+  .video{height:270px}
   .cart-panel{width:100vw}
+  .hero-stats{flex-direction:row}
 }
 </style>
 </head>
@@ -242,35 +423,73 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
 <!-- NAV -->
 <div class="nav" id="mainNav">
   <div class="nav-left">
+
+    <!-- SHOP -->
     <div class="nav-item">
       <button class="nav-link">SHOP <span class="chevron">▾</span></button>
       <div class="dropdown">
-        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>Sneakers</a>
-        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div>Clothing</a>
-        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>Accessories</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item sale" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>SALE</a>
+        <div class="dropdown-inner">
+          <!-- Sneakers with flyout -->
+          <div class="has-sub">
+            <div class="dropdown-item">
+              <div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"></path></svg></div>
+              <span>Sneakers</span>
+              <span class="arrow">›</span>
+            </div>
+            <div class="submenu">
+              <div class="submenu-inner">
+                <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Jordans</a>
+                <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Nike</a>
+                <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>ASICS</a>
+                <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Yeezy</a>
+                <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>UGGS</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"></path></svg></div>Other</a>
+              </div>
+            </div>
+          </div>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"></path></svg></div>Clothing</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>Accessories</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item sale" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>SALE</a>
+        </div>
       </div>
     </div>
+
+    <!-- BRANDS -->
     <div class="nav-item">
       <button class="nav-link">BRANDS <span class="chevron">▾</span></button>
       <div class="dropdown">
-        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Nike</a>
-        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Amiri</a>
-        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Chrome Hearts</a>
-        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Eric Emanuel</a>
-        <a class="dropdown-item" href="#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>ValeForever</a>
+        <div class="dropdown-inner" style="min-width:230px;max-height:400px;overflow-y:auto">
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Nike</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Amiri</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Chrome Hearts</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Eric Emanuel</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>ValeForever</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Lost Intricacy</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Valley Dreams</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Rick Owens</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Ksubi</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Prada</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Christian Dior</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>Moose Knuckles</a>
+          <a class="dropdown-item" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>ALO</a>
+        </div>
       </div>
     </div>
+
   </div>
-  <div class="nav-center"><img src="logo.png" class="logo"></div>
+
+  <div class="nav-center"><img src="./BoUnit NYC_files/logo.png" class="logo" alt="BoUnit NYC"></div>
+
   <div class="nav-right">
     <div class="search-wrap">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       <input class="search-bar" id="searchBar" type="text" placeholder="Search">
     </div>
-    <button class="cart-btn" onclick="toggleCart()" title="View Cart">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <button class="cart-btn" onclick="toggleCart()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
       <span class="cart-count" id="cartCount">0</span>
     </button>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
@@ -279,29 +498,64 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a class="mob-link" href="#">Shop</a>
-  <a class="mob-sub" href="#">Sneakers</a>
-  <a class="mob-sub" href="#">Clothing</a>
-  <a class="mob-sub" href="#">Accessories</a>
-  <a class="mob-sub mob-sale" href="#">Sale</a>
-  <a class="mob-link" href="#">Brands</a>
-  <a class="mob-sub" href="#">Nike</a>
-  <a class="mob-sub" href="#">Amiri</a>
-  <a class="mob-sub" href="#">Chrome Hearts</a>
-  <a class="mob-sub" href="#">Eric Emanuel</a>
-  <a class="mob-sub" href="#">ValeForever</a>
+  <div class="mob-header">
+    <img src="./BoUnit NYC_files/logo.png" style="height:28px" alt="BoUnit NYC">
+  </div>
+  <div class="mob-body">
+    <div class="mob-section-label">Navigate</div>
+
+    <button class="mob-link" onclick="toggleMobSection(&#39;mob-shop&#39;)">
+      Shop <span class="mob-arrow">›</span>
+    </button>
+    <div class="mob-sub-list" id="mob-shop">
+      <button class="mob-link" style="font-size:12px;padding:10px 14px" onclick="toggleMobSection(&#39;mob-sneakers&#39;)">
+        Sneakers <span class="mob-arrow">›</span>
+      </button>
+      <div class="mob-sub-list" id="mob-sneakers">
+        <a class="mob-sub mob-sub-indent" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Jordans</a>
+        <a class="mob-sub mob-sub-indent" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Nike</a>
+        <a class="mob-sub mob-sub-indent" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">ASICS</a>
+        <a class="mob-sub mob-sub-indent" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Yeezy</a>
+        <a class="mob-sub mob-sub-indent" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">UGGS</a>
+        <a class="mob-sub mob-sub-indent" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Other</a>
+      </div>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Clothing</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Accessories</a>
+      <a class="mob-sub sale" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Sale</a>
+    </div>
+
+    <button class="mob-link" onclick="toggleMobSection(&#39;mob-brands&#39;)">
+      Brands <span class="mob-arrow">›</span>
+    </button>
+    <div class="mob-sub-list" id="mob-brands">
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Nike</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Amiri</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Chrome Hearts</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Eric Emanuel</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">ValeForever</a>
+      <div class="mob-divider"></div>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Lost Intricacy</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Valley Dreams</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Rick Owens</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Ksubi</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Prada</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Christian Dior</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Moose Knuckles</a>
+      <a class="mob-sub" href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">ALO</a>
+    </div>
+  </div>
 </div>
 
 <!-- CART -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-panel" id="cartPanel">
   <div class="cart-header">
-    <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Your Cart</h3>
-    <button class="cart-close" onclick="toggleCart()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>Your Cart</h3>
+    <button class="cart-close" onclick="toggleCart()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
   </div>
   <div class="cart-items" id="cartItems">
-    <div class="cart-empty" id="cartEmpty">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <div class="cart-empty" id="cartEmpty" style="display: flex;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
       <p>Your cart is empty.<br>Start shopping to add items.</p>
     </div>
   </div>
@@ -316,25 +570,58 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
 <div class="section">
   <div class="section-header"><div><h2>Shop by Brand</h2></div></div>
   <div class="brands-wrap">
-    <button class="slide-btn left" onclick="slideBrands(-1)">&#8249;</button>
-    <button class="slide-btn right" onclick="slideBrands(1)">&#8250;</button>
+    <button class="slide-btn left" onclick="slideBrands(-1)">‹</button>
+    <button class="slide-btn right" onclick="slideBrands(1)">›</button>
     <div class="brands" id="brandsCarousel">
-      <div class="brand-card"><img src="nike1.png"><span>Nike</span></div>
-      <div class="brand-card"><img src="amiri1.png"><span>Amiri</span></div>
-      <div class="brand-card"><img src="chrome1.png"><span>Chrome Hearts</span></div>
-      <div class="brand-card"><img src="vale1.png"><span>ValeForever</span></div>
-      <div class="brand-card"><img src="eric1.png"><span>Eric Emanuel</span></div>
+      <div class="brand-card"><img src="./BoUnit NYC_files/nike1.png" alt="Nike"><span>Nike</span></div>
+      <div class="brand-card"><img src="./BoUnit NYC_files/amiri1.png" alt="Amiri"><span>Amiri</span></div>
+      <div class="brand-card"><img src="./BoUnit NYC_files/chrome1.png" alt="Chrome Hearts"><span>Chrome Hearts</span></div>
+      <div class="brand-card"><img src="./BoUnit NYC_files/vale1.png" alt="ValeForever"><span>ValeForever</span></div>
+      <div class="brand-card"><img src="./BoUnit NYC_files/eric1.png" alt="Eric Emanuel"><span>Eric Emanuel</span></div>
     </div>
   </div>
 </div>
 
 <!-- HERO -->
-<div class="hero" style="background:url('background.png') center/cover no-repeat;position:relative;">
-  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.75)"></div>
-  <div style="position:relative;z-index:2;max-width:560px;margin:auto;text-align:center;padding:20px">
-    <img src="logo.png" class="hero-logo">
-    <h1 style="margin-bottom:10px;font-size:24px;letter-spacing:.5px">THE FUTURE OF STREETWEAR</h1>
-    <p style="font-size:13px;color:#9aa0a6;line-height:1.7">Established in 2001, BoUnitNYC has built a reputation as a trusted source for authentic streetwear and sneakers. Decades of experience, thousands of satisfied customers, zero compromises on quality.</p>
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+  <canvas id="heroCanvas" width="1513" height="729"></canvas>
+  <div class="hero-line-l"></div>
+  <div class="hero-line-r"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      NYC · EST. 2001 · STREETWEAR
+    </div>
+    <img src="./BoUnit NYC_files/logo.png" class="hero-logo" alt="BoUnit NYC">
+    <h1 class="hero-title">BOUNIT<span>NYC</span></h1>
+    <p class="hero-desc">A trusted source for authentic sneakers and streetwear. Verified products, decades of experience, zero compromises.</p>
+    <div class="hero-ctas">
+      <a href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        Shop Now
+      </a>
+      <a href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#" class="btn-secondary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        View Arrivals
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">10K+</div><div class="hero-stat-label">Orders</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-label">Authentic</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">4.9★</div><div class="hero-stat-label">Rating</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">24h</div><div class="hero-stat-label">Shipping</div></div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
   </div>
 </div>
 
@@ -342,14 +629,14 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
 <div class="section">
   <div class="section-header"><div><h2>New Arrivals</h2></div></div>
   <div class="arrivals-wrap">
-    <button class="slide-btn left" onclick="slideLeft()">&#8249;</button>
-    <button class="slide-btn right" onclick="slideRight()">&#8250;</button>
+    <button class="slide-btn left" onclick="slideLeft()">‹</button>
+    <button class="slide-btn right" onclick="slideRight()">›</button>
     <div class="arrivals" id="arrivals">
-      <div class="arrival-card"><img src="chtrucker.jpeg"><div class="arrival-info">Chrome Hearts Trucker</div></div>
-      <div class="arrival-card"><img src="jorts.jpeg"><div class="arrival-info">Denim Jorts</div></div>
-      <div class="arrival-card"><img src="flugame.jpeg"><div class="arrival-info">Jordan 12 Flu Game</div></div>
-      <div class="arrival-card"><img src="asics.jpeg"><div class="arrival-info">ASICS Runner</div></div>
-      <div class="arrival-card"><img src="supreme.jpeg"><div class="arrival-info">Supreme Piece</div></div>
+      <div class="arrival-card" style="cursor: pointer;"><img src="./BoUnit NYC_files/chtrucker.jpeg" alt="Chrome Hearts Trucker"><div class="arrival-info">Chrome Hearts Trucker</div><button style="position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%) translateY(10px); background: rgba(47, 124, 255, 0.92); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(255, 255, 255); font-family: Poppins, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; padding: 7px 14px; border-radius: 8px; cursor: pointer; white-space: nowrap; opacity: 0; transition: 0.2s; pointer-events: none; z-index: 5;">+ ADD TO CART</button></div>
+      <div class="arrival-card" style="cursor: pointer;"><img src="./BoUnit NYC_files/jorts.jpeg" alt="Denim Jorts"><div class="arrival-info">Denim Jorts</div><button style="position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%) translateY(10px); background: rgba(47, 124, 255, 0.92); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(255, 255, 255); font-family: Poppins, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; padding: 7px 14px; border-radius: 8px; cursor: pointer; white-space: nowrap; opacity: 0; transition: 0.2s; pointer-events: none; z-index: 5;">+ ADD TO CART</button></div>
+      <div class="arrival-card" style="cursor: pointer;"><img src="./BoUnit NYC_files/flugame.jpeg" alt="Jordan 12 Flu Game"><div class="arrival-info">Jordan 12 Flu Game</div><button style="position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%) translateY(10px); background: rgba(47, 124, 255, 0.92); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(255, 255, 255); font-family: Poppins, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; padding: 7px 14px; border-radius: 8px; cursor: pointer; white-space: nowrap; opacity: 0; transition: 0.2s; pointer-events: none; z-index: 5;">+ ADD TO CART</button></div>
+      <div class="arrival-card" style="cursor: pointer;"><img src="./BoUnit NYC_files/asics.jpeg" alt="ASICS Runner"><div class="arrival-info">ASICS Runner</div><button style="position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%) translateY(10px); background: rgba(47, 124, 255, 0.92); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(255, 255, 255); font-family: Poppins, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; padding: 7px 14px; border-radius: 8px; cursor: pointer; white-space: nowrap; opacity: 0; transition: 0.2s; pointer-events: none; z-index: 5;">+ ADD TO CART</button></div>
+      <div class="arrival-card" style="cursor: pointer;"><img src="./BoUnit NYC_files/supreme.jpeg" alt="Supreme Piece"><div class="arrival-info">Supreme Piece</div><button style="position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%) translateY(10px); background: rgba(47, 124, 255, 0.92); border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; color: rgb(255, 255, 255); font-family: Poppins, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; padding: 7px 14px; border-radius: 8px; cursor: pointer; white-space: nowrap; opacity: 0; transition: 0.2s; pointer-events: none; z-index: 5;">+ ADD TO CART</button></div>
     </div>
   </div>
 </div>
@@ -366,25 +653,25 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
     </div>
     <div class="features">
       <div class="feature">
-        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
         <div class="feature-title">100% Authentic</div>
         <div class="feature-desc">Every item manually verified before it ships. Zero fakes, ever.</div>
         <div class="feature-tags"><span class="feature-tag">Manual Check</span><span class="feature-tag">Zero Fakes</span></div>
       </div>
       <div class="feature">
-        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
         <div class="feature-title">Fast Shipping</div>
         <div class="feature-desc">Same-day processing, next-day delivery. Fully tracked and insured.</div>
         <div class="feature-tags"><span class="feature-tag">Same-Day</span><span class="feature-tag">Insured</span></div>
       </div>
       <div class="feature">
-        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg></div>
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 .49-3.51"></path></svg></div>
         <div class="feature-title">Easy Returns</div>
         <div class="feature-desc">7-day return window. No forms, no hassle, fast refunds.</div>
         <div class="feature-tags"><span class="feature-tag">7 Days</span><span class="feature-tag">Fast Refunds</span></div>
       </div>
       <div class="feature">
-        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
         <div class="feature-title">Secure Checkout</div>
         <div class="feature-desc">256-bit SSL on every order. Apple Pay and Crypto accepted.</div>
         <div class="feature-tags"><span class="feature-tag">SSL</span><span class="feature-tag">Apple Pay</span><span class="feature-tag">Crypto</span></div>
@@ -400,75 +687,75 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
     <div class="review-count"><span>5</span> verified reviews</div>
   </div>
   <div class="video-section">
-    <button class="slide-btn left" onclick="slideReviews(-1)">&#8249;</button>
-    <button class="slide-btn right" onclick="slideReviews(1)">&#8250;</button>
+    <button class="slide-btn left" onclick="slideReviews(-1)">‹</button>
+    <button class="slide-btn right" onclick="slideReviews(1)">›</button>
     <div class="videos" id="reviews">
 
       <div class="video-container">
-        <video class="video" src="vid1.mp4" autoplay muted loop playsinline id="v1"></video>
-        <button class="unmute-btn" id="ub1" onclick="toggleMute('v1','ub1')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        <video class="video" src="vid1.mp4" autoplay="" muted="" loop="" playsinline="" id="v1"></video>
+        <button class="unmute-btn" id="ub1" onclick="toggleMute(&#39;v1&#39;,&#39;ub1&#39;)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
         </button>
         <div class="video-meta">
           <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
           <a class="ig-handle" href="https://instagram.com/jaydot_geek" target="_blank" rel="noopener">
-            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></div>
             <span class="ig-name">@jaydot_geek</span>
           </a>
         </div>
       </div>
 
       <div class="video-container">
-        <video class="video" src="vid2.mp4" autoplay muted loop playsinline id="v2"></video>
-        <button class="unmute-btn" id="ub2" onclick="toggleMute('v2','ub2')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        <video class="video" src="vid2.mp4" autoplay="" muted="" loop="" playsinline="" id="v2"></video>
+        <button class="unmute-btn" id="ub2" onclick="toggleMute(&#39;v2&#39;,&#39;ub2&#39;)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
         </button>
         <div class="video-meta">
           <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
           <a class="ig-handle" href="https://instagram.com/jayguapo65" target="_blank" rel="noopener">
-            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></div>
             <span class="ig-name">@jayguapo65</span>
           </a>
         </div>
       </div>
 
       <div class="video-container">
-        <video class="video" src="vid3.mp4" autoplay muted loop playsinline id="v3"></video>
-        <button class="unmute-btn" id="ub3" onclick="toggleMute('v3','ub3')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        <video class="video" src="vid3.mp4" autoplay="" muted="" loop="" playsinline="" id="v3"></video>
+        <button class="unmute-btn" id="ub3" onclick="toggleMute(&#39;v3&#39;,&#39;ub3&#39;)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
         </button>
         <div class="video-meta">
           <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
           <a class="ig-handle" href="https://instagram.com/ndot_spinalot47" target="_blank" rel="noopener">
-            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></div>
             <span class="ig-name">@ndot_spinalot47</span>
           </a>
         </div>
       </div>
 
       <div class="video-container">
-        <video class="video" src="vid4.mp4" autoplay muted loop playsinline id="v4"></video>
-        <button class="unmute-btn" id="ub4" onclick="toggleMute('v4','ub4')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        <video class="video" src="vid4.mp4" autoplay="" muted="" loop="" playsinline="" id="v4"></video>
+        <button class="unmute-btn" id="ub4" onclick="toggleMute(&#39;v4&#39;,&#39;ub4&#39;)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
         </button>
         <div class="video-meta">
           <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
           <a class="ig-handle" href="https://instagram.com/nycjahh_" target="_blank" rel="noopener">
-            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></div>
             <span class="ig-name">@nycjahh_</span>
           </a>
         </div>
       </div>
 
       <div class="video-container">
-        <video class="video" src="vid5.mp4" autoplay muted loop playsinline id="v5"></video>
-        <button class="unmute-btn" id="ub5" onclick="toggleMute('v5','ub5')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        <video class="video" src="vid5.mp4" autoplay="" muted="" loop="" playsinline="" id="v5"></video>
+        <button class="unmute-btn" id="ub5" onclick="toggleMute(&#39;v5&#39;,&#39;ub5&#39;)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
         </button>
         <div class="video-meta">
           <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
           <a class="ig-handle" href="https://instagram.com/adamnkilla" target="_blank" rel="noopener">
-            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></div>
             <span class="ig-name">@adamnkilla</span>
           </a>
         </div>
@@ -483,16 +770,16 @@ body{background:#0f0f14;color:#fff;overflow-x:hidden}
   <div class="footer-divider"></div>
   <div class="footer-main">
     <div class="footer-left">
-      <img src="logo.png" class="footer-logo">
+      <img src="./BoUnit NYC_files/logo.png" class="footer-logo" alt="BoUnit NYC">
       <strong>BoUnitNYC</strong>
       <span>support@bounitnyc.com</span>
     </div>
     <div class="footer-right">
-      <a href="#">About Us</a>
-      <a href="#">Careers</a>
-      <a href="#">Terms of Service</a>
-      <a href="#">Refund Policy</a>
-      <a href="#">Privacy Policy</a>
+      <a href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">About Us</a>
+      <a href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Careers</a>
+      <a href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Terms of Service</a>
+      <a href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Refund Policy</a>
+      <a href="file:///C:/Users/Prince%20Maldonado/Downloads/index_11.html#">Privacy Policy</a>
     </div>
   </div>
 </div>
@@ -511,6 +798,12 @@ function toggleMenu(){
   hb.classList.toggle('open');mm.classList.toggle('open');
   document.body.style.overflow=mm.classList.contains('open')?'hidden':'';
 }
+function toggleMobSection(id){
+  const el=document.getElementById(id);
+  const btn=el.previousElementSibling;
+  const isOpen=el.classList.toggle('open');
+  if(btn)btn.classList.toggle('active',isOpen);
+}
 
 /* SLIDERS */
 function slideLeft(){document.getElementById('arrivals').scrollBy({left:-260,behavior:'smooth'})}
@@ -521,23 +814,17 @@ function slideBrands(dir){document.getElementById('brandsCarousel').scrollBy({le
 /* SEARCH */
 document.getElementById('searchBar').addEventListener('keydown',e=>{if(e.key==='Escape')e.target.blur()});
 
-/* UNMUTE — clicking unmute on one video mutes all others */
+/* UNMUTE */
 const MUTED_SVG=`<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>`;
 const SOUND_SVG=`<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>`;
-
 function toggleMute(videoId,btnId){
   const vid=document.getElementById(videoId);
   const willUnmute=vid.muted;
-  // mute all videos
   [1,2,3,4,5].forEach(n=>{
     const v=document.getElementById('v'+n);
-    if(v){v.muted=true;document.getElementById('ub'+n).querySelector('svg').innerHTML=MUTED_SVG}
+    if(v){v.muted=true;const b=document.getElementById('ub'+n);if(b)b.querySelector('svg').innerHTML=MUTED_SVG}
   });
-  // toggle target
-  if(willUnmute){
-    vid.muted=false;
-    document.getElementById(btnId).querySelector('svg').innerHTML=SOUND_SVG;
-  }
+  if(willUnmute){vid.muted=false;document.getElementById(btnId).querySelector('svg').innerHTML=SOUND_SVG}
 }
 
 /* CART */
@@ -582,7 +869,7 @@ function renderCart(){
   });
 }
 
-/* ADD TO CART ON ARRIVAL CARDS */
+/* ADD TO CART */
 document.querySelectorAll('.arrival-card').forEach(card=>{
   card.style.cursor='pointer';
   const info=card.querySelector('.arrival-info');if(!info)return;
@@ -599,7 +886,53 @@ document.querySelectorAll('.arrival-card').forEach(card=>{
   btn.addEventListener('click',e=>{e.stopPropagation();addToCart(name,price,img)});
 });
 
+/* HERO PARTICLES */
+(function(){
+  const canvas=document.getElementById('heroCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[];
+  function resize(){
+    const hero=canvas.parentElement;
+    W=canvas.width=hero.offsetWidth;
+    H=canvas.height=hero.offsetHeight;
+  }
+  function rand(a,b){return Math.random()*(b-a)+a}
+  function mkParticle(){
+    const r=rand(1,2.8);
+    return{x:rand(0,W),y:rand(0,H),r,baseA:rand(0.04,0.13),alpha:0,vx:rand(-.16,.16),vy:rand(-.25,-.06),pulse:rand(0,Math.PI*2),ps:rand(.008,.022),fs:rand(.004,.012)};
+  }
+  function init(){
+    resize();particles=[];
+    const n=Math.floor(W*H/16000);
+    for(let i=0;i<n;i++){const p=mkParticle();p.alpha=rand(0,p.baseA);particles.push(p)}
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{
+      p.pulse+=p.ps;
+      const pa=p.baseA+Math.sin(p.pulse)*.04;
+      if(p.alpha<pa)p.alpha=Math.min(p.alpha+p.fs,pa);
+      else p.alpha=Math.max(p.alpha-p.fs,pa);
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.y<-8)p.y=H+8;
+      if(p.x<-8)p.x=W+8;
+      if(p.x>W+8)p.x=-8;
+      const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
+      g.addColorStop(0,`rgba(47,124,255,${p.alpha})`);
+      g.addColorStop(.5,`rgba(47,124,255,${p.alpha*.35})`);
+      g.addColorStop(1,`rgba(47,124,255,0)`);
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*4,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*.55,0,Math.PI*2);ctx.fillStyle=`rgba(160,200,255,${p.alpha*1.5})`;ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  init();draw();
+})();
+
 renderCart();
 </script>
-</body>
-</html>
+
+
+</body></html>
