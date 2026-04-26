@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>Rhude — BoUnitNYC</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:#0a0a12;color:#fff;overflow-x:hidden}
+img{display:block;max-width:100%}
+
+/* ── NAV ── */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:0 32px;height:60px;background:rgba(8,8,18,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:200}
+.nav-logo{height:44px}
+.nav-back{display:flex;align-items:center;gap:8px;color:#8892b0;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:color .2s}
+.nav-back:hover{color:#fff}
+.nav-back:hover svg{transform:translateX(-3px)}
+.nav-back svg{transition:transform .2s}
+.nav-cart{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#8892b0;cursor:pointer;background:none;border:1px solid rgba(255,255,255,0.1);padding:8px 16px;border-radius:10px;transition:.22s}
+.nav-cart:hover{color:#fff;border-color:rgba(47,124,255,0.4);background:rgba(47,124,255,0.08)}
+
+/* ── PAGE HEADER ── */
+.page-header{padding:32px 32px 0;max-width:1400px;margin:0 auto}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:11px;color:#444;letter-spacing:.8px;text-transform:uppercase;margin-bottom:16px}
+.breadcrumb a{color:#444;text-decoration:none;transition:color .2s}
+.breadcrumb a:hover{color:#2f7cff}
+.breadcrumb span{color:#2f7cff}
+.page-title-row{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px}
+.page-title{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.page-title span{color:#2f7cff}
+.result-count{font-size:12px;color:#555;letter-spacing:.5px}
+.result-count span{color:#8892b0;font-weight:600}
+
+/* ── LAYOUT ── */
+.shop-layout{display:grid;grid-template-columns:240px 1fr;gap:28px;max-width:1400px;margin:0 auto;padding:24px 32px 60px}
+
+/* ── SIDEBAR FILTERS ── */
+.sidebar{display:flex;flex-direction:column;gap:4px;position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto}
+.sidebar::-webkit-scrollbar{width:0}
+
+.filter-group{background:#0d0d1a;border:1px solid rgba(255,255,255,0.06);border-radius:12px;overflow:hidden}
+.filter-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer;user-select:none}
+.filter-header h3{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8892b0}
+.filter-header .toggle{font-size:16px;color:#2f7cff;transition:transform .25s;line-height:1}
+.filter-header.open .toggle{transform:rotate(45deg)}
+.filter-body{padding:0 16px 14px;display:flex;flex-direction:column;gap:6px}
+.filter-body.hidden{display:none}
+
+/* search within filter */
+.filter-search{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#fff;font-family:'Poppins',sans-serif;font-size:11px;padding:7px 10px;outline:none;margin-bottom:6px}
+.filter-search::placeholder{color:#444}
+.filter-search:focus{border-color:rgba(47,124,255,0.4)}
+
+/* checkboxes */
+.filter-option{display:flex;align-items:center;gap:10px;cursor:pointer;padding:4px 2px}
+.filter-option input[type=checkbox]{display:none}
+.filter-option .cb{width:16px;height:16px;border-radius:4px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.04);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.18s}
+.filter-option input:checked+.cb{background:#2f7cff;border-color:#2f7cff}
+.filter-option input:checked+.cb::after{content:"✓";color:#fff;font-size:10px;font-weight:700;line-height:1}
+.filter-option span{font-size:12px;color:#8892b0;transition:color .18s}
+.filter-option:hover span{color:#fff}
+
+/* price sort */
+.sort-btn{width:100%;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#8892b0;font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;letter-spacing:.5px;cursor:pointer;text-align:left;transition:.18s;margin-bottom:4px}
+.sort-btn:hover,.sort-btn.active{background:rgba(47,124,255,0.1);border-color:rgba(47,124,255,0.35);color:#fff}
+.sort-btn.active{color:#2f7cff}
+
+/* size pills */
+.size-pills{display:flex;flex-wrap:wrap;gap:6px}
+.size-pill{padding:5px 10px;border-radius:7px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#8892b0;font-size:11px;font-weight:600;cursor:pointer;transition:.18s}
+.size-pill:hover{border-color:rgba(47,124,255,0.4);color:#fff}
+.size-pill.active{background:rgba(47,124,255,0.12);border-color:#2f7cff;color:#2f7cff}
+
+.filter-divider{height:1px;background:rgba(255,255,255,0.05);margin:4px 0}
+
+/* clear filters */
+.clear-btn{width:100%;padding:10px;border-radius:9px;background:rgba(255,77,77,0.07);border:1px solid rgba(255,77,77,0.2);color:#ff6b6b;font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;transition:.2s;margin-top:4px}
+.clear-btn:hover{background:rgba(255,77,77,0.15);border-color:rgba(255,77,77,0.4)}
+
+/* mobile filter toggle */
+.mob-filter-toggle{display:none;width:100%;padding:11px 16px;background:#0d0d1a;border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#8892b0;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;align-items:center;justify-content:space-between;margin-bottom:16px}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:300}
+.sidebar-overlay.open{display:block}
+
+/* ── PRODUCT GRID ── */
+.grid-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.active-filters{display:flex;flex-wrap:wrap;gap:6px}
+.active-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:6px;background:rgba(47,124,255,0.1);border:1px solid rgba(47,124,255,0.25);font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#2f7cff;cursor:pointer;transition:.18s}
+.active-tag:hover{background:rgba(255,77,77,0.1);border-color:rgba(255,77,77,0.3);color:#ff6b6b}
+.active-tag .x{font-size:12px}
+
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+/* ── PRODUCT CARD ── */
+.product-card{
+  background:#0d0d1a;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(47,124,255,0.12);
+  box-shadow:0 0 16px rgba(47,124,255,0.08);
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+  cursor:pointer;position:relative;
+}
+.product-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 28px rgba(47,124,255,0.25),0 16px 40px rgba(0,0,0,0.4);
+  border-color:rgba(47,124,255,0.35);
+}
+.product-card.hidden{display:none}
+
+.card-img-wrap{position:relative;overflow:hidden;background:#13131f;aspect-ratio:1/1}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.product-card:hover .card-img-wrap img{transform:scale(1.06)}
+
+.card-badge{position:absolute;top:10px;left:10px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 9px;border-radius:5px}
+.badge-new{background:linear-gradient(135deg,#2f7cff,#1a5cd6);color:#fff;box-shadow:0 3px 10px rgba(47,124,255,0.4)}
+.badge-used{background:rgba(255,165,0,0.15);border:1px solid rgba(255,165,0,0.35);color:#ffa500}
+.badge-sold{background:rgba(255,77,77,0.15);border:1px solid rgba(255,77,77,0.3);color:#ff4d4d}
+
+.stock-dot{position:absolute;top:10px;right:10px;width:7px;height:7px;border-radius:50%;background:#ff4d4d;box-shadow:0 0 8px rgba(255,77,77,0.8)}
+.stock-dot.green{background:#2ecc71;box-shadow:0 0 8px rgba(46,204,113,0.8)}
+
+.card-body{padding:12px}
+.card-brand{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2f7cff;margin-bottom:3px}
+.card-name{font-size:12px;font-weight:700;line-height:1.35;margin-bottom:6px;color:#e0e6f0}
+.card-size{font-size:10px;color:#555;letter-spacing:.5px;margin-bottom:8px}
+.card-price{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.card-price-old{font-size:11px;color:#444;text-decoration:line-through;margin-left:6px;font-weight:400}
+
+/* no results */
+.no-results{grid-column:1/-1;text-align:center;padding:60px 20px;color:#444}
+.no-results svg{opacity:.2;margin:0 auto 12px}
+.no-results p{font-size:13px;letter-spacing:.5px}
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  .product-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:768px){
+  .nav{padding:0 16px}
+  .page-header{padding:20px 16px 0}
+  .shop-layout{grid-template-columns:1fr;padding:16px 16px 48px;gap:0}
+  .sidebar{position:fixed;top:0;left:0;bottom:0;width:300px;max-height:100vh;z-index:400;background:#0a0a12;border-right:1px solid rgba(255,255,255,0.08);padding:20px 16px;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+  .sidebar.open{transform:translateX(0)}
+  .mob-filter-toggle{display:flex}
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .page-title{font-size:22px}
+}
+@media(max-width:480px){
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .card-body{padding:9px}
+  .card-name{font-size:11px}
+}
+
+/* ── FOOTER ── */
+.footer{background:linear-gradient(180deg,#080812 0%,#000 100%);border-top:1px solid rgba(47,124,255,0.15);position:relative;overflow:hidden}
+.footer::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(47,124,255,0.6),transparent)}
+.footer::after{content:"";position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:600px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(47,124,255,0.05),transparent 70%);pointer-events:none}
+.footer-inner{position:relative;z-index:1;padding:36px 32px 20px}
+.footer-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:20px}
+.footer-logo{width:80px;filter:drop-shadow(0 0 16px rgba(47,124,255,0.3));margin-bottom:10px}
+.footer-brand-name{font-size:15px;font-weight:800;letter-spacing:1px;margin-bottom:4px}
+.footer-brand-name span{color:#2f7cff}
+.footer-tagline{font-size:11px;color:#444;letter-spacing:.5px;line-height:1.6;max-width:200px}
+.footer-col-title{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#2f7cff;margin-bottom:12px}
+.footer-links{display:flex;flex-direction:column;gap:8px}
+.footer-links a{font-size:12px;color:#666;text-decoration:none;letter-spacing:.3px;transition:color .2s;display:flex;align-items:center;gap:6px}
+.footer-links a::before{content:"";width:4px;height:4px;border-radius:50%;background:rgba(47,124,255,0.4);flex-shrink:0;transition:background .2s}
+.footer-links a:hover{color:#fff}
+.footer-links a:hover::before{background:#2f7cff}
+.footer-contact{display:flex;flex-direction:column;gap:8px}
+.footer-contact-item{display:flex;align-items:center;gap:8px;font-size:12px;color:#666;letter-spacing:.3px}
+.footer-contact-item svg{flex-shrink:0;color:#2f7cff;opacity:.7}
+.footer-socials{display:flex;gap:8px;margin-top:14px}
+.footer-social{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#666;transition:.22s;text-decoration:none}
+.footer-social:hover{background:rgba(47,124,255,0.15);border-color:rgba(47,124,255,0.4);color:#fff;transform:translateY(-2px)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-copy{font-size:10px;color:#333;letter-spacing:.8px;text-transform:uppercase}
+.footer-copy span{color:#2f7cff}
+.footer-badges{display:flex;gap:6px}
+.footer-badge{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:5px;background:rgba(47,124,255,0.07);border:1px solid rgba(47,124,255,0.15);color:#4a7acc}
+@media(max-width:768px){.footer-top{grid-template-columns:1fr;gap:24px}.footer-bottom{flex-direction:column;align-items:flex-start;gap:12px}}
+
+.footer{background:linear-gradient(180deg,#080812 0%,#000 100%);border-top:1px solid rgba(47,124,255,0.15);position:relative;overflow:hidden}
+.footer::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(47,124,255,0.6),transparent)}
+.footer::after{content:"";position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:600px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(47,124,255,0.05),transparent 70%);pointer-events:none}
+.footer-inner{position:relative;z-index:1;padding:36px 32px 20px}
+.footer-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:20px}
+.footer-logo-img{width:80px;filter:drop-shadow(0 0 16px rgba(47,124,255,0.3));margin-bottom:10px}
+.footer-brand-name{font-size:15px;font-weight:800;letter-spacing:1px;margin-bottom:4px}
+.footer-brand-name span{color:#2f7cff}
+.footer-tagline{font-size:11px;color:#444;letter-spacing:.5px;line-height:1.6;max-width:200px}
+.footer-col-title{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#2f7cff;margin-bottom:12px}
+.footer-links{display:flex;flex-direction:column;gap:8px}
+.footer-links a{font-size:12px;color:#666;text-decoration:none;letter-spacing:.3px;transition:color .2s;display:flex;align-items:center;gap:6px}
+.footer-links a::before{content:"";width:4px;height:4px;border-radius:50%;background:rgba(47,124,255,0.4);flex-shrink:0;transition:background .2s}
+.footer-links a:hover{color:#fff}
+.footer-links a:hover::before{background:#2f7cff}
+.footer-contact{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.footer-contact-item{display:flex;align-items:center;gap:8px;font-size:12px;color:#666}
+.footer-contact-item svg{flex-shrink:0;color:#2f7cff;opacity:.7}
+.footer-socials{display:flex;gap:8px;margin-top:14px}
+.footer-social{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#666;transition:.22s;text-decoration:none}
+.footer-social:hover{background:rgba(47,124,255,0.15);border-color:rgba(47,124,255,0.4);color:#fff;transform:translateY(-2px)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-copy{font-size:10px;color:#333;letter-spacing:.8px;text-transform:uppercase}
+.footer-copy span{color:#2f7cff}
+.footer-badges{display:flex;gap:6px}
+.footer-badge{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:5px;background:rgba(47,124,255,0.07);border:1px solid rgba(47,124,255,0.15);color:#4a7acc}
+@media(max-width:768px){.footer-top{grid-template-columns:1fr;gap:24px}.footer-bottom{flex-direction:column;align-items:flex-start;gap:12px}}</style>
+</head>
+<body>
+<div class="nav">
+  <a href="index.html" class="nav-back"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back</a>
+  <img src="logo.png" class="nav-logo" alt="BoUnit NYC">
+  <button class="nav-cart" onclick="window.location.href='index.html'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Cart</button>
+</div>
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Home</a><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><a href="index.html">Brands</a><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><span>Rhude</span></div>
+  <div class="page-title-row"><h1 class="page-title"><span>Rhude</span> Collection</h1><div class="result-count">Showing <b id="countDisplay">20</b> items</div></div>
+</div>
+<div class="shop-layout">
+  <button class="mob-filter-toggle" onclick="toggleSidebar()"><span>Filters</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="18" x2="12" y2="18"/></svg></button>
+  <div class="sidebar" id="sidebar">
+    <div class="filter-group"><div class="filter-header open" onclick="toggleGroup(this)"><h3>Sort By</h3><span class="toggle">+</span></div><div class="filter-body"><button class="sort-btn active" onclick="setSort('featured',this)">Featured</button><button class="sort-btn" onclick="setSort('low-high',this)">Price: Low to High</button><button class="sort-btn" onclick="setSort('high-low',this)">Price: High to Low</button></div></div>
+    <div class="filter-group"><div class="filter-header open" onclick="toggleGroup(this)"><h3>Condition</h3><span class="toggle">+</span></div><div class="filter-body"><label class="filter-option"><input type="checkbox" data-filter="condition" value="new" onchange="applyFilters()"><span class="cb"></span><span>New</span></label><label class="filter-option"><input type="checkbox" data-filter="condition" value="used" onchange="applyFilters()"><span class="cb"></span><span>Used — Excellent</span></label></div></div>
+    <div class="filter-group"><div class="filter-header open" onclick="toggleGroup(this)"><h3>Shoe Size (Men's)</h3><span class="toggle">+</span></div><div class="filter-body"><div class="size-pills"><span class="size-pill" onclick="togglePill(this)">6</span><span class="size-pill" onclick="togglePill(this)">6.5</span><span class="size-pill" onclick="togglePill(this)">7</span><span class="size-pill" onclick="togglePill(this)">7.5</span><span class="size-pill" onclick="togglePill(this)">8</span><span class="size-pill" onclick="togglePill(this)">8.5</span><span class="size-pill" onclick="togglePill(this)">9</span><span class="size-pill" onclick="togglePill(this)">9.5</span><span class="size-pill" onclick="togglePill(this)">10</span><span class="size-pill" onclick="togglePill(this)">10.5</span><span class="size-pill" onclick="togglePill(this)">11</span><span class="size-pill" onclick="togglePill(this)">11.5</span><span class="size-pill" onclick="togglePill(this)">12</span><span class="size-pill" onclick="togglePill(this)">13</span><span class="size-pill" onclick="togglePill(this)">14</span></div></div></div>
+    <div class="filter-group"><div class="filter-header" onclick="toggleGroup(this)"><h3>Youth Shoe Size</h3><span class="toggle">+</span></div><div class="filter-body hidden"><div class="size-pills"><span class="size-pill" onclick="togglePill(this)">1Y</span><span class="size-pill" onclick="togglePill(this)">1.5Y</span><span class="size-pill" onclick="togglePill(this)">2Y</span><span class="size-pill" onclick="togglePill(this)">2.5Y</span><span class="size-pill" onclick="togglePill(this)">3Y</span><span class="size-pill" onclick="togglePill(this)">3.5Y</span><span class="size-pill" onclick="togglePill(this)">4Y</span><span class="size-pill" onclick="togglePill(this)">4.5Y</span><span class="size-pill" onclick="togglePill(this)">5Y</span><span class="size-pill" onclick="togglePill(this)">5.5Y</span><span class="size-pill" onclick="togglePill(this)">6Y</span><span class="size-pill" onclick="togglePill(this)">6.5Y</span><span class="size-pill" onclick="togglePill(this)">7Y</span></div></div></div>
+    <div class="filter-group"><div class="filter-header" onclick="toggleGroup(this)"><h3>Clothing Size</h3><span class="toggle">+</span></div><div class="filter-body hidden"><div style="font-size:9px;color:#444;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Adult</div><div class="size-pills" style="margin-bottom:12px"><span class="size-pill" onclick="togglePill(this)">XS</span><span class="size-pill" onclick="togglePill(this)">S</span><span class="size-pill" onclick="togglePill(this)">M</span><span class="size-pill" onclick="togglePill(this)">L</span><span class="size-pill" onclick="togglePill(this)">XL</span><span class="size-pill" onclick="togglePill(this)">2XL</span><span class="size-pill" onclick="togglePill(this)">3XL</span></div><div style="font-size:9px;color:#444;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Youth</div><div class="size-pills"><span class="size-pill" onclick="togglePill(this)">YXS</span><span class="size-pill" onclick="togglePill(this)">YS</span><span class="size-pill" onclick="togglePill(this)">YM</span><span class="size-pill" onclick="togglePill(this)">YL</span><span class="size-pill" onclick="togglePill(this)">YXL</span></div></div></div>
+    <div class="filter-group"><div class="filter-header" onclick="toggleGroup(this)"><h3>Price Range</h3><span class="toggle">+</span></div><div class="filter-body hidden"><label class="filter-option"><input type="checkbox" data-filter="price" value="0-100" onchange="applyFilters()"><span class="cb"></span><span>Under $100</span></label><label class="filter-option"><input type="checkbox" data-filter="price" value="100-250" onchange="applyFilters()"><span class="cb"></span><span>$100 – $250</span></label><label class="filter-option"><input type="checkbox" data-filter="price" value="250-500" onchange="applyFilters()"><span class="cb"></span><span>$250 – $500</span></label><label class="filter-option"><input type="checkbox" data-filter="price" value="500-99999" onchange="applyFilters()"><span class="cb"></span><span>$500+</span></label></div></div>
+    <button class="clear-btn" onclick="clearFilters()">Clear All Filters</button>
+  </div>
+  <div>
+    <div class="grid-top"><div class="active-filters" id="activeTags"></div></div>
+    <div class="product-grid" id="productGrid">
+      <div class="product-card" data-condition="new" data-price="480" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot "></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Traxedo Pant</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$480</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="280" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Cigar Label Tee</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$280</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="380" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Raceday Short</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$380</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="295" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot "></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Chevron Eagle Tee</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$295</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="520" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Crewneck</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$520</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="580" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Traxedo Jacket</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$580</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="260" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot "></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Bandana Tee</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$260</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="420" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Moonlight Short</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$420</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="595" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Logo Hoodie</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$595</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="480" data-shoesize="28,30,32,34">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot "></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Denim Jean</div>
+          <div class="card-size">28 / 30 / 32 / 34</div>
+          <div class="card-price">$480</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="780" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Racing Jacket</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$780</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="used" data-price="275" data-clothingsize="M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-used">Used</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Palm Logo Tee</div>
+          <div class="card-size">M / L / XL</div>
+          <div class="card-price">$275</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="95" data-clothingsize="One Size">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot "></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Cap</div>
+          <div class="card-size">One Size</div>
+          <div class="card-price">$95</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="350" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Ruched Short</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$350</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="560" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Graphic Hoodie</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$560</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="295" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot "></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Long Sleeve</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$295</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="620" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Zip Up Jacket</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$620</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="265" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude American Flag Tee</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$265</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="460" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot "></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Track Pant</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$460</div>
+        </div>
+      </div>
+      <div class="product-card" data-condition="new" data-price="280" data-clothingsize="S,M,L,XL">
+        <div class="card-img-wrap">
+          <div class="placeholder-img">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Add Image</span>
+          </div>
+          <span class="card-badge badge-new">New</span>
+          <div class="stock-dot green"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Rhude</div>
+          <div class="card-name">Rhude Swim Short</div>
+          <div class="card-size">S / M / L / XL</div>
+          <div class="card-price">$280</div>
+        </div>
+      </div>
+      <div class="no-results" id="noResults" style="display:none"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>No items match your filters.</p></div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <img src="logo.png" class="footer-logo-img" alt="BoUnit NYC">
+        <div class="footer-brand-name">BOUNIT<span>NYC</span></div>
+        <div class="footer-tagline">Authentic streetwear and sneakers. Verified products, zero compromises.</div>
+        <div class="footer-socials">
+          <a class="footer-social" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a class="footer-social" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+          <a class="footer-social" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <div class="footer-links"><a href="index.html">Home</a><a href="sneakers.html">Shop All</a><a href="index.html">New Arrivals</a><a href="mailto:support@bounitnyc.com">Contact Us</a></div>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <div class="footer-links"><a href="refund.html">Refund Policy</a><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a></div>
+        <div class="footer-contact">
+          <div class="footer-contact-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>support@bounitnyc.com</div>
+          <div class="footer-contact-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>New York City, NY</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 <span>BoUnitNYC</span> · All Rights Reserved · Est. 2023</div>
+      <div class="footer-badges"><span class="footer-badge">100% Authentic</span><span class="footer-badge">Verified</span><span class="footer-badge">SSL Secure</span></div>
+    </div>
+  </div>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<script>
+/* ── STATE ── */
+let activeSort='featured';
+let activeShoeSizes=[];
+let activeClothingSizes=[];
+
+/* ── SIDEBAR TOGGLE (mobile) ── */
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+  document.body.style.overflow=document.getElementById('sidebar').classList.contains('open')?'hidden':'';
+}
+
+/* ── FILTER GROUP ACCORDION ── */
+function toggleGroup(header){
+  header.classList.toggle('open');
+  const body=header.nextElementSibling;
+  body.classList.toggle('hidden');
+}
+
+/* ── SORT ── */
+function setSort(type,btn){
+  activeSort=type;
+  document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+/* ── SIZE PILLS ── */
+function togglePill(el,type){
+  el.classList.toggle('active');
+  if(type==='shoeSize'){
+    activeShoeSizes=Array.from(document.querySelectorAll('#shoe-pills .size-pill.active')).map(p=>p.textContent);
+    // also grab youth sizes
+    document.querySelectorAll('.size-pill.active').forEach(p=>{
+      if(!activeShoeSizes.includes(p.textContent))activeShoeSizes.push(p.textContent);
+    });
+  }
+  if(type==='clothingSize'){
+    activeClothingSizes=Array.from(document.querySelectorAll('.size-pill.active')).map(p=>p.textContent);
+  }
+  applyFilters();
+}
+
+/* ── APPLY FILTERS ── */
+function applyFilters(){
+  const condChecked=Array.from(document.querySelectorAll('input[data-filter="condition"]:checked')).map(i=>i.value);
+  const priceChecked=Array.from(document.querySelectorAll('input[data-filter="price"]:checked')).map(i=>i.value);
+  const shoeSizes=Array.from(document.querySelectorAll('.size-pill.active')).map(p=>p.textContent);
+
+  const cards=Array.from(document.querySelectorAll('.product-card'));
+  let visible=[];
+
+  cards.forEach(card=>{
+    const cond=card.dataset.condition;
+    const price=parseFloat(card.dataset.price);
+    const sizes=(card.dataset.shoesize||'').split(',');
+
+    let show=true;
+
+    // condition filter
+    if(condChecked.length&&!condChecked.includes(cond))show=false;
+
+    // price filter
+    if(priceChecked.length){
+      const inRange=priceChecked.some(r=>{
+        const[min,max]=r.split('-').map(Number);
+        return price>=min&&price<=max;
+      });
+      if(!inRange)show=false;
+    }
+
+    // shoe size filter
+    if(shoeSizes.length){
+      const hasSize=shoeSizes.some(s=>sizes.includes(s));
+      if(!hasSize)show=false;
+    }
+
+    card.classList.toggle('hidden',!show);
+    if(show)visible.push(card);
+  });
+
+  // sort
+  const grid=document.getElementById('productGrid');
+  if(activeSort!=='featured'){
+    visible.sort((a,b)=>{
+      const pa=parseFloat(a.dataset.price),pb=parseFloat(b.dataset.price);
+      if(activeSort==='low-high')return pa-pb;
+      if(activeSort==='high-low')return pb-pa;
+      return 0;
+    });
+    visible.forEach(c=>grid.appendChild(c));
+  }
+
+  // update count
+  document.getElementById('countDisplay').textContent=visible.length;
+  document.getElementById('noResults').style.display=visible.length?'none':'grid';
+
+  // update active tags
+  updateTags(condChecked,priceChecked,shoeSizes);
+}
+
+/* ── ACTIVE FILTER TAGS ── */
+function updateTags(conds,prices,sizes){
+  const container=document.getElementById('activeTags');
+  container.innerHTML='';
+  const add=(label,clearFn)=>{
+    const tag=document.createElement('div');
+    tag.className='active-tag';
+    tag.innerHTML=`${label} <span class="x">✕</span>`;
+    tag.onclick=clearFn;
+    container.appendChild(tag);
+  };
+  conds.forEach(c=>add(c==='new'?'New':'Used',()=>{
+    document.querySelector(`input[value="${c}"]`).checked=false;applyFilters();
+  }));
+  prices.forEach(p=>{
+    const[min,max]=p.split('-');
+    const label=max==='99999'?`$${min}+`:`$${min}–$${max}`;
+    add(label,()=>{document.querySelector(`input[value="${p}"]`).checked=false;applyFilters();});
+  });
+  sizes.forEach(s=>add(`Size ${s}`,()=>{
+    document.querySelectorAll('.size-pill').forEach(p=>{if(p.textContent===s)p.classList.remove('active')});
+    applyFilters();
+  }));
+}
+
+/* ── CLEAR ALL ── */
+function clearFilters(){
+  document.querySelectorAll('input[type=checkbox]').forEach(i=>i.checked=false);
+  document.querySelectorAll('.size-pill').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.sort-btn').classList.add('active');
+  activeSort='featured';
+  activeShoeSizes=[];activeClothingSizes=[];
+  applyFilters();
+}
+</script>
+</body>
+</html>

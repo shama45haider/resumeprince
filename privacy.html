@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — BoUnitNYC</title>
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#0a0a12;color:#fff;overflow-x:hidden}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:0 32px;height:60px;background:rgba(8,8,18,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:200}
+.nav-logo{height:44px}
+.nav-back{display:flex;align-items:center;gap:8px;color:#8892b0;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:color .2s}
+.nav-back:hover{color:#fff}
+.nav-back svg{transition:transform .2s}
+.nav-back:hover svg{transform:translateX(-3px)}
+.policy-wrap{max-width:780px;margin:0 auto;padding:48px 32px 80px}
+.policy-title{font-size:32px;font-weight:800;letter-spacing:-.5px;margin-bottom:32px;background:linear-gradient(135deg,#fff,#8892b0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.policy-wrap h2{font-size:16px;font-weight:700;letter-spacing:.3px;color:#fff;margin:28px 0 10px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06)}
+.policy-wrap p{font-size:13px;color:#666;line-height:1.85;margin-bottom:12px}
+.policy-wrap a{color:#2f7cff;text-decoration:none}
+.policy-wrap a:hover{text-decoration:underline}
+@media(max-width:768px){.nav{padding:0 16px}.policy-wrap{padding:32px 16px 60px}.policy-title{font-size:24px}}
+
+
+/* ── FOOTER ── */
+.footer{background:linear-gradient(180deg,#080812 0%,#000 100%);border-top:1px solid rgba(47,124,255,0.15);position:relative;overflow:hidden}
+.footer::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(90deg,transparent,rgba(47,124,255,0.6),transparent)}
+.footer::after{content:"";position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:600px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(47,124,255,0.05),transparent 70%);pointer-events:none}
+.footer-inner{position:relative;z-index:1;padding:36px 32px 20px}
+.footer-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:20px}
+.footer-logo-img{width:80px;filter:drop-shadow(0 0 16px rgba(47,124,255,0.3));margin-bottom:10px}
+.footer-brand-name{font-size:15px;font-weight:800;letter-spacing:1px;margin-bottom:4px}
+.footer-brand-name span{color:#2f7cff}
+.footer-tagline{font-size:11px;color:#444;letter-spacing:.5px;line-height:1.6;max-width:200px}
+.footer-col-title{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#2f7cff;margin-bottom:12px}
+.footer-links{display:flex;flex-direction:column;gap:8px}
+.footer-links a{font-size:12px;color:#666;text-decoration:none;letter-spacing:.3px;transition:color .2s;display:flex;align-items:center;gap:6px}
+.footer-links a::before{content:"";width:4px;height:4px;border-radius:50%;background:rgba(47,124,255,0.4);flex-shrink:0;transition:background .2s}
+.footer-links a:hover{color:#fff}
+.footer-links a:hover::before{background:#2f7cff}
+.footer-contact{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.footer-contact-item{display:flex;align-items:center;gap:8px;font-size:12px;color:#666}
+.footer-contact-item svg{flex-shrink:0;color:#2f7cff;opacity:.7}
+.footer-socials{display:flex;gap:8px;margin-top:14px}
+.footer-social{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#666;transition:.22s;text-decoration:none}
+.footer-social:hover{background:rgba(47,124,255,0.15);border-color:rgba(47,124,255,0.4);color:#fff;transform:translateY(-2px)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-copy{font-size:10px;color:#333;letter-spacing:.8px;text-transform:uppercase}
+.footer-copy span{color:#2f7cff}
+.footer-badges{display:flex;gap:6px}
+.footer-badge{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:5px;background:rgba(47,124,255,0.07);border:1px solid rgba(47,124,255,0.15);color:#4a7acc}
+@media(max-width:768px){.footer-top{grid-template-columns:1fr;gap:24px}.footer-bottom{flex-direction:column;align-items:flex-start;gap:12px}}
+
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back
+  </a>
+  <img src="logo.png" class="nav-logo" alt="BoUnit NYC">
+  <button class="nav-cart" onclick="window.location.href='index.html'">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    Cart
+  </button>
+</div>
+
+<div class="policy-wrap">
+
+<h1 class="policy-title">Privacy Policy</h1>
+<p>BoUnitNYC respects your privacy and is committed to protecting your personal data.</p>
+<h2>Information We Collect</h2>
+<p>We collect information you provide when placing an order, including your name, email address, shipping address, and payment details. Payment information is processed securely and never stored on our servers.</p>
+<h2>How We Use Your Information</h2>
+<p>Your information is used solely to fulfill your order, communicate with you about your purchase, and improve our services. We do not sell or share your data with third parties for marketing purposes.</p>
+<h2>Cookies</h2>
+<p>Our website may use cookies to improve your browsing experience. You can disable cookies in your browser settings at any time.</p>
+<h2>Security</h2>
+<p>We use industry-standard SSL encryption to protect your data during transmission.</p>
+<h2>Contact</h2>
+<p>If you have questions about our privacy practices, contact us at <a href="mailto:support@bounitnyc.com">support@bounitnyc.com</a>.</p>
+
+</div>
+
+<div class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <img src="logo.png" class="footer-logo-img" alt="BoUnit NYC">
+        <div class="footer-brand-name">BOUNIT<span>NYC</span></div>
+        <div class="footer-tagline">Authentic streetwear and sneakers. Verified products, zero compromises.</div>
+        <div class="footer-socials">
+          <a class="footer-social" href="#" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a class="footer-social" href="#" title="TikTok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+          <a class="footer-social" href="#" title="X/Twitter"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="index.html">Shop All</a>
+          <a href="index.html">New Arrivals</a>
+          <a href="mailto:support@bounitnyc.com">Contact Us</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <div class="footer-links">
+          <a href="refund.html">Refund Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy Policy</a>
+        </div>
+        <div class="footer-contact">
+          <div class="footer-contact-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>support@bounitnyc.com</div>
+          <div class="footer-contact-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>New York City, NY</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 <span>BoUnitNYC</span> · All Rights Reserved · Est. 2023</div>
+      <div class="footer-badges">
+        <span class="footer-badge">100% Authentic</span>
+        <span class="footer-badge">Verified</span>
+        <span class="footer-badge">SSL Secure</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
