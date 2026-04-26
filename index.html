@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,12 +20,13 @@ img,video{display:block;max-width:100%}
 .tick::before,.tick::after{content:"|";color:rgba(47,124,255,0.45);margin:0 12px;font-size:10px;vertical-align:middle;font-weight:300}
 
 /* ── NAV DESKTOP ── */
-.nav{display:flex;justify-content:space-between;align-items:center;padding:0 24px;height:60px;background:rgba(8,8,18,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:500;transition:height .3s,background .3s}
-.nav.scrolled{height:50px;background:rgba(4,4,12,0.97);border-bottom-color:rgba(47,124,255,0.18);box-shadow:0 8px 32px rgba(0,0,0,0.7)}
-.nav-left,.nav-right{display:flex;gap:4px;align-items:center}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:0 24px;height:72px;background:rgba(8,8,18,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:500;transition:height .3s,background .3s}
+.nav.scrolled{height:56px;background:rgba(4,4,12,0.97);border-bottom-color:rgba(47,124,255,0.18);box-shadow:0 8px 32px rgba(0,0,0,0.7)}
+.nav-left{display:flex;gap:4px;align-items:center;flex:1}
+.nav-right{display:flex;gap:8px;align-items:center;flex:1;justify-content:flex-end}
 .nav-center{position:absolute;left:50%;transform:translateX(-50%)}
-.logo{height:58px;transition:height .3s}
-.nav.scrolled .logo{height:44px}
+.logo{height:72px;transition:height .3s}
+.nav.scrolled .logo{height:52px}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:10}
 .hamburger span{display:block;width:22px;height:2px;background:#8892b0;border-radius:2px;transition:.25s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -276,15 +278,159 @@ img,video{display:block;max-width:100%}
 .scroll-line{width:1px;height:32px;background:linear-gradient(180deg,rgba(47,124,255,0.8),transparent);animation:scrollAnim 2s ease-in-out infinite}
 @keyframes scrollAnim{0%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(0);transform-origin:bottom}}
 
-/* ── BRANDS ── */
+/* ── BRANDS STRIP (redesigned) ── */
+.brands-strip{
+  position:relative;
+  background:linear-gradient(90deg,#06060f 0%,#0a0a18 50%,#06060f 100%);
+  border-top:1px solid rgba(47,124,255,0.18);
+  border-bottom:1px solid rgba(47,124,255,0.18);
+  overflow:hidden;
+}
+/* shimmer line top */
+.brands-strip::before{
+  content:"";position:absolute;top:0;left:-100%;
+  width:55%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(47,124,255,0.7),transparent);
+  animation:shimmer 3.5s linear infinite;
+}
+.brands-strip-inner{
+  max-width:1300px;margin:0 auto;
+  display:flex;align-items:stretch;
+  height:64px;
+}
+.brands-strip-heading{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 20px 0 24px;
+  border-right:1px solid rgba(47,124,255,0.15);
+  flex-shrink:0;gap:2px;
+  background:rgba(47,124,255,0.04);
+}
+.brands-strip-heading-top{
+  font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#2f7cff;opacity:.8;
+}
+.brands-strip-heading-bottom{
+  font-size:13px;font-weight:800;letter-spacing:.3px;color:#fff;white-space:nowrap;
+}
+.brands-pill-row{
+  display:flex;align-items:center;gap:10px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;flex:1;padding:0 20px;
+}
+.brands-pill-row::-webkit-scrollbar{display:none}
+.brand-pill{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 16px 8px 8px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:12px;cursor:pointer;
+  transition:all .22s ease;
+  white-space:nowrap;flex-shrink:0;
+  font-family:'Poppins',sans-serif;
+  position:relative;overflow:hidden;
+}
+.brand-pill::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(47,124,255,0.08),transparent);
+  opacity:0;transition:opacity .22s;
+}
+.brand-pill:hover::before{opacity:1}
+.brand-pill-img-wrap{
+  width:36px;height:36px;border-radius:8px;overflow:hidden;flex-shrink:0;
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 0 10px rgba(0,0,0,0.4);
+}
+.brand-pill-img-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.75) saturate(.9);
+  transition:filter .22s,transform .22s;
+}
+.brand-pill-text{display:flex;flex-direction:column;gap:1px;text-align:left}
+.brand-pill-name{
+  font-size:11px;font-weight:700;letter-spacing:.4px;
+  text-transform:uppercase;color:#ccd6f6;
+  transition:color .22s;
+}
+.brand-pill-sub{
+  font-size:9px;color:#444;letter-spacing:.5px;text-transform:uppercase;
+}
+.brand-pill:hover{
+  background:rgba(47,124,255,0.1);
+  border-color:rgba(47,124,255,0.45);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(47,124,255,0.2);
+}
+.brand-pill:hover .brand-pill-img-wrap img{filter:brightness(1) saturate(1.1);transform:scale(1.05)}
+.brand-pill:hover .brand-pill-name{color:#fff}
+.brand-pill:hover .brand-pill-sub{color:#2f7cff}
+.brands-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#2f7cff;margin-bottom:3px}
+.brands-title{font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:2px}
+.brands-title span{color:#2f7cff}
+.brands-sub{font-size:11px;color:#444;letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px}
 .brands-wrap{position:relative;max-width:1100px;margin:0 auto}
-.brands{display:flex;gap:12px;overflow-x:auto;scroll-behavior:smooth;padding:4px 50px;-webkit-overflow-scrolling:touch}
+
+/* fade edges */
+.brands-wrap::before,.brands-wrap::after{content:"";position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+.brands-wrap::before{left:0;background:linear-gradient(90deg,#0f0f14,transparent)}
+.brands-wrap::after{right:0;background:linear-gradient(270deg,#0f0f14,transparent)}
+
+.brands{display:flex;gap:14px;overflow-x:auto;scroll-behavior:smooth;padding:4px 24px 6px;-webkit-overflow-scrolling:touch}
 .brands::-webkit-scrollbar{display:none}
-.brand-card{min-width:190px;flex-shrink:0;position:relative;border-radius:10px;overflow:hidden;cursor:pointer;transition:.3s;border:1px solid rgba(255,255,255,0.06)}
-.brand-card img{width:100%;height:100px;object-fit:cover;filter:brightness(.62);transition:.3s}
-.brand-card span{position:absolute;bottom:8px;left:12px;font-weight:700;font-size:13px;letter-spacing:.5px;text-shadow:0 2px 8px rgba(0,0,0,0.9)}
-.brand-card:hover img{transform:scale(1.07);filter:brightness(.88)}
-.brand-card:hover{box-shadow:0 12px 40px rgba(47,124,255,0.2);border-color:rgba(47,124,255,0.2)}
+
+.brand-card{
+  min-width:200px;flex-shrink:0;position:relative;border-radius:14px;overflow:hidden;cursor:pointer;
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+  border:1px solid rgba(255,255,255,0.07);
+  background:#0d0d1a;
+}
+/* animated blue glow border on hover */
+.brand-card::before{
+  content:"";position:absolute;inset:0;border-radius:14px;
+  background:linear-gradient(135deg,rgba(47,124,255,0.4),rgba(47,124,255,0));
+  opacity:0;transition:opacity .3s;z-index:1;pointer-events:none;
+}
+.brand-card:hover::before{opacity:1}
+.brand-card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 20px 50px rgba(47,124,255,0.3),0 0 0 1px rgba(47,124,255,0.3);
+  border-color:rgba(47,124,255,0.4);
+}
+
+.brand-card img{
+  width:100%;height:112px;object-fit:cover;
+  filter:brightness(.55) saturate(.8);
+  transition:filter .3s,transform .3s;
+  display:block;
+}
+.brand-card:hover img{filter:brightness(.8) saturate(1.1);transform:scale(1.08)}
+
+/* bottom info strip */
+.brand-card-info{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  background:linear-gradient(0deg,rgba(5,5,16,0.92) 0%,transparent 100%);
+  padding:22px 12px 11px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand-card-name{font-weight:800;font-size:13px;letter-spacing:.4px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.8)}
+.brand-card-arrow{
+  width:24px;height:24px;border-radius:50%;
+  background:rgba(47,124,255,0.2);border:1px solid rgba(47,124,255,0.4);
+  display:flex;align-items:center;justify-content:center;
+  color:#2f7cff;font-size:12px;
+  transform:translateX(-4px);opacity:0;
+  transition:transform .25s,opacity .25s;
+}
+.brand-card:hover .brand-card-arrow{transform:translateX(0);opacity:1}
+
+/* verified dot on each card */
+.brand-card-badge{
+  position:absolute;top:10px;right:10px;z-index:2;
+  background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);
+  border:1px solid rgba(47,124,255,0.3);
+  border-radius:6px;padding:3px 8px;
+  font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:#fff;display:flex;align-items:center;gap:4px;
+}
+.brand-card-badge-dot{width:5px;height:5px;border-radius:50%;background:#2f7cff;box-shadow:0 0 6px rgba(47,124,255,1)}
 
 /* ── NEW ARRIVALS ── */
 .arrivals-wrap{position:relative;max-width:1100px;margin:0 auto}
@@ -418,6 +564,12 @@ img,video{display:block;max-width:100%}
   .hamburger{display:flex}
   .nav{padding:0 16px}
   .mobile-menu{display:flex}
+  /* keep cart visible on mobile right side */
+  .cart-btn{display:flex}
+  .nav-right{gap:8px}
+
+  /* hide Shop By Brand on mobile */
+  .desktop-only-section{display:none !important}
 
   /* hero */
   .hero{min-height:70vh}
@@ -536,32 +688,30 @@ img,video{display:block;max-width:100%}
       <button class="nav-link">BRANDS <span class="chevron">▾</span></button>
       <div class="dropdown">
         <div class="dropdown-inner" style="min-width:230px;max-height:420px;overflow-y:auto">
-          <a class="dropdown-item" href="amiri.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Amiri</a>
-          <a class="dropdown-item" href="chromehearts.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Chrome Hearts</a>
-          <a class="dropdown-item" href="valleydreams.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Valley Dreams</a>
-          <a class="dropdown-item" href="dior.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Christian Dior</a>
-          <a class="dropdown-item" href="alo.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>ALO</a>
-          <a class="dropdown-item" href="nike.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Nike</a>
-          <a class="dropdown-item" href="ericemmanuel.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Eric Emanuel</a>
-          <a class="dropdown-item" href="givenchy.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Givenchy</a>
-          <a class="dropdown-item" href="essentials.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Essentials Fear of God</a>
-          <a class="dropdown-item" href="supreme.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Supreme</a>
-          <a class="dropdown-item" href="gallerydept.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Gallery Dept.</a>
-          <a class="dropdown-item" href="polo.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Polo Ralph Lauren</a>
-          <a class="dropdown-item" href="denimtears.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Denim Tears</a>
-          <a class="dropdown-item" href="lululemon.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Lululemon</a>
-          <a class="dropdown-item" href="travisscott.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Travis Scott</a>
-          <a class="dropdown-item" href="vlone.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Vlone</a>
-          <a class="dropdown-item" href="hellstar.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Hellstar</a>
-          <a class="dropdown-item" href="bape.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Bape</a>
-          <a class="dropdown-item" href="rhude.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Rhude</a>
-          <a class="dropdown-item" href="offwhite.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Off-White</a>
-          <a class="dropdown-item" href="godspeed.html" target="_blank"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Godspeed</a>
+          <a class="dropdown-item" href="amiri.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Amiri</a>
+          <a class="dropdown-item" href="chromehearts.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Chrome Hearts</a>
+          <a class="dropdown-item" href="valleydreams.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Valley Dreams</a>
+          <a class="dropdown-item" href="dior.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Christian Dior</a>
+          <a class="dropdown-item" href="alo.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>ALO</a>
+          <a class="dropdown-item" href="nike.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Nike</a>
+          <a class="dropdown-item" href="ericemmanuel.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Eric Emanuel</a>
+          <a class="dropdown-item" href="givenchy.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Givenchy</a>
+          <a class="dropdown-item" href="essentials.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Essentials Fear of God</a>
+          <a class="dropdown-item" href="supreme.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Supreme</a>
+          <a class="dropdown-item" href="gallerydept.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Gallery Dept.</a>
+          <a class="dropdown-item" href="polo.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Polo Ralph Lauren</a>
+          <a class="dropdown-item" href="denimtears.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Denim Tears</a>
+          <a class="dropdown-item" href="lululemon.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Lululemon</a>
+          <a class="dropdown-item" href="travisscott.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Travis Scott</a>
+          <a class="dropdown-item" href="vlone.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Vlone</a>
+          <a class="dropdown-item" href="hellstar.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Hellstar</a>
+          <a class="dropdown-item" href="bape.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Bape</a>
+          <a class="dropdown-item" href="rhude.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Rhude</a>
+          <a class="dropdown-item" href="offwhite.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Off-White</a>
+          <a class="dropdown-item" href="godspeed.html"><div class="d-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Godspeed</a>
         </div>
       </div>
     </div>
-    </div>
-
   </div>
 
   <div class="nav-center"><img src="logo.png" class="logo" alt="BoUnit NYC"></div>
@@ -596,7 +746,7 @@ img,video{display:block;max-width:100%}
       </button>
       <div class="mob-sub-list" id="mob-sneakers">
         <a class="mob-sub mob-sub-indent" href="#">Jordans</a>
-        <a class="mob-sub mob-sub-indent" href="nike.html" target="_blank">Nike</a>
+        <a class="mob-sub mob-sub-indent" href="nike.html">Nike</a>
         <a class="mob-sub mob-sub-indent" href="#">ASICS</a>
         <a class="mob-sub mob-sub-indent" href="#">Yeezy</a>
         <a class="mob-sub mob-sub-indent" href="#">UGGS</a>
@@ -611,27 +761,27 @@ img,video{display:block;max-width:100%}
       Brands <span class="mob-arrow">›</span>
     </button>
         <div class="mob-sub-list" id="mob-brands">
-      <a class="mob-sub" href="amiri.html" target="_blank">Amiri</a>
-      <a class="mob-sub" href="chromehearts.html" target="_blank">Chrome Hearts</a>
-      <a class="mob-sub" href="valleydreams.html" target="_blank">Valley Dreams</a>
-      <a class="mob-sub" href="dior.html" target="_blank">Christian Dior</a>
-      <a class="mob-sub" href="alo.html" target="_blank">ALO</a>
-      <a class="mob-sub" href="nike.html" target="_blank">Nike</a>
-      <a class="mob-sub" href="ericemmanuel.html" target="_blank">Eric Emanuel</a>
-      <a class="mob-sub" href="givenchy.html" target="_blank">Givenchy</a>
-      <a class="mob-sub" href="essentials.html" target="_blank">Essentials Fear of God</a>
-      <a class="mob-sub" href="supreme.html" target="_blank">Supreme</a>
-      <a class="mob-sub" href="gallerydept.html" target="_blank">Gallery Dept.</a>
-      <a class="mob-sub" href="polo.html" target="_blank">Polo Ralph Lauren</a>
-      <a class="mob-sub" href="denimtears.html" target="_blank">Denim Tears</a>
-      <a class="mob-sub" href="lululemon.html" target="_blank">Lululemon</a>
-      <a class="mob-sub" href="travisscott.html" target="_blank">Travis Scott</a>
-      <a class="mob-sub" href="vlone.html" target="_blank">Vlone</a>
-      <a class="mob-sub" href="hellstar.html" target="_blank">Hellstar</a>
-      <a class="mob-sub" href="bape.html" target="_blank">Bape</a>
-      <a class="mob-sub" href="rhude.html" target="_blank">Rhude</a>
-      <a class="mob-sub" href="offwhite.html" target="_blank">Off-White</a>
-      <a class="mob-sub" href="godspeed.html" target="_blank">Godspeed</a>
+      <a class="mob-sub" href="amiri.html">Amiri</a>
+      <a class="mob-sub" href="chromehearts.html">Chrome Hearts</a>
+      <a class="mob-sub" href="valleydreams.html">Valley Dreams</a>
+      <a class="mob-sub" href="dior.html">Christian Dior</a>
+      <a class="mob-sub" href="alo.html">ALO</a>
+      <a class="mob-sub" href="nike.html">Nike</a>
+      <a class="mob-sub" href="ericemmanuel.html">Eric Emanuel</a>
+      <a class="mob-sub" href="givenchy.html">Givenchy</a>
+      <a class="mob-sub" href="essentials.html">Essentials Fear of God</a>
+      <a class="mob-sub" href="supreme.html">Supreme</a>
+      <a class="mob-sub" href="gallerydept.html">Gallery Dept.</a>
+      <a class="mob-sub" href="polo.html">Polo Ralph Lauren</a>
+      <a class="mob-sub" href="denimtears.html">Denim Tears</a>
+      <a class="mob-sub" href="lululemon.html">Lululemon</a>
+      <a class="mob-sub" href="travisscott.html">Travis Scott</a>
+      <a class="mob-sub" href="vlone.html">Vlone</a>
+      <a class="mob-sub" href="hellstar.html">Hellstar</a>
+      <a class="mob-sub" href="bape.html">Bape</a>
+      <a class="mob-sub" href="rhude.html">Rhude</a>
+      <a class="mob-sub" href="offwhite.html">Off-White</a>
+      <a class="mob-sub" href="godspeed.html">Godspeed</a>
     </div>
       <a class="mob-sub" href="#">Lost Intricacy</a>
       <a class="mob-sub" href="#">Valley Dreams</a>
@@ -683,17 +833,55 @@ img,video{display:block;max-width:100%}
 </div>
 
 <!-- SHOP BY BRAND -->
-<div class="section" style="padding-top:6px;padding-bottom:6px">
-  <div class="section-header" style="margin-bottom:8px"><div><h2>Shop by Brand</h2></div></div>
-  <div class="brands-wrap">
-    <button class="slide-btn left" onclick="slideBrands(-1)">&#8249;</button>
-    <button class="slide-btn right" onclick="slideBrands(1)">&#8250;</button>
-    <div class="brands" id="brandsCarousel">
-      <div class="brand-card" onclick="window.open('nike.html','_blank')" style="cursor:pointer"><img src="nike1.png" alt="Nike"><span>Nike</span></div>
-      <div class="brand-card"><img src="amiri1.png" alt="Amiri"><span>Amiri</span></div>
-      <div class="brand-card"><img src="chrome1.png" alt="Chrome Hearts"><span>Chrome Hearts</span></div>
-      <div class="brand-card"><img src="vale1.png" alt="ValeForever"><span>ValeForever</span></div>
-      <div class="brand-card"><img src="eric1.png" alt="Eric Emanuel"><span>Eric Emanuel</span></div>
+<!-- SHOP BY BRAND -->
+<div class="desktop-only-section brands-strip">
+  <div class="brands-strip-inner">
+    <div class="brands-strip-heading">
+      <div class="brands-strip-heading-top">Browse</div>
+      <div class="brands-strip-heading-bottom">Shop by Brand</div>
+    </div>
+    <div class="brands-pill-row" id="brandsCarousel">
+
+      <button class="brand-pill" onclick="window.location.href='nike.html'">
+        <div class="brand-pill-img-wrap"><img src="nike1.png" alt="Nike"></div>
+        <div class="brand-pill-text">
+          <span class="brand-pill-name">Nike</span>
+          <span class="brand-pill-sub">Sneakers</span>
+        </div>
+      </button>
+
+      <button class="brand-pill" onclick="window.location.href='amiri.html'">
+        <div class="brand-pill-img-wrap"><img src="amiri1.png" alt="Amiri"></div>
+        <div class="brand-pill-text">
+          <span class="brand-pill-name">Amiri</span>
+          <span class="brand-pill-sub">Clothing</span>
+        </div>
+      </button>
+
+      <button class="brand-pill" onclick="window.location.href='chromehearts.html'">
+        <div class="brand-pill-img-wrap"><img src="chrome1.png" alt="Chrome Hearts"></div>
+        <div class="brand-pill-text">
+          <span class="brand-pill-name">Chrome Hearts</span>
+          <span class="brand-pill-sub">Accessories</span>
+        </div>
+      </button>
+
+      <button class="brand-pill" onclick="window.location.href='valeforever.html'">
+        <div class="brand-pill-img-wrap"><img src="vale1.png" alt="ValeForever"></div>
+        <div class="brand-pill-text">
+          <span class="brand-pill-name">ValeForever</span>
+          <span class="brand-pill-sub">Clothing</span>
+        </div>
+      </button>
+
+      <button class="brand-pill" onclick="window.location.href='ericemmanuel.html'">
+        <div class="brand-pill-img-wrap"><img src="eric1.png" alt="Eric Emanuel"></div>
+        <div class="brand-pill-text">
+          <span class="brand-pill-name">Eric Emanuel</span>
+          <span class="brand-pill-sub">Shorts</span>
+        </div>
+      </button>
+
     </div>
   </div>
 </div>
@@ -748,11 +936,15 @@ img,video{display:block;max-width:100%}
     <button class="slide-btn left" onclick="slideLeft()">&#8249;</button>
     <button class="slide-btn right" onclick="slideRight()">&#8250;</button>
     <div class="arrivals" id="arrivals">
-      <div class="arrival-card" onclick="window.open('chrometrucker.html','_blank')" style="cursor:pointer"><img src="chtrucker.jpeg" alt="Chrome Hearts Trucker"><div class="arrival-info">Chrome Hearts Trucker</div></div>
+      <div class="arrival-card" onclick="window.location.href='chrometrucker.html'" style="cursor:pointer"><img src="chtrucker.jpeg" alt="Chrome Hearts Trucker"><div class="arrival-info">Chrome Hearts Trucker</div></div>
       <div class="arrival-card"><img src="jorts.jpeg" alt="Denim Jorts"><div class="arrival-info">Denim Jorts</div></div>
-      <div class="arrival-card" onclick="window.open('flugame.html','_blank')" style="cursor:pointer"><img src="flugame.jpeg" alt="Jordan 12 Flu Game"><div class="arrival-info">Jordan 12 Flu Game</div></div>
+      <div class="arrival-card" onclick="window.location.href='flugame.html'" style="cursor:pointer"><img src="flugame.jpeg" alt="Jordan 12 Flu Game"><div class="arrival-info">Jordan 12 Flu Game</div></div>
       <div class="arrival-card"><img src="asics.jpeg" alt="ASICS Runner"><div class="arrival-info">ASICS Runner</div></div>
       <div class="arrival-card"><img src="supreme.jpeg" alt="Supreme Piece"><div class="arrival-info">Supreme Piece</div></div>
+      <div class="arrival-card"><img src="new1.jpeg" alt="New Item"><div class="arrival-info">Add Item Here</div></div>
+      <div class="arrival-card"><img src="new2.jpeg" alt="New Item"><div class="arrival-info">Add Item Here</div></div>
+      <div class="arrival-card"><img src="new3.jpeg" alt="New Item"><div class="arrival-info">Add Item Here</div></div>
+      <div class="arrival-card"><img src="new4.jpeg" alt="New Item"><div class="arrival-info">Add Item Here</div></div>
     </div>
   </div>
 </div>
@@ -829,7 +1021,7 @@ img,video{display:block;max-width:100%}
         </button>
         <div class="video-meta">
           <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
-          <a class="ig-handle" href="https://instagram.com/jaydot_geek" target="_blank" rel="noopener">
+          <a class="ig-handle" href="https://instagram.com/jaydot_geek" rel="noopener">
             <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
             <span class="ig-name">@jaydot_geek</span>
           </a>
@@ -843,7 +1035,7 @@ img,video{display:block;max-width:100%}
         </button>
         <div class="video-meta">
           <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
-          <a class="ig-handle" href="https://instagram.com/jayguapo65" target="_blank" rel="noopener">
+          <a class="ig-handle" href="https://instagram.com/jayguapo65" rel="noopener">
             <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
             <span class="ig-name">@jayguapo65</span>
           </a>
@@ -857,7 +1049,7 @@ img,video{display:block;max-width:100%}
         </button>
         <div class="video-meta">
           <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
-          <a class="ig-handle" href="https://instagram.com/ndot_spinalot47" target="_blank" rel="noopener">
+          <a class="ig-handle" href="https://instagram.com/ndot_spinalot47" rel="noopener">
             <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
             <span class="ig-name">@ndot_spinalot47</span>
           </a>
@@ -871,7 +1063,7 @@ img,video{display:block;max-width:100%}
         </button>
         <div class="video-meta">
           <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
-          <a class="ig-handle" href="https://instagram.com/nycjahh_" target="_blank" rel="noopener">
+          <a class="ig-handle" href="https://instagram.com/nycjahh_" rel="noopener">
             <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
             <span class="ig-name">@nycjahh_</span>
           </a>
@@ -885,7 +1077,7 @@ img,video{display:block;max-width:100%}
         </button>
         <div class="video-meta">
           <div class="verified"><div class="verified-dot"></div>Verified Buyer</div>
-          <a class="ig-handle" href="https://instagram.com/adamnkilla" target="_blank" rel="noopener">
+          <a class="ig-handle" href="https://instagram.com/adamnkilla" rel="noopener">
             <div class="ig-logo"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
             <span class="ig-name">@adamnkilla</span>
           </a>
