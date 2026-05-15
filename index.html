@@ -1,331 +1,312 @@
-export default function EastVillageBuyers() {
-  const categories = [
-    {
-      title: 'Gold',
-      subtitle: 'Chains, rings, bracelets & scrap gold',
-      image:
-        'https://images.unsplash.com/photo-1610375461369-d613b5647f66?q=80&w=1200&auto=format&fit=crop',
-    },
-    {
-      title: 'Silver',
-      subtitle: 'Sterling silver jewelry & coins',
-      image:
-        'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1200&auto=format&fit=crop',
-    },
-    {
-      title: 'Watches',
-      subtitle: 'Rolex, AP, Cartier, Omega & more',
-      image:
-        'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=1200&auto=format&fit=crop',
-    },
-    {
-      title: 'Sneakers',
-      subtitle: 'Jordan, Nike, Yeezy & designer pairs',
-      image:
-        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop',
-    },
-    {
-      title: 'Designer Bags',
-      subtitle: 'Louis Vuitton, Chanel, Gucci & more',
-      image:
-        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1200&auto=format&fit=crop',
-    },
-    {
-      title: 'Clothing',
-      subtitle: 'Streetwear, designer & vintage pieces',
-      image:
-        'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200&auto=format&fit=crop',
-    },
-  ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>East Village Buyers</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#f8f5f0] text-black font-sans">
 
-  const gallery = [
-    'https://images.unsplash.com/photo-1523398002811-999ca8dec234?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop',
-  ];
+  <!-- TOP BAR -->
+  <div class="bg-orange-500 text-white text-sm py-2 px-6 flex justify-between">
+    <div class="flex gap-6">
+      <span>NYC BASED</span>
+      <span>TRUSTED SINCE DAY ONE</span>
+    </div>
 
-  return (
-    <div className="bg-[#f8f5f0] text-black min-h-screen font-sans">
-      {/* Top Bar */}
-      <div className="bg-[#f59e0b] text-white text-sm py-2 px-6 flex justify-between items-center tracking-wide">
-        <div className="flex gap-6">
-          <span>NYC BASED</span>
-          <span>TRUSTED SINCE DAY ONE</span>
-        </div>
-        <div className="flex gap-6">
-          <span>TOP DOLLAR PAID</span>
-          <span>FAST & SECURE PAYMENTS</span>
+    <div class="flex gap-6">
+      <span>TOP DOLLAR PAID</span>
+      <span>FAST & SECURE PAYMENTS</span>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="bg-white px-10 py-5 flex justify-between items-center border-b border-black/10 sticky top-0 z-50">
+
+    <div class="text-3xl font-black uppercase leading-none">
+      <span class="text-orange-500">East</span><br>
+      <span>Village</span><br>
+      <span class="text-orange-500">Buyers</span>
+    </div>
+
+    <div class="hidden md:flex gap-10 uppercase font-semibold text-sm">
+      <a href="#">Buy</a>
+      <a href="#">Sell</a>
+      <a href="#">Trade</a>
+      <a href="#">Consign</a>
+      <a href="#">Shop</a>
+      <a href="#">About</a>
+    </div>
+
+    <button class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold uppercase text-sm">
+      Request Quote
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="grid lg:grid-cols-2 gap-12 items-center px-10 lg:px-20 py-16">
+
+    <div>
+      <p class="uppercase text-orange-500 font-semibold tracking-widest mb-5">
+        Buy. Sell. Trade. Consign.
+      </p>
+
+      <h1 class="text-6xl lg:text-8xl font-black uppercase leading-[0.9] mb-6">
+        East Village Buyers
+      </h1>
+
+      <p class="text-lg text-black/70 leading-relaxed max-w-lg mb-8">
+        We buy designer products, iconic sneakers, jewelry, watches, scrap gold and more.
+      </p>
+
+      <div class="flex gap-4 flex-wrap">
+        <button class="bg-orange-500 text-white px-8 py-4 rounded-xl font-semibold uppercase">
+          Request Quote
+        </button>
+
+        <button class="border border-black px-8 py-4 rounded-xl font-semibold uppercase">
+          Visit Store
+        </button>
+      </div>
+    </div>
+
+    <div class="rounded-[30px] overflow-hidden shadow-2xl h-[600px]">
+      <img
+        src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1600&auto=format&fit=crop"
+        class="w-full h-full object-cover"
+      >
+    </div>
+
+  </section>
+
+  <!-- WHAT WE BUY -->
+  <section class="px-10 lg:px-20 py-10">
+
+    <div class="flex justify-between items-center mb-10">
+      <div>
+        <h2 class="text-4xl font-black uppercase mb-2">What We Buy</h2>
+        <p class="text-black/60">
+          Top dollar paid for authentic products and precious metals.
+        </p>
+      </div>
+
+      <button class="uppercase text-sm font-semibold border-b border-black pb-1">
+        View All
+      </button>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+
+      <div class="bg-white rounded-[24px] overflow-hidden shadow-md">
+        <img src="https://images.unsplash.com/photo-1610375461369-d613b5647f66?q=80&w=1200&auto=format&fit=crop" class="h-48 w-full object-cover">
+        <div class="p-5">
+          <h3 class="font-black uppercase text-xl mb-2">Gold</h3>
+          <p class="text-black/60 text-sm">Chains, rings, bracelets & scrap gold.</p>
         </div>
       </div>
 
-      {/* Navbar */}
-      <nav className="bg-white border-b border-black/5 px-8 lg:px-14 py-5 flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-4">
-          <div className="text-3xl font-black leading-none uppercase">
-            <span className="text-[#f59e0b]">East</span>
-            <br />
-            <span>Village</span>
-            <br />
-            <span className="text-[#f59e0b]">Buyers</span>
-          </div>
+      <div class="bg-white rounded-[24px] overflow-hidden shadow-md">
+        <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=1200&auto=format&fit=crop" class="h-48 w-full object-cover">
+        <div class="p-5">
+          <h3 class="font-black uppercase text-xl mb-2">Watches</h3>
+          <p class="text-black/60 text-sm">Rolex, AP, Cartier, Omega & more.</p>
         </div>
+      </div>
 
-        <div className="hidden lg:flex gap-10 font-semibold uppercase text-sm tracking-wide">
-          <a href="#">Buy</a>
-          <a href="#">Sell</a>
-          <a href="#">Trade</a>
-          <a href="#">Consign</a>
-          <a href="#">Shop</a>
-          <a href="#">About</a>
+      <div class="bg-white rounded-[24px] overflow-hidden shadow-md">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop" class="h-48 w-full object-cover">
+        <div class="p-5">
+          <h3 class="font-black uppercase text-xl mb-2">Sneakers</h3>
+          <p class="text-black/60 text-sm">Jordan, Nike, Yeezy & designer pairs.</p>
         </div>
+      </div>
 
-        <button className="bg-[#f59e0b] text-white px-6 py-3 rounded-md font-semibold uppercase text-sm hover:opacity-90 transition">
-          Request Quote
-        </button>
-      </nav>
-
-      {/* Hero */}
-      <section className="grid lg:grid-cols-2 items-center px-8 lg:px-16 py-14 gap-10 overflow-hidden">
-        <div className="max-w-xl">
-          <p className="uppercase text-[#f59e0b] tracking-widest text-sm font-semibold mb-5">
-            Buy. Sell. Trade. Consign.
-          </p>
-
-          <h1 className="text-6xl lg:text-8xl font-black leading-[0.9] uppercase mb-6">
-            East Village Buyers
-          </h1>
-
-          <p className="text-lg text-black/70 leading-relaxed mb-8 max-w-md">
-            We buy designer products, iconic sneakers, jewelry, watches,
-            scrap gold and more.
-          </p>
-
-          <div className="flex gap-4">
-            <button className="bg-[#f59e0b] text-white px-8 py-4 rounded-md font-semibold uppercase tracking-wide hover:opacity-90 transition">
-              Request Quote
-            </button>
-
-            <button className="border border-black px-8 py-4 rounded-md font-semibold uppercase tracking-wide hover:bg-black hover:text-white transition">
-              Visit Store
-            </button>
-          </div>
+      <div class="bg-white rounded-[24px] overflow-hidden shadow-md">
+        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1200&auto=format&fit=crop" class="h-48 w-full object-cover">
+        <div class="p-5">
+          <h3 class="font-black uppercase text-xl mb-2">Designer Bags</h3>
+          <p class="text-black/60 text-sm">Louis Vuitton, Chanel, Gucci & more.</p>
         </div>
+      </div>
 
-        <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl">
-          <img
-            src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1600&auto=format&fit=crop"
-            alt="Store"
-            className="w-full h-full object-cover"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
-
-          <div className="absolute bottom-8 left-8 bg-white/90 backdrop-blur p-5 rounded-2xl shadow-lg max-w-xs">
-            <p className="text-sm uppercase tracking-wide text-[#f59e0b] font-semibold mb-2">
-              Trusted NYC Buyers
-            </p>
-            <p className="font-medium text-black/80">
-              Sneakers • Jewelry • Watches • Designer • Scrap Gold
-            </p>
-          </div>
+      <div class="bg-white rounded-[24px] overflow-hidden shadow-md">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200&auto=format&fit=crop" class="h-48 w-full object-cover">
+        <div class="p-5">
+          <h3 class="font-black uppercase text-xl mb-2">Clothing</h3>
+          <p class="text-black/60 text-sm">Streetwear, designer & vintage.</p>
         </div>
-      </section>
+      </div>
 
-      {/* Categories */}
-      <section className="px-8 lg:px-16 py-14">
-        <div className="flex items-center justify-between mb-10">
-          <div>
-            <h2 className="text-4xl font-black uppercase mb-2">
-              What We Buy
-            </h2>
-            <p className="text-black/60">
-              Top dollar paid for authentic products and precious metals.
-            </p>
-          </div>
-
-          <button className="hidden md:block uppercase text-sm font-semibold border-b border-black pb-1 hover:text-[#f59e0b] transition">
-            View All
-          </button>
+      <div class="bg-white rounded-[24px] overflow-hidden shadow-md">
+        <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1200&auto=format&fit=crop" class="h-48 w-full object-cover">
+        <div class="p-5">
+          <h3 class="font-black uppercase text-xl mb-2">Silver</h3>
+          <p class="text-black/60 text-sm">Sterling silver jewelry & coins.</p>
         </div>
+      </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
-          {categories.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-3xl overflow-hidden border border-black/5 hover:-translate-y-1 transition shadow-sm hover:shadow-xl"
-            >
-              <div className="h-48 overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div className="p-5">
-                <h3 className="text-xl font-black uppercase mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-black/60 leading-relaxed">
-                  {item.subtitle}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Quote Section */}
-      <section className="px-8 lg:px-16 py-10">
-        <div className="bg-black text-white rounded-[32px] overflow-hidden grid lg:grid-cols-2">
-          <div className="relative min-h-[340px]">
-            <img
-              src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1600&auto=format&fit=crop"
-              alt="Luxury"
-              className="w-full h-full object-cover opacity-70"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent"></div>
-          </div>
-
-          <div className="p-10 lg:p-14 flex flex-col justify-center">
-            <p className="uppercase text-[#f59e0b] tracking-widest text-sm font-semibold mb-4">
-              Fast & Secure
-            </p>
-
-            <h2 className="text-5xl font-black uppercase mb-6">
-              Call For Quote
-            </h2>
-
-            <p className="text-white/70 text-lg leading-relaxed mb-8 max-w-lg">
-              Get a fast quote for sneakers, jewelry, luxury watches,
-              designer items and scrap gold.
-            </p>
-
-            <div className="flex flex-wrap gap-4">
-              <button className="bg-[#f59e0b] text-white px-8 py-4 rounded-xl font-semibold uppercase tracking-wide hover:opacity-90 transition">
-                Call Now
-              </button>
-
-              <button className="border border-white/30 px-8 py-4 rounded-xl font-semibold uppercase tracking-wide hover:bg-white hover:text-black transition">
-                Text Photos
-              </button>
-            </div>
-
-            <div className="mt-8 text-white/60 text-sm leading-8">
-              <p>(212) 658-2184</p>
-              <p>East Village, NYC</p>
-              <p>Mon - Sun • 11AM - 8PM</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Compact Feature Bar */}
-      <section className="px-8 lg:px-16 py-6">
-        <div className="bg-white rounded-2xl border border-black/5 grid grid-cols-2 md:grid-cols-4 overflow-hidden">
-          {[
-            'Top Dollar Paid',
-            'Authenticity Experts',
-            'Same Day Payments',
-            'NYC Based',
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="p-6 text-center border-r last:border-r-0 border-black/5"
-            >
-              <p className="font-black uppercase text-sm tracking-wide">
-                {item}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="px-8 lg:px-16 py-12">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h2 className="text-3xl font-black uppercase mb-2">
-              Inside The Store
-            </h2>
-            <p className="text-black/60">
-              Follow @eastvillagebuyers
-            </p>
-          </div>
-
-          <button className="uppercase text-sm font-semibold border-b border-black pb-1 hover:text-[#f59e0b] transition">
-            Instagram
-          </button>
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-          {gallery.map((image, index) => (
-            <div
-              key={index}
-              className="rounded-3xl overflow-hidden h-72 shadow-lg"
-            >
-              <img
-                src={image}
-                alt="Gallery"
-                className="w-full h-full object-cover hover:scale-105 transition duration-500"
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-white border-t border-black/5 mt-14 px-8 lg:px-16 py-14">
-        <div className="grid lg:grid-cols-4 gap-12">
-          <div>
-            <div className="text-4xl font-black leading-none uppercase mb-5">
-              <span className="text-[#f59e0b]">East</span>
-              <br />
-              <span>Village</span>
-              <br />
-              <span className="text-[#f59e0b]">Buyers</span>
-            </div>
-
-            <p className="text-black/60 leading-relaxed max-w-sm">
-              We buy and sell authentic sneakers, luxury items, watches,
-              jewelry and more.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="font-black uppercase mb-5">Shop</h4>
-            <div className="flex flex-col gap-3 text-black/60">
-              <a href="#">New Arrivals</a>
-              <a href="#">Best Sellers</a>
-              <a href="#">Accessories</a>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="font-black uppercase mb-5">Company</h4>
-            <div className="flex flex-col gap-3 text-black/60">
-              <a href="#">About Us</a>
-              <a href="#">Store Location</a>
-              <a href="#">Contact</a>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="font-black uppercase mb-5">Contact</h4>
-            <div className="flex flex-col gap-3 text-black/60">
-              <p>(212) 658-2184</p>
-              <p>info@eastvillagebuyers.com</p>
-              <p>East Village, NYC</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-black/5 mt-12 pt-8 text-center text-black/50 text-sm">
-          © 2026 East Village Buyers. All rights reserved.
-        </div>
-      </footer>
     </div>
-  );
-}
+  </section>
+
+  <!-- CALL FOR QUOTE -->
+  <section class="px-10 lg:px-20 py-12">
+
+    <div class="bg-black text-white rounded-[30px] overflow-hidden grid lg:grid-cols-2">
+
+      <div>
+        <img
+          src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1600&auto=format&fit=crop"
+          class="w-full h-full object-cover opacity-80"
+        >
+      </div>
+
+      <div class="p-12 flex flex-col justify-center">
+
+        <p class="uppercase text-orange-500 tracking-widest text-sm font-semibold mb-4">
+          Fast & Secure
+        </p>
+
+        <h2 class="text-5xl font-black uppercase mb-6">
+          Call For Quote
+        </h2>
+
+        <p class="text-white/70 text-lg mb-8 max-w-md leading-relaxed">
+          Get a fast quote for sneakers, jewelry, luxury watches, designer items and scrap gold.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+
+          <button class="bg-orange-500 text-white px-8 py-4 rounded-xl font-semibold uppercase">
+            Call Now
+          </button>
+
+          <button class="border border-white/30 px-8 py-4 rounded-xl font-semibold uppercase">
+            Text Photos
+          </button>
+
+        </div>
+
+        <div class="mt-8 text-white/60 leading-8 text-sm">
+          <p>(212) 658-2184</p>
+          <p>East Village, NYC</p>
+          <p>Mon - Sun • 11AM - 8PM</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- COMPACT INFO SECTION -->
+  <section class="px-10 lg:px-20 py-4">
+
+    <div class="bg-white rounded-[24px] border border-black/5 grid grid-cols-2 lg:grid-cols-4 overflow-hidden">
+
+      <div class="p-6 text-center border-r border-b lg:border-b-0 border-black/5">
+        <h3 class="font-black uppercase text-sm mb-1">Top Dollar Paid</h3>
+        <p class="text-black/60 text-sm">Competitive offers daily.</p>
+      </div>
+
+      <div class="p-6 text-center border-r lg:border-b-0 border-b border-black/5">
+        <h3 class="font-black uppercase text-sm mb-1">Authenticity Experts</h3>
+        <p class="text-black/60 text-sm">Years of experience you can trust.</p>
+      </div>
+
+      <div class="p-6 text-center border-r border-black/5">
+        <h3 class="font-black uppercase text-sm mb-1">Same Day Payments</h3>
+        <p class="text-black/60 text-sm">Fast and secure payouts.</p>
+      </div>
+
+      <div class="p-6 text-center">
+        <h3 class="font-black uppercase text-sm mb-1">NYC Based</h3>
+        <p class="text-black/60 text-sm">Located in East Village.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- GALLERY -->
+  <section class="px-10 lg:px-20 py-14">
+
+    <div class="flex justify-between items-center mb-8">
+      <div>
+        <h2 class="text-3xl font-black uppercase mb-2">Inside The Store</h2>
+        <p class="text-black/60">Follow @eastvillagebuyers</p>
+      </div>
+
+      <button class="uppercase text-sm font-semibold border-b border-black pb-1">
+        Instagram
+      </button>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?q=80&w=1200&auto=format&fit=crop" class="rounded-[24px] h-72 object-cover w-full">
+
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop" class="rounded-[24px] h-72 object-cover w-full">
+
+      <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1200&auto=format&fit=crop" class="rounded-[24px] h-72 object-cover w-full">
+
+      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop" class="rounded-[24px] h-72 object-cover w-full">
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-black/10 px-10 lg:px-20 py-14 mt-10">
+
+    <div class="grid lg:grid-cols-4 gap-10">
+
+      <div>
+        <div class="text-4xl font-black uppercase leading-none mb-5">
+          <span class="text-orange-500">East</span><br>
+          <span>Village</span><br>
+          <span class="text-orange-500">Buyers</span>
+        </div>
+
+        <p class="text-black/60 leading-relaxed">
+          We buy and sell authentic sneakers, jewelry, watches and luxury items.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-black uppercase mb-4">Shop</h4>
+        <div class="flex flex-col gap-3 text-black/60">
+          <a href="#">New Arrivals</a>
+          <a href="#">Best Sellers</a>
+          <a href="#">Accessories</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-black uppercase mb-4">Company</h4>
+        <div class="flex flex-col gap-3 text-black/60">
+          <a href="#">About Us</a>
+          <a href="#">Store Location</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-black uppercase mb-4">Contact</h4>
+        <div class="flex flex-col gap-3 text-black/60">
+          <p>(212) 658-2184</p>
+          <p>info@eastvillagebuyers.com</p>
+          <p>East Village, NYC</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="border-t border-black/10 mt-10 pt-8 text-center text-black/50 text-sm">
+      © 2026 East Village Buyers. All rights reserved.
+    </div>
+
+  </footer>
+
+</body>
+</html>
